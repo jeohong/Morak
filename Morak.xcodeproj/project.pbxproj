@@ -167,10 +167,10 @@
 		A3488B9B2E4B66BD00232643 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A3488B9C2E4B66D600232643 /* Post */,
+				A3488BA32E4B672A00232643 /* Chat */,
 				A3488BA52E4B673900232643 /* Friends */,
 				A3488BA42E4B673400232643 /* Setting */,
-				A3488BA32E4B672A00232643 /* Chat */,
-				A3488B9C2E4B66D600232643 /* Post */,
 			);
 			path = Features;
 			sourceTree = "<group>";

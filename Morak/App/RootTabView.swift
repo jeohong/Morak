@@ -20,13 +20,13 @@ struct RootTabView: View {
                 .tabItem { Label(AppTab.chat.title, systemImage: AppTab.chat.systemImage) }
                 .tag(AppTab.chat)
 
-            SettingView()
-                .tabItem { Label(AppTab.setting.title, systemImage: AppTab.setting.systemImage) }
-                .tag(AppTab.setting)
-
             FriendsView()
                 .tabItem { Label(AppTab.friends.title, systemImage: AppTab.friends.systemImage) }
                 .tag(AppTab.friends)
+
+            SettingView()
+                .tabItem { Label(AppTab.setting.title, systemImage: AppTab.setting.systemImage) }
+                .tag(AppTab.setting)
         }
     }
 }
