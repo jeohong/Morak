@@ -6,6 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A3488B8C2E4B60BC00232643 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3488B872E4B60BC00232643 /* Assets.xcassets */; };
+		A3488B8D2E4B60BC00232643 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3488B892E4B60BC00232643 /* Launch Screen.storyboard */; };
+		A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B8A2E4B60BC00232643 /* MorakApp.swift */; };
+		A3488B962E4B61D700232643 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B952E4B61D700232643 /* AppTab.swift */; };
+		A3488B982E4B627300232643 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B972E4B627300232643 /* AppState.swift */; };
+		A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B992E4B641C00232643 /* RootTabView.swift */; };
+		A3488BA22E4B671800232643 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BA12E4B671800232643 /* PostView.swift */; };
+		A3488BA72E4B674400232643 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BA62E4B674400232643 /* ChatView.swift */; };
+		A3488BA92E4B674900232643 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BA82E4B674900232643 /* SettingView.swift */; };
+		A3488BAB2E4B675200232643 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BAA2E4B675200232643 /* FriendsView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A31D1C2E2E40BA3600318EC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,14 +40,19 @@
 		A31D1C202E40BA3500318EC7 /* Morak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C2D2E40BA3600318EC7 /* MorakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3488B872E4B60BC00232643 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3488B892E4B60BC00232643 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A3488B8A2E4B60BC00232643 /* MorakApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorakApp.swift; sourceTree = "<group>"; };
+		A3488B952E4B61D700232643 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		A3488B972E4B627300232643 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		A3488B992E4B641C00232643 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		A3488BA12E4B671800232643 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		A3488BA62E4B674400232643 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A3488BA82E4B674900232643 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		A3488BAA2E4B675200232643 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A31D1C222E40BA3500318EC7 /* Morak */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Morak;
-			sourceTree = "<group>";
-		};
 		A31D1C302E40BA3600318EC7 /* MorakTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MorakTests;
@@ -75,7 +93,7 @@
 		A31D1C172E40BA3500318EC7 = {
 			isa = PBXGroup;
 			children = (
-				A31D1C222E40BA3500318EC7 /* Morak */,
+				A3488B8B2E4B60BC00232643 /* Morak */,
 				A31D1C302E40BA3600318EC7 /* MorakTests */,
 				A31D1C3A2E40BA3600318EC7 /* MorakUITests */,
 				A31D1C212E40BA3500318EC7 /* Products */,
@@ -92,6 +110,103 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A3488B8B2E4B60BC00232643 /* Morak */ = {
+			isa = PBXGroup;
+			children = (
+				A3488B902E4B60C100232643 /* App */,
+				A3488B932E4B618200232643 /* Resources */,
+				A3488B912E4B613400232643 /* Shared */,
+				A3488B9B2E4B66BD00232643 /* Features */,
+			);
+			path = Morak;
+			sourceTree = "<group>";
+		};
+		A3488B902E4B60C100232643 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A3488B8A2E4B60BC00232643 /* MorakApp.swift */,
+				A3488B972E4B627300232643 /* AppState.swift */,
+				A3488B992E4B641C00232643 /* RootTabView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A3488B912E4B613400232643 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A3488B922E4B614100232643 /* Components */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		A3488B922E4B614100232643 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A3488B942E4B61CA00232643 /* TabBar */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A3488B932E4B618200232643 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A3488B872E4B60BC00232643 /* Assets.xcassets */,
+				A3488B892E4B60BC00232643 /* Launch Screen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A3488B942E4B61CA00232643 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				A3488B952E4B61D700232643 /* AppTab.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		A3488B9B2E4B66BD00232643 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A3488B9C2E4B66D600232643 /* Post */,
+				A3488BA32E4B672A00232643 /* Chat */,
+				A3488BA52E4B673900232643 /* Friends */,
+				A3488BA42E4B673400232643 /* Setting */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A3488B9C2E4B66D600232643 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				A3488BA12E4B671800232643 /* PostView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		A3488BA32E4B672A00232643 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A3488BA62E4B674400232643 /* ChatView.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		A3488BA42E4B673400232643 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A3488BA82E4B674900232643 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		A3488BA52E4B673900232643 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				A3488BAA2E4B675200232643 /* FriendsView.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +221,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				A31D1C222E40BA3500318EC7 /* Morak */,
 			);
 			name = Morak;
 			packageProductDependencies = (
@@ -212,6 +324,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3488B8C2E4B60BC00232643 /* Assets.xcassets in Resources */,
+				A3488B8D2E4B60BC00232643 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +350,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */,
+				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
+				A3488BAB2E4B675200232643 /* FriendsView.swift in Sources */,
+				A3488B962E4B61D700232643 /* AppTab.swift in Sources */,
+				A3488BA92E4B674900232643 /* SettingView.swift in Sources */,
+				A3488BA22E4B671800232643 /* PostView.swift in Sources */,
+				A3488BA72E4B674400232643 /* ChatView.swift in Sources */,
+				A3488B982E4B627300232643 /* AppState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,8 +525,11 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -412,9 +537,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brokong.Morak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -431,8 +560,11 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -440,9 +572,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brokong.Morak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
