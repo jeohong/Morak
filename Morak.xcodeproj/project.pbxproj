@@ -10,13 +10,13 @@
 		A3488B8C2E4B60BC00232643 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3488B872E4B60BC00232643 /* Assets.xcassets */; };
 		A3488B8D2E4B60BC00232643 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3488B892E4B60BC00232643 /* Launch Screen.storyboard */; };
 		A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B8A2E4B60BC00232643 /* MorakApp.swift */; };
-		A3488B962E4B61D700232643 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B952E4B61D700232643 /* AppTab.swift */; };
-		A3488B982E4B627300232643 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B972E4B627300232643 /* AppState.swift */; };
 		A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B992E4B641C00232643 /* RootTabView.swift */; };
-		A3488BA22E4B671800232643 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BA12E4B671800232643 /* PostView.swift */; };
-		A3488BA72E4B674400232643 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BA62E4B674400232643 /* ChatView.swift */; };
-		A3488BA92E4B674900232643 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BA82E4B674900232643 /* SettingView.swift */; };
-		A3488BAB2E4B675200232643 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488BAA2E4B675200232643 /* FriendsView.swift */; };
+		A36D7BC72E5878C2005F21C2 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BC42E5878C2005F21C2 /* AppState.swift */; };
+		A36D7BD52E5878EF005F21C2 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BC82E5878EF005F21C2 /* ChatView.swift */; };
+		A36D7BD62E5878EF005F21C2 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BD12E5878EF005F21C2 /* SettingView.swift */; };
+		A36D7BD72E5878EF005F21C2 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BCE2E5878EF005F21C2 /* PostView.swift */; };
+		A36D7BD82E5878EF005F21C2 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BCB2E5878EF005F21C2 /* FriendsView.swift */; };
+		A36D7BDB2E58790C005F21C2 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BD92E58790C005F21C2 /* AppTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,13 +43,13 @@
 		A3488B872E4B60BC00232643 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3488B892E4B60BC00232643 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A3488B8A2E4B60BC00232643 /* MorakApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorakApp.swift; sourceTree = "<group>"; };
-		A3488B952E4B61D700232643 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
-		A3488B972E4B627300232643 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		A3488B992E4B641C00232643 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
-		A3488BA12E4B671800232643 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
-		A3488BA62E4B674400232643 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		A3488BA82E4B674900232643 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		A3488BAA2E4B675200232643 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		A36D7BC42E5878C2005F21C2 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		A36D7BC82E5878EF005F21C2 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A36D7BCB2E5878EF005F21C2 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		A36D7BCE2E5878EF005F21C2 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		A36D7BD12E5878EF005F21C2 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		A36D7BD92E58790C005F21C2 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -113,10 +113,11 @@
 		A3488B8B2E4B60BC00232643 /* Morak */ = {
 			isa = PBXGroup;
 			children = (
+				A36D7BC62E5878C2005F21C2 /* Core */,
 				A3488B902E4B60C100232643 /* App */,
 				A3488B932E4B618200232643 /* Resources */,
+				A36D7BD42E5878EF005F21C2 /* Features */,
 				A3488B912E4B613400232643 /* Shared */,
-				A3488B9B2E4B66BD00232643 /* Features */,
 			);
 			path = Morak;
 			sourceTree = "<group>";
@@ -125,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				A3488B8A2E4B60BC00232643 /* MorakApp.swift */,
-				A3488B972E4B627300232643 /* AppState.swift */,
 				A3488B992E4B641C00232643 /* RootTabView.swift */,
 			);
 			path = App;
@@ -142,7 +142,7 @@
 		A3488B922E4B614100232643 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A3488B942E4B61CA00232643 /* TabBar */,
+				A36D7BDA2E58790C005F21C2 /* Navigation */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -156,55 +156,103 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		A3488B942E4B61CA00232643 /* TabBar */ = {
+		A36D7BC52E5878C2005F21C2 /* State */ = {
 			isa = PBXGroup;
 			children = (
-				A3488B952E4B61D700232643 /* AppTab.swift */,
+				A36D7BC42E5878C2005F21C2 /* AppState.swift */,
 			);
-			path = TabBar;
+			path = State;
 			sourceTree = "<group>";
 		};
-		A3488B9B2E4B66BD00232643 /* Features */ = {
+		A36D7BC62E5878C2005F21C2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				A3488B9C2E4B66D600232643 /* Post */,
-				A3488BA32E4B672A00232643 /* Chat */,
-				A3488BA52E4B673900232643 /* Friends */,
-				A3488BA42E4B673400232643 /* Setting */,
+				A36D7BC52E5878C2005F21C2 /* State */,
 			);
-			path = Features;
+			path = Core;
 			sourceTree = "<group>";
 		};
-		A3488B9C2E4B66D600232643 /* Post */ = {
+		A36D7BC92E5878EF005F21C2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A3488BA12E4B671800232643 /* PostView.swift */,
+				A36D7BC82E5878EF005F21C2 /* ChatView.swift */,
 			);
-			path = Post;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		A3488BA32E4B672A00232643 /* Chat */ = {
+		A36D7BCA2E5878EF005F21C2 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				A3488BA62E4B674400232643 /* ChatView.swift */,
+				A36D7BC92E5878EF005F21C2 /* Views */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		A3488BA42E4B673400232643 /* Setting */ = {
+		A36D7BCC2E5878EF005F21C2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A3488BA82E4B674900232643 /* SettingView.swift */,
+				A36D7BCB2E5878EF005F21C2 /* FriendsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A36D7BCD2E5878EF005F21C2 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				A36D7BCC2E5878EF005F21C2 /* Views */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		A36D7BCF2E5878EF005F21C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A36D7BCE2E5878EF005F21C2 /* PostView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A36D7BD02E5878EF005F21C2 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				A36D7BCF2E5878EF005F21C2 /* Views */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		A36D7BD22E5878EF005F21C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A36D7BD12E5878EF005F21C2 /* SettingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A36D7BD32E5878EF005F21C2 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A36D7BD22E5878EF005F21C2 /* Views */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
 		};
-		A3488BA52E4B673900232643 /* Friends */ = {
+		A36D7BD42E5878EF005F21C2 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				A3488BAA2E4B675200232643 /* FriendsView.swift */,
+				A36D7BCA2E5878EF005F21C2 /* Chat */,
+				A36D7BCD2E5878EF005F21C2 /* Friends */,
+				A36D7BD02E5878EF005F21C2 /* Post */,
+				A36D7BD32E5878EF005F21C2 /* Setting */,
 			);
-			path = Friends;
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A36D7BDA2E58790C005F21C2 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				A36D7BD92E58790C005F21C2 /* AppTab.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,12 +400,12 @@
 			files = (
 				A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */,
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
-				A3488BAB2E4B675200232643 /* FriendsView.swift in Sources */,
-				A3488B962E4B61D700232643 /* AppTab.swift in Sources */,
-				A3488BA92E4B674900232643 /* SettingView.swift in Sources */,
-				A3488BA22E4B671800232643 /* PostView.swift in Sources */,
-				A3488BA72E4B674400232643 /* ChatView.swift in Sources */,
-				A3488B982E4B627300232643 /* AppState.swift in Sources */,
+				A36D7BC72E5878C2005F21C2 /* AppState.swift in Sources */,
+				A36D7BD52E5878EF005F21C2 /* ChatView.swift in Sources */,
+				A36D7BD62E5878EF005F21C2 /* SettingView.swift in Sources */,
+				A36D7BD72E5878EF005F21C2 /* PostView.swift in Sources */,
+				A36D7BD82E5878EF005F21C2 /* FriendsView.swift in Sources */,
+				A36D7BDB2E58790C005F21C2 /* AppTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
