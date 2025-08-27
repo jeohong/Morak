@@ -13,20 +13,51 @@ struct RootTabView: View {
     var body: some View {
         TabView(selection: $appState.selectedTab) {
             PostView()
-                .tabItem { Label(AppTab.post.title, systemImage: AppTab.post.systemImage) }
+                .tabItem { 
+                    Image(AppTab.post.systemImage)
+                        .renderingMode(.template)
+                    Text(AppTab.post.title)
+                }
                 .tag(AppTab.post)
 
             ChatView()
-                .tabItem { Label(AppTab.chat.title, systemImage: AppTab.chat.systemImage) }
+                .tabItem { 
+                    Image(AppTab.chat.systemImage)
+                        .renderingMode(.template)
+                    Text(AppTab.chat.title)
+                }
                 .tag(AppTab.chat)
 
             FriendsView()
-                .tabItem { Label(AppTab.friends.title, systemImage: AppTab.friends.systemImage) }
+                .tabItem { 
+                    Image(AppTab.friends.systemImage)
+                        .renderingMode(.template)
+                    Text(AppTab.friends.title)
+                }
                 .tag(AppTab.friends)
 
             SettingView()
-                .tabItem { Label(AppTab.setting.title, systemImage: AppTab.setting.systemImage) }
+                .tabItem { 
+                    Image(AppTab.setting.systemImage)
+                        .renderingMode(.template)
+                    Text(AppTab.setting.title)
+                }
                 .tag(AppTab.setting)
+        }
+        .accentColor(.secondary)
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.backgroundColor = UIColor(Color.surface)
+            tabBarAppearance.selectionIndicatorTintColor = UIColor(Color.primary)
+            
+            // Configure item appearance
+            tabBarAppearance.stackedLayoutAppearance.selected.iconColor = UIColor(Color.primary)
+            tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor(Color.primary)]
+            tabBarAppearance.stackedLayoutAppearance.normal.iconColor = UIColor(Color.textSecondary)
+            tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor(Color.textSecondary)]
+            
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
     }
 }
