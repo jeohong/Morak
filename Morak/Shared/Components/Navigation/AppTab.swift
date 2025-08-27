@@ -24,10 +24,10 @@ enum AppTab: Hashable {
 
     var systemImage: String {
         switch self {
-        case .post: "house.fill"
-        case .chat: "magnifyingglass"
-        case .setting: "person.circle.fill"
-        case .friends: "person.circle.fill"
+        case .post: "tab_post"
+        case .chat: "tab_chatting"
+        case .setting: "tab_setting"
+        case .friends: "tab_friends"
         }
     }
 }
