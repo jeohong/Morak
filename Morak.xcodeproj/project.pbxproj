@@ -28,6 +28,7 @@
 		A372E3572E5EF746001B9CE0 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E34C2E5EF746001B9CE0 /* Pretendard-Regular.otf */; };
 		A372E3582E5EF746001B9CE0 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E3482E5EF746001B9CE0 /* Pretendard-ExtraBold.otf */; };
 		A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */; };
+		A372E35D2E5EF8FC001B9CE0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372E35C2E5EF8FC001B9CE0 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		A372E34E2E5EF746001B9CE0 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		A372E3592E5EF772001B9CE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		A372E35C2E5EF8FC001B9CE0 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -234,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				A36D7BCE2E5878EF005F21C2 /* PostView.swift */,
+				A372E35C2E5EF8FC001B9CE0 /* HeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				A36D7BD52E5878EF005F21C2 /* ChatView.swift in Sources */,
 				A36D7BD62E5878EF005F21C2 /* SettingView.swift in Sources */,
 				A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */,
+				A372E35D2E5EF8FC001B9CE0 /* HeaderView.swift in Sources */,
 				A36D7BD72E5878EF005F21C2 /* PostView.swift in Sources */,
 				A36D7BD82E5878EF005F21C2 /* FriendsView.swift in Sources */,
 				A36D7BDB2E58790C005F21C2 /* AppTab.swift in Sources */,
