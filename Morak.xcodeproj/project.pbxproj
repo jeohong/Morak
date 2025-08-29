@@ -29,6 +29,8 @@
 		A372E3582E5EF746001B9CE0 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E3482E5EF746001B9CE0 /* Pretendard-ExtraBold.otf */; };
 		A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */; };
 		A372E35D2E5EF8FC001B9CE0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372E35C2E5EF8FC001B9CE0 /* HeaderView.swift */; };
+		A37BAABD2E61C22800D52788 /* FilterOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BAABB2E61C22800D52788 /* FilterOption.swift */; };
+		A37BAABF2E61C40100D52788 /* FilterPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37BAABE2E61C40100D52788 /* FilterPickerSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		A372E3592E5EF772001B9CE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		A372E35C2E5EF8FC001B9CE0 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		A37BAABB2E61C22800D52788 /* FilterOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOption.swift; sourceTree = "<group>"; };
+		A37BAABE2E61C40100D52788 /* FilterPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPickerSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -237,6 +241,7 @@
 			children = (
 				A36D7BCE2E5878EF005F21C2 /* PostView.swift */,
 				A372E35C2E5EF8FC001B9CE0 /* HeaderView.swift */,
+				A37BAABE2E61C40100D52788 /* FilterPickerSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				A36D7BCF2E5878EF005F21C2 /* Views */,
+				A37BAABC2E61C22800D52788 /* Models */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -307,6 +313,14 @@
 				A372E34E2E5EF746001B9CE0 /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A37BAABC2E61C22800D52788 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A37BAABB2E61C22800D52788 /* FilterOption.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,6 +475,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A37BAABD2E61C22800D52788 /* FilterOption.swift in Sources */,
 				A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */,
 				A36D7BDE2E587B14005F21C2 /* Color+Extension.swift in Sources */,
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
@@ -470,6 +485,7 @@
 				A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */,
 				A372E35D2E5EF8FC001B9CE0 /* HeaderView.swift in Sources */,
 				A36D7BD72E5878EF005F21C2 /* PostView.swift in Sources */,
+				A37BAABF2E61C40100D52788 /* FilterPickerSheet.swift in Sources */,
 				A36D7BD82E5878EF005F21C2 /* FriendsView.swift in Sources */,
 				A36D7BDB2E58790C005F21C2 /* AppTab.swift in Sources */,
 			);

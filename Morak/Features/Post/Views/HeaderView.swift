@@ -8,6 +8,24 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @State private var showFilterMenu = false
+    @State private var selectedFilter: FilterOption = .latest
+    
+    var body: some View {
+        HStack {
+            LogoSection()
+            Spacer()
+            ActionButtons(
+                showFilterMenu: $showFilterMenu,
+                selectedFilter: $selectedFilter
+            )
+        }
+        .padding(.horizontal, 20)
+    }
+}
+
+// MARK: - Logo Section
+private struct LogoSection: View {
     var body: some View {
         HStack {
             Image("logo")
@@ -17,24 +35,39 @@ struct HeaderView: View {
             Text("Morak")
                 .font(.pretendard.largeTitle)
                 .foregroundStyle(Color.surface)
+        }
+    }
+}
+
+// MARK: - Action Buttons
+private struct ActionButtons: View {
+    @Binding var showFilterMenu: Bool
+    @Binding var selectedFilter: FilterOption
+    
+    var body: some View {
+        HStack(spacing: 10) {
+            HeaderButton(imageName: "ic_bell") {
+                print("알림")
+            }
             
-            Spacer()
+            HeaderButton(imageName: "ic_search") {
+                print("검색")
+            }
             
-            HStack(spacing: 10) {
-                HeaderButton(imageName: "ic_bell") {
-                    print("알림")
-                }
-                
-                HeaderButton(imageName: "ic_search") {
-                    print("검색")
-                }
-                
-                HeaderButton(imageName: "ic_filter") {
-                    print("필터")
-                }
+            HeaderButton(imageName: "ic_filter") {
+                showFilterMenu = true
+            }
+            .sheet(isPresented: $showFilterMenu) {
+                FilterPickerSheet(
+                    isPresented: $showFilterMenu,
+                    selectedFilter: $selectedFilter,
+                    onConfirm: { filter in
+                        // TODO: ViewModel 연결해서 API 재호출
+                        print("\(filter.title) 선택됨")
+                    }
+                )
             }
         }
-        .padding(.horizontal, 20)
     }
 }
 
