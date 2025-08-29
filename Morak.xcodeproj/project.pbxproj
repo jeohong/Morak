@@ -268,9 +268,9 @@
 		A36D7BD42E5878EF005F21C2 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A36D7BD02E5878EF005F21C2 /* Post */,
 				A36D7BCA2E5878EF005F21C2 /* Chat */,
 				A36D7BCD2E5878EF005F21C2 /* Friends */,
-				A36D7BD02E5878EF005F21C2 /* Post */,
 				A36D7BD32E5878EF005F21C2 /* Setting */,
 			);
 			path = Features;
