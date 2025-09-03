@@ -9,7 +9,20 @@ import SwiftUI
 
 struct PostView: View {
     var body: some View {
-        Text("포스트 뷰")
+        VStack(spacing: 0) {
+            HeaderView()
+            
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack {
+                        Text("포스트 뷰")
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
+        }
+        .background(Color.primary.ignoresSafeArea())
     }
 }
 
