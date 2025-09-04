@@ -22,7 +22,7 @@ struct PostView: View {
                 }
             }
         }
-        .background(Color.primary.ignoresSafeArea())
+        .background(Color.background.ignoresSafeArea())
     }
 }
 

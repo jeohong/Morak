@@ -34,7 +34,7 @@ private struct LogoSection: View {
             
             Text("Morak")
                 .font(.pretendard.largeTitle)
-                .foregroundStyle(Color.surface)
+                .foregroundStyle(Color.primary)
         }
     }
 }

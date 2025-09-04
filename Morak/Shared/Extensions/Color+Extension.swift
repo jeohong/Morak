@@ -23,17 +23,16 @@ extension Color {
 // MARK: - Custom Colors Extension
 extension Color {
     // MARK: - Base Colors
-    static var main: Color { Color(hex: 0xFFAD35) }
+    static var main: Color { Color(hex: 0xff6b35) }
     static var deepGray: Color { Color(hex: 0x5A554E) }
     static var customRed: Color { Color(hex: 0xFF0000) }
-    static var point: Color { Color(hex: 0xFF8424) }
-    static var lightYellow: Color { Color(hex: 0xFEEDBF) }
+    static var point: Color { Color(hex: 0xfef8f4) }
+    static var whiteColor: Color { Color(hex: 0xfffefd) }
     
     // MARK: - Semantic Colors (의미적 색상)
     static var primary: Color { .main }
-    static var secondary: Color { .point }
-    static var surface: Color { .lightYellow }
-    static var textPrimary: Color { .black }
+    static var background: Color { .point }
     static var textSecondary: Color { .deepGray }
     static var error: Color { .customRed }
+    static var tabBackground: Color { .whiteColor }
 }

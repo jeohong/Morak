@@ -47,7 +47,7 @@ struct RootTabView: View {
         .accentColor(.secondary)
         .onAppear {
             let tabBarAppearance = UITabBarAppearance()
-            tabBarAppearance.backgroundColor = UIColor(Color.surface)
+            tabBarAppearance.backgroundColor = UIColor(Color.tabBackground)
             tabBarAppearance.selectionIndicatorTintColor = UIColor(Color.primary)
             
             // Configure item appearance
