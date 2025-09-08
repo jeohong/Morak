@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A338DD212E6C21A6000E087B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A338DD202E6C21A6000E087B /* LoginView.swift */; };
 		A3488B8C2E4B60BC00232643 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3488B872E4B60BC00232643 /* Assets.xcassets */; };
 		A3488B8D2E4B60BC00232643 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3488B892E4B60BC00232643 /* Launch Screen.storyboard */; };
 		A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B8A2E4B60BC00232643 /* MorakApp.swift */; };
@@ -54,6 +55,7 @@
 		A31D1C202E40BA3500318EC7 /* Morak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C2D2E40BA3600318EC7 /* MorakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A338DD202E6C21A6000E087B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A3488B872E4B60BC00232643 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3488B892E4B60BC00232643 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A3488B8A2E4B60BC00232643 /* MorakApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorakApp.swift; sourceTree = "<group>"; };
@@ -137,6 +139,14 @@
 				A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A338DD1F2E6C219D000E087B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A338DD202E6C21A6000E087B /* LoginView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		A3488B8B2E4B60BC00232643 /* Morak */ = {
@@ -274,6 +284,7 @@
 		A36D7BD42E5878EF005F21C2 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				A338DD1F2E6C219D000E087B /* Login */,
 				A36D7BD02E5878EF005F21C2 /* Post */,
 				A36D7BCA2E5878EF005F21C2 /* Chat */,
 				A36D7BCD2E5878EF005F21C2 /* Friends */,
@@ -483,6 +494,7 @@
 				A36D7BD52E5878EF005F21C2 /* ChatView.swift in Sources */,
 				A36D7BD62E5878EF005F21C2 /* SettingView.swift in Sources */,
 				A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */,
+				A338DD212E6C21A6000E087B /* LoginView.swift in Sources */,
 				A372E35D2E5EF8FC001B9CE0 /* HeaderView.swift in Sources */,
 				A36D7BD72E5878EF005F21C2 /* PostView.swift in Sources */,
 				A37BAABF2E61C40100D52788 /* FilterPickerSheet.swift in Sources */,
