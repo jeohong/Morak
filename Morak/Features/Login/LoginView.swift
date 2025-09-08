@@ -85,7 +85,7 @@ struct LoginView: View {
                         .cornerRadius(12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(showPasswordError ? Color.red : Color.clear, lineWidth: 1)
+                                .stroke(showPasswordError ? Color.customRed : Color.clear, lineWidth: 1)
                         )
                         .onSubmit {
                             handleLogin()
