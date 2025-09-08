@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var showPasswordError: Bool = false
@@ -21,6 +22,20 @@ struct LoginView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            HStack() {
+                Spacer()
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image("ic_close")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.secondary)
+                }
+                .padding()
+            }
+            .padding(.trailing, 8)
+            
             Image("logo")
                 .resizable()
                 .frame(width: 120, height: 120)
