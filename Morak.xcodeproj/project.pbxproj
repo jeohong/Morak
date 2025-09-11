@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A30975B72E70459800D25838 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30975B62E70459800D25838 /* UINavigationController.swift */; };
+		A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30975B62E70459800D25838 /* UINavigationController+Extension.swift */; };
 		A338DD212E6C21A6000E087B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A338DD202E6C21A6000E087B /* LoginView.swift */; };
 		A3488B8C2E4B60BC00232643 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3488B872E4B60BC00232643 /* Assets.xcassets */; };
 		A3488B8D2E4B60BC00232643 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3488B892E4B60BC00232643 /* Launch Screen.storyboard */; };
@@ -53,7 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A30975B62E70459800D25838 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		A30975B62E70459800D25838 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		A31D1C202E40BA3500318EC7 /* Morak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C2D2E40BA3600318EC7 /* MorakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,7 +308,7 @@
 			children = (
 				A36D7BDC2E587B14005F21C2 /* Color+Extension.swift */,
 				A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */,
-				A30975B62E70459800D25838 /* UINavigationController.swift */,
+				A30975B62E70459800D25838 /* UINavigationController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -499,7 +499,7 @@
 				A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */,
 				A338DD212E6C21A6000E087B /* LoginView.swift in Sources */,
 				A372E35D2E5EF8FC001B9CE0 /* HeaderView.swift in Sources */,
-				A30975B72E70459800D25838 /* UINavigationController.swift in Sources */,
+				A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */,
 				A36D7BD72E5878EF005F21C2 /* PostView.swift in Sources */,
 				A37BAABF2E61C40100D52788 /* FilterPickerSheet.swift in Sources */,
 				A36D7BD82E5878EF005F21C2 /* FriendsView.swift in Sources */,
