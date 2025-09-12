@@ -13,6 +13,7 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var showPasswordError: Bool = false
     @State private var passwordErrorMessage: String = ""
+    @State private var showSignup: Bool = false
     @FocusState private var focusedField: Field?
     
     enum Field {
@@ -139,7 +140,9 @@ struct LoginView: View {
                     .font(.pretendard.mediumTextRegular)
                     .foregroundColor(.secondary)
                 
-                Button(action: handleSignUp) {
+                Button {
+                    showSignup = true
+                } label: {
                     Text("회원가입")
                         .font(.pretendard.mediumTextSemiBold)
                         .fontWeight(.semibold)
@@ -150,6 +153,9 @@ struct LoginView: View {
         }
         .onTapGesture {
             focusedField = nil
+        }
+        .navigationDestination(isPresented: $showSignup) {
+            SignupView()
         }
     }
     
@@ -174,11 +180,6 @@ struct LoginView: View {
     private func handleForgotPassword() {
         // TODO: 비밀번호 찾기 화면으로 이동
         print("비밀번호 찾기")
-    }
-    
-    private func handleSignUp() {
-        // TODO: 회원가입 화면으로 이동
-        print("회원가입")
     }
 }
 
