@@ -9,10 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var showPasswordError: Bool = false
-    @State private var passwordErrorMessage: String = ""
+    @StateObject private var viewModel = LoginViewModel()
     @State private var showSignup: Bool = false
     @FocusState private var focusedField: Field?
     
@@ -58,7 +55,7 @@ struct LoginView: View {
                         .font(.pretendard.mediumTextRegular)
                         .foregroundColor(.secondary)
                     
-                    TextField("이메일을 입력하세요", text: $email)
+                    TextField("이메일을 입력하세요", text: $viewModel.email)
                         .textFieldStyle(.plain)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
@@ -77,7 +74,7 @@ struct LoginView: View {
                         .font(.pretendard.mediumTextRegular)
                         .foregroundColor(.secondary)
                     
-                    SecureField("비밀번호를 입력하세요", text: $password)
+                    SecureField("비밀번호를 입력하세요", text: $viewModel.password)
                         .textFieldStyle(.plain)
                         .textContentType(.password)
                         .focused($focusedField, equals: .password)
@@ -86,20 +83,19 @@ struct LoginView: View {
                         .cornerRadius(12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(showPasswordError ? Color.customRed : Color.clear, lineWidth: 1)
+                                .stroke(viewModel.showError ? Color.customRed : Color.clear, lineWidth: 1)
                         )
                         .onSubmit {
-                            handleLogin()
-                        }
-                        .onChange(of: password) { _ in
-                            if showPasswordError {
-                                showPasswordError = false
-                                passwordErrorMessage = ""
+                            Task {
+                                await viewModel.login()
                             }
                         }
+                        .onChange(of: viewModel.password) { _ in
+                            viewModel.clearError()
+                        }
                     
-                    if showPasswordError {
-                        Text(passwordErrorMessage)
+                    if viewModel.showError {
+                        Text(viewModel.errorMessage)
                             .font(.pretendard.mediumTextRegular)
                             .foregroundColor(.customRed)
                             .padding(.horizontal, 4)
@@ -111,19 +107,30 @@ struct LoginView: View {
             Spacer()
                 .frame(height: 40)
             
-            Button(action: handleLogin) {
-                Text("로그인")
-                    .font(.pretendard.largeTextMedium)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 56)
-                    .background(
-                        Color.accentColor
-                            .opacity(isFormValid ? 1.0 : 0.3)
-                    )
-                    .cornerRadius(16)
+            Button(action: {
+                Task {
+                    await viewModel.login()
+                }
+            }) {
+                HStack {
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(0.8)
+                    }
+                    Text(viewModel.isLoading ? "로그인 중..." : "로그인")
+                        .font(.pretendard.largeTextMedium)
+                        .foregroundColor(.white)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 56)
+                .background(
+                    Color.accentColor
+                        .opacity(viewModel.isFormValid && !viewModel.isLoading ? 1.0 : 0.3)
+                )
+                .cornerRadius(16)
             }
-            .disabled(!isFormValid)
+            .disabled(!viewModel.isFormValid || viewModel.isLoading)
             .padding(.horizontal, 24)
             
             Button(action: handleForgotPassword) {
@@ -157,24 +164,14 @@ struct LoginView: View {
         .navigationDestination(isPresented: $showSignup) {
             SignupView()
         }
-    }
-    
-    private var isFormValid: Bool {
-        !email.isEmpty && email.contains("@") && !password.isEmpty && password.count >= 6
-    }
-    
-    private func handleLogin() {
-        guard isFormValid else { return }
-        focusedField = nil
-        
-        // TODO: 실제 API 통신 로직 구현
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // 로그인 실패 시뮬레이션
-            showPasswordError = true
-            passwordErrorMessage = "비밀번호가 일치하지 않습니다."
+        .onChange(of: viewModel.isLoginSuccessful) { success in
+            if success {
+                dismiss()
+            }
         }
-        
-        print("로그인 시도: \(email)")
+        .onAppear() {
+            print(SecureTokenManager.shared.getAccessToken(), "저장된 토큰")
+        }
     }
     
     private func handleForgotPassword() {
