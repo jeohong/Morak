@@ -47,6 +47,10 @@
 		D4B1C7572E76C081001C4743 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C70D2E76C081001C4743 /* APIEndpoint.swift */; };
 		D4B1C7582E76C081001C4743 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C71B2E76C081001C4743 /* LoginModels.swift */; };
 		D4B1C75A2E76C081001C4743 /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7242E76C081001C4743 /* LogoutUseCase.swift */; };
+		D4B1C75D2E76CD74001C4743 /* SignupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C75B2E76CD74001C4743 /* SignupModels.swift */; };
+		D4B1C76A2E76CDE0001C4743 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7682E76CDE0001C4743 /* SignupViewModel.swift */; };
+		D4B1C76D2E76D047001C4743 /* EmailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C76B2E76D047001C4743 /* EmailRepository.swift */; };
+		D4B1C7702E76D47B001C4743 /* SignupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C76E2E76D47B001C4743 /* SignupUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,10 @@
 		D4B1C7392E76C081001C4743 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		D4B1C73A2E76C081001C4743 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		D4B1C73E2E76C081001C4743 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		D4B1C75B2E76CD74001C4743 /* SignupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModels.swift; sourceTree = "<group>"; };
+		D4B1C7682E76CDE0001C4743 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		D4B1C76B2E76D047001C4743 /* EmailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRepository.swift; sourceTree = "<group>"; };
+		D4B1C76E2E76D47B001C4743 /* SignupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -380,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				D4B1C7292E76C081001C4743 /* AuthRepository.swift */,
+				D4B1C76B2E76D047001C4743 /* EmailRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -396,6 +405,9 @@
 			isa = PBXGroup;
 			children = (
 				D4B1C72D2E76C081001C4743 /* Views */,
+				D4B1C75C2E76CD74001C4743 /* Models */,
+				D4B1C7692E76CDE0001C4743 /* ViewModels */,
+				D4B1C76F2E76D47B001C4743 /* UseCase */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -505,6 +517,30 @@
 				D4B1C7402E76C081001C4743 /* Setting */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		D4B1C75C2E76CD74001C4743 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4B1C75B2E76CD74001C4743 /* SignupModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D4B1C7692E76CDE0001C4743 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D4B1C7682E76CDE0001C4743 /* SignupViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D4B1C76F2E76D47B001C4743 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				D4B1C76E2E76D47B001C4743 /* SignupUseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -660,8 +696,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */,
+				D4B1C75D2E76CD74001C4743 /* SignupModels.swift in Sources */,
 				A36D7BDE2E587B14005F21C2 /* Color+Extension.swift in Sources */,
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
+				D4B1C7702E76D47B001C4743 /* SignupUseCase.swift in Sources */,
 				A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */,
 				A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */,
 				D4B1C7422E76C081001C4743 /* AuthFlowView.swift in Sources */,
@@ -670,6 +708,7 @@
 				D4B1C7452E76C081001C4743 /* LogoutViewModel.swift in Sources */,
 				D4B1C7462E76C081001C4743 /* LoginUseCase.swift in Sources */,
 				D4B1C7472E76C081001C4743 /* SecureTokenManager.swift in Sources */,
+				D4B1C76A2E76CDE0001C4743 /* SignupViewModel.swift in Sources */,
 				D4B1C7492E76C081001C4743 /* AuthRepository.swift in Sources */,
 				D4B1C74A2E76C081001C4743 /* HeaderView.swift in Sources */,
 				D4B1C74B2E76C081001C4743 /* PostView.swift in Sources */,
@@ -681,6 +720,7 @@
 				D4B1C7512E76C081001C4743 /* SignupView.swift in Sources */,
 				D4B1C7522E76C081001C4743 /* FriendsView.swift in Sources */,
 				D4B1C7532E76C081001C4743 /* BaseResponse.swift in Sources */,
+				D4B1C76D2E76D047001C4743 /* EmailRepository.swift in Sources */,
 				D4B1C7542E76C081001C4743 /* APIManager.swift in Sources */,
 				D4B1C7552E76C081001C4743 /* SettingView.swift in Sources */,
 				D4B1C7562E76C081001C4743 /* NetworkError.swift in Sources */,

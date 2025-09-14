@@ -24,10 +24,18 @@ final class APIManager: APIManagerProtocol {
     }
     
     func request<T: Codable>(_ endpoint: any APIEndpoint, responseType: T.Type) async throws -> T {
-        guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
+        var urlString = endpoint.baseURL + endpoint.path
+
+        if let queryParameters = endpoint.queryParameters, !queryParameters.isEmpty {
+            var urlComponents = URLComponents(string: urlString)
+            urlComponents?.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+            urlString = urlComponents?.url?.absoluteString ?? urlString
+        }
+
+        guard let url = URL(string: urlString) else {
             throw NetworkError.invalidURL
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         
@@ -36,7 +44,6 @@ final class APIManager: APIManagerProtocol {
             request.setValue(value, forHTTPHeaderField: key)
         }
         
-        // POST 요청인 경우 body 설정
         if endpoint.method != .GET, let requestBody = endpoint.requestBody {
             do {
                 let encoder = JSONEncoder()
