@@ -9,16 +9,8 @@ import SwiftUI
 
 struct SignupView: View {
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel = SignupViewModel()
     @State private var currentStep: SignupStep = .email
-    @State private var email: String = ""
-    @State private var verificationCode: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
-    @State private var nickname: String = ""
-    @State private var showPasswordError: Bool = false
-    @State private var passwordErrorMessage: String = ""
-    @State private var isCodeSent: Bool = false
-    @State private var isCodeVerified: Bool = false
     @FocusState private var focusedField: Field?
     
     enum SignupStep {
@@ -187,7 +179,7 @@ struct SignupView: View {
                 .foregroundColor(.secondary)
             
             HStack(spacing: 8) {
-                TextField("이메일을 입력하세요", text: $email)
+                TextField("이메일을 입력하세요", text: $viewModel.email)
                     .textFieldStyle(.plain)
                     .keyboardType(.emailAddress)
                     .autocapitalization(.none)
@@ -197,31 +189,46 @@ struct SignupView: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
                     .onSubmit {
-                        if isCodeSent {
+                        if viewModel.isEmailSent {
                             focusedField = .verificationCode
                         }
                     }
                 
                 Button(action: sendVerificationCode) {
-                    Text(isCodeSent ? "재전송" : "전송")
-                        .font(.pretendard.mediumTextSemiBold)
-                        .foregroundColor(.white)
-                        .frame(width: 70, height: 56)
-                        .background(Color.accentColor.opacity(isEmailValid ? 1.0 : 0.3))
-                        .cornerRadius(12)
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .frame(width: 70, height: 56)
+                            .background(Color.accentColor.opacity(0.7))
+                            .cornerRadius(12)
+                    } else {
+                        Text(viewModel.isEmailSent ? "재전송" : "전송")
+                            .font(.pretendard.mediumTextSemiBold)
+                            .foregroundColor(.white)
+                            .frame(width: 70, height: 56)
+                            .background(Color.accentColor.opacity(viewModel.isEmailValid && !viewModel.isLoading ? 1.0 : 0.3))
+                            .cornerRadius(12)
+                    }
                 }
-                .disabled(!isEmailValid)
+                .disabled(!viewModel.isEmailValid || viewModel.isLoading)
+            }
+
+            if let emailErrorMessage = viewModel.emailErrorMessage {
+                Text(emailErrorMessage)
+                    .font(.pretendard.mediumTextRegular)
+                    .foregroundColor(.customRed)
+                    .padding(.horizontal, 4)
             }
         }
-        
-        if isCodeSent {
+
+        if viewModel.isEmailSent {
             VStack(alignment: .leading, spacing: 8) {
                 Text("인증번호")
                     .font(.pretendard.mediumTextRegular)
                     .foregroundColor(.secondary)
                 
                 HStack(spacing: 8) {
-                    TextField("인증번호를 입력하세요", text: $verificationCode)
+                    TextField("인증번호를 입력하세요", text: $viewModel.verificationCode)
                         .textFieldStyle(.plain)
                         .keyboardType(.numberPad)
                         .focused($focusedField, equals: .verificationCode)
@@ -230,18 +237,33 @@ struct SignupView: View {
                         .cornerRadius(12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(isCodeVerified ? Color.green : Color.clear, lineWidth: 1)
+                                .stroke(viewModel.isCodeVerified ? Color.green : Color.clear, lineWidth: 1)
                         )
                     
                     Button(action: verifyCode) {
-                        Text("확인")
-                            .font(.pretendard.mediumTextSemiBold)
-                            .foregroundColor(.white)
-                            .frame(width: 70, height: 56)
-                            .background(Color.accentColor.opacity(verificationCode.isEmpty ? 0.3 : 1.0))
-                            .cornerRadius(12)
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .frame(width: 70, height: 56)
+                                .background(Color.accentColor.opacity(0.7))
+                                .cornerRadius(12)
+                        } else {
+                            Text("확인")
+                                .font(.pretendard.mediumTextSemiBold)
+                                .foregroundColor(.white)
+                                .frame(width: 70, height: 56)
+                                .background(Color.accentColor.opacity(viewModel.verificationCode.isEmpty || viewModel.isLoading ? 0.3 : 1.0))
+                                .cornerRadius(12)
+                        }
                     }
-                    .disabled(verificationCode.isEmpty)
+                    .disabled(viewModel.verificationCode.isEmpty || viewModel.isLoading)
+                }
+
+                if let codeErrorMessage = viewModel.codeErrorMessage {
+                    Text(codeErrorMessage)
+                        .font(.pretendard.mediumTextRegular)
+                        .foregroundColor(.customRed)
+                        .padding(.horizontal, 4)
                 }
             }
         }
@@ -254,7 +276,7 @@ struct SignupView: View {
                 .font(.pretendard.mediumTextRegular)
                 .foregroundColor(.secondary)
             
-            SecureField("비밀번호를 입력하세요", text: $password)
+            SecureField("비밀번호를 입력하세요", text: $viewModel.password)
                 .textFieldStyle(.plain)
                 .textContentType(.newPassword)
                 .focused($focusedField, equals: .password)
@@ -264,8 +286,8 @@ struct SignupView: View {
                 .onSubmit {
                     focusedField = .confirmPassword
                 }
-                .onChange(of: password) { _ in
-                    if showPasswordError {
+                .onChange(of: viewModel.password) { _ in
+                    if viewModel.showPasswordError {
                         validatePasswords()
                     }
                 }
@@ -276,7 +298,7 @@ struct SignupView: View {
                 .font(.pretendard.mediumTextRegular)
                 .foregroundColor(.secondary)
             
-            SecureField("비밀번호를 다시 입력하세요", text: $confirmPassword)
+            SecureField("비밀번호를 다시 입력하세요", text: $viewModel.confirmPassword)
                 .textFieldStyle(.plain)
                 .textContentType(.newPassword)
                 .focused($focusedField, equals: .confirmPassword)
@@ -285,16 +307,16 @@ struct SignupView: View {
                 .cornerRadius(12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(showPasswordError ? Color.customRed : Color.clear, lineWidth: 1)
+                        .stroke(viewModel.showPasswordError ? Color.customRed : Color.clear, lineWidth: 1)
                 )
-                .onChange(of: confirmPassword) { _ in
-                    if showPasswordError {
+                .onChange(of: viewModel.confirmPassword) { _ in
+                    if viewModel.showPasswordError {
                         validatePasswords()
                     }
                 }
             
-            if showPasswordError {
-                Text(passwordErrorMessage)
+            if viewModel.showPasswordError {
+                Text(viewModel.passwordErrorMessage)
                     .font(.pretendard.mediumTextRegular)
                     .foregroundColor(.customRed)
                     .padding(.horizontal, 4)
@@ -309,7 +331,7 @@ struct SignupView: View {
                 .font(.pretendard.mediumTextRegular)
                 .foregroundColor(.secondary)
             
-            TextField("닉네임을 입력하세요", text: $nickname)
+            TextField("닉네임을 입력하세요", text: $viewModel.nickname)
                 .textFieldStyle(.plain)
                 .textContentType(.nickname)
                 .focused($focusedField, equals: .nickname)
@@ -319,18 +341,14 @@ struct SignupView: View {
         }
     }
     
-    private var isEmailValid: Bool {
-        !email.isEmpty && email.contains("@") && email.contains(".")
-    }
-    
     private var isCurrentStepValid: Bool {
         switch currentStep {
         case .email:
-            return isEmailValid && isCodeVerified
+            return viewModel.isEmailValid && viewModel.isCodeVerified
         case .password:
-            return !password.isEmpty && password.count >= 6 && password == confirmPassword
+            return viewModel.isPasswordStepValid
         case .nickname:
-            return !nickname.isEmpty
+            return viewModel.isNicknameValid
         }
     }
     
@@ -368,7 +386,7 @@ struct SignupView: View {
             }
         case .password:
             validatePasswords()
-            if !showPasswordError && isCurrentStepValid {
+            if !viewModel.showPasswordError && isCurrentStepValid {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     currentStep = .nickname
                 }
@@ -382,40 +400,41 @@ struct SignupView: View {
     }
     
     private func validatePasswords() {
-        if !confirmPassword.isEmpty && password != confirmPassword {
-            showPasswordError = true
-            passwordErrorMessage = "비밀번호가 일치하지 않습니다."
-        } else {
-            showPasswordError = false
-            passwordErrorMessage = ""
-        }
+        viewModel.validatePasswords()
     }
     
     private func sendVerificationCode() {
-        guard isEmailValid else { return }
-        
-        // TODO: 실제 인증번호 전송 API 호출
-        print("인증번호 전송: \(email)")
-        
-        isCodeSent = true
-        focusedField = .verificationCode
+        guard viewModel.isEmailValid else { return }
+
+        Task {
+            await viewModel.checkAndSendEmail()
+
+            if viewModel.isEmailSent {
+                focusedField = .verificationCode
+            }
+        }
     }
     
     private func verifyCode() {
-        guard !verificationCode.isEmpty else { return }
-        
-        // TODO: 실제 인증번호 확인 API 호출
-        print("인증번호 확인: \(verificationCode)")
-        
-        // 임시로 항상 성공으로 처리
-        isCodeVerified = true
+        guard !viewModel.verificationCode.isEmpty else { return }
+
+        Task {
+            await viewModel.verifyEmailCode()
+
+            if viewModel.isCodeVerified {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    currentStep = .password
+                }
+                focusedField = .password
+            }
+        }
     }
     
     private func handleSignUp() {
         focusedField = nil
         
         // TODO: 실제 API 통신 로직 구현
-        print("회원가입 시도: \(email), 닉네임: \(nickname)")
+        print("회원가입 시도: \(viewModel.email), 닉네임: \(viewModel.nickname)")
         
         // 회원가입 성공 시 화면 닫기
         dismiss()
