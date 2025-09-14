@@ -8,7 +8,7 @@
 import Foundation
 
 protocol APIManagerProtocol {
-    func request<T: Codable>(_ endpoint: APIEndpoint, responseType: T.Type) async throws -> T
+    func request<T: Codable>(_ endpoint: any APIEndpoint, responseType: T.Type) async throws -> T
 }
 
 final class APIManager: APIManagerProtocol {
@@ -23,7 +23,7 @@ final class APIManager: APIManagerProtocol {
         self.session = URLSession(configuration: config)
     }
     
-    func request<T: Codable>(_ endpoint: APIEndpoint, responseType: T.Type) async throws -> T {
+    func request<T: Codable>(_ endpoint: any APIEndpoint, responseType: T.Type) async throws -> T {
         guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
             throw NetworkError.invalidURL
         }
@@ -37,9 +37,10 @@ final class APIManager: APIManagerProtocol {
         }
         
         // POST 요청인 경우 body 설정
-        if endpoint.method != .GET, let parameters = endpoint.parameters {
+        if endpoint.method != .GET, let requestBody = endpoint.requestBody {
             do {
-                request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+                let encoder = JSONEncoder()
+                request.httpBody = try encoder.encode(requestBody)
             } catch {
                 throw NetworkError.encodingError
             }

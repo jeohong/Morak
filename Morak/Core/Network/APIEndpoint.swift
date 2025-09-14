@@ -12,7 +12,7 @@ protocol APIEndpoint {
     var path: String { get }
     var method: HTTPMethod { get }
     var headers: [String: String]? { get }
-    var parameters: [String: Any]? { get }
+    var requestBody: (any Codable)? { get }
 }
 
 enum HTTPMethod: String {
@@ -24,9 +24,9 @@ enum HTTPMethod: String {
 }
 
 enum AuthEndpoint: APIEndpoint {
-    case login(email: String, password: String)
+    case login(LoginRequest)
     case logout
-    
+
     var baseURL: String {
         return baseUrl
     }
@@ -65,13 +65,10 @@ enum AuthEndpoint: APIEndpoint {
         return headers
     }
     
-    var parameters: [String: Any]? {
+    var requestBody: (any Codable)? {
         switch self {
-        case .login(let email, let password):
-            return [
-                "email": email,
-                "password": password
-            ]
+        case .login(let loginRequest):
+            return loginRequest
         case .logout:
             return nil
         }
