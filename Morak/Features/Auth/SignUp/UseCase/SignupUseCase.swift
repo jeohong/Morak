@@ -13,13 +13,17 @@ protocol SignupUseCaseProtocol {
     func verifyEmail(_ email: String, code: String) async throws -> EmailVerifyResponse
     func checkEmailAndSendVerification(_ email: String) async throws
     func verifyEmailCode(_ email: String, code: String) async throws
+    func signup(email: String, password: String, nickname: String) async throws -> BaseResponse<SignupData>
 }
 
 final class SignupUseCase: SignupUseCaseProtocol {
     private let emailRepository: EmailRepositoryProtocol
+    private let authRepository: AuthRepositoryProtocol
 
-    init(emailRepository: EmailRepositoryProtocol = EmailRepository()) {
+    init(emailRepository: EmailRepositoryProtocol = EmailRepository(),
+         authRepository: AuthRepositoryProtocol = AuthRepository()) {
         self.emailRepository = emailRepository
+        self.authRepository = authRepository
     }
 
     func checkEmail(_ email: String) async throws -> EmailCheckResponse {
@@ -78,6 +82,11 @@ final class SignupUseCase: SignupUseCaseProtocol {
             throw SignupError.invalidVerificationCode
         }
     }
+
+    func signup(email: String, password: String, nickname: String) async throws -> BaseResponse<SignupData> {
+        let request = SignupRequest(email: email, password: password, nickname: nickname)
+        return try await authRepository.signup(request)
+    }
 }
 
 // MARK: - Error Types
@@ -89,6 +98,7 @@ enum SignupError: Error, LocalizedError {
     case emailSendFailed
     case emptyVerificationCode
     case invalidVerificationCode
+    case signupFailed(String)
 
     var errorDescription: String? {
         switch self {
@@ -104,6 +114,8 @@ enum SignupError: Error, LocalizedError {
             return "인증번호를 입력해주세요"
         case .invalidVerificationCode:
             return "인증번호가 올바르지 않습니다"
+        case .signupFailed(let message):
+            return message
         }
     }
 }

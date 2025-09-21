@@ -40,3 +40,26 @@ struct EmailVerifyResponse: Codable {
     let message: String
     let data: Bool?
 }
+
+// MARK: - 회원가입 요청/응답 모델
+
+struct SignupRequest: Codable {
+    let email: String
+    let password: String
+    let nickname: String
+}
+
+struct SignupData: Codable {
+    let id: Int
+    let email: String
+    let nickname: String
+    let loginType: String
+    let role: String
+    let accessToken: String?
+    let refreshToken: String?
+}
+
+struct SignupErrorResponse: Codable {
+    let message: String
+    let data: String?
+}

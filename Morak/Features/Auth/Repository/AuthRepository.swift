@@ -11,6 +11,7 @@ import Foundation
 protocol AuthRepositoryProtocol {
     func login(_ request: LoginRequest) async throws -> BaseResponse<LoginData>
     func logout() async throws -> LogoutResponse
+    func signup(_ request: SignupRequest) async throws -> BaseResponse<SignupData>
 }
 
 final class AuthRepository: AuthRepositoryProtocol {
@@ -28,5 +29,10 @@ final class AuthRepository: AuthRepositoryProtocol {
     func logout() async throws -> LogoutResponse {
         let endpoint = AuthEndpoint.logout
         return try await apiManager.request(endpoint, responseType: LogoutResponse.self)
+    }
+
+    func signup(_ request: SignupRequest) async throws -> BaseResponse<SignupData> {
+        let endpoint = AuthEndpoint.signup(request)
+        return try await apiManager.request(endpoint, responseType: BaseResponse<SignupData>.self)
     }
 }

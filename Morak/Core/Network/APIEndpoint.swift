@@ -27,6 +27,7 @@ enum HTTPMethod: String {
 enum AuthEndpoint: APIEndpoint {
     case login(LoginRequest)
     case logout
+    case signup(SignupRequest)
 
     var baseURL: String {
         return baseUrl
@@ -38,6 +39,8 @@ enum AuthEndpoint: APIEndpoint {
             return "api/v1/auth/login"
         case .logout:
             return "api/v1/auth/logout"
+        case .signup:
+            return "api/v1/auth/signup"
         }
     }
     
@@ -46,6 +49,8 @@ enum AuthEndpoint: APIEndpoint {
         case .login:
             return .POST
         case .logout:
+            return .POST
+        case .signup:
             return .POST
         }
     }
@@ -72,6 +77,8 @@ enum AuthEndpoint: APIEndpoint {
             return loginRequest
         case .logout:
             return nil
+        case .signup(let signupRequest):
+            return signupRequest
         }
     }
 

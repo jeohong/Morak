@@ -26,6 +26,8 @@ final class SignupViewModel: ObservableObject {
     @Published var isEmailAlreadyExists: Bool = false
     @Published var isEmailSent: Bool = false
     @Published var isCodeVerified: Bool = false
+    @Published var nicknameErrorMessage: String?
+    @Published var isSignupCompleted: Bool = false
 
     private let signupUseCase: SignupUseCaseProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -105,12 +107,42 @@ final class SignupViewModel: ObservableObject {
         }
     }
 
+    func signup() async {
+        guard isNicknameValid else { return }
+
+        isLoading = true
+        nicknameErrorMessage = nil
+
+        do {
+            _ = try await signupUseCase.signup(email: email, password: password, nickname: nickname)
+            isSignupCompleted = true
+            nicknameErrorMessage = nil
+        } catch {
+            if let signupError = error as? SignupError {
+                nicknameErrorMessage = signupError.errorDescription
+            } else if let networkError = error as? NetworkError {
+                switch networkError {
+                case .serverError(_, let message):
+                    nicknameErrorMessage = message ?? "서버 오류가 발생했습니다"
+                default:
+                    nicknameErrorMessage = networkError.errorDescription ?? "회원가입 중 오류가 발생했습니다"
+                }
+            } else {
+                nicknameErrorMessage = "회원가입 중 오류가 발생했습니다"
+            }
+        }
+
+        isLoading = false
+    }
+
     func resetState() {
         isLoading = false
         emailErrorMessage = nil
         codeErrorMessage = nil
+        nicknameErrorMessage = nil
         isEmailAlreadyExists = false
         isEmailSent = false
         isCodeVerified = false
+        isSignupCompleted = false
     }
 }

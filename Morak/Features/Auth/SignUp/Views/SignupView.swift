@@ -71,18 +71,25 @@ struct SignupView: View {
                         .frame(height: 40)
                     
                     Button(action: handleNextStep) {
-                        Text(nextButtonTitle)
-                            .font(.pretendard.largeTextMedium)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 56)
-                            .background(
-                                Color.accentColor
-                                    .opacity(isCurrentStepValid ? 1.0 : 0.3)
-                            )
-                            .cornerRadius(16)
+                        HStack {
+                            if viewModel.isLoading && currentStep == .nickname {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                    .scaleEffect(0.8)
+                            }
+                            Text(nextButtonTitle)
+                                .font(.pretendard.largeTextMedium)
+                                .foregroundColor(.white)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 56)
+                        .background(
+                            Color.accentColor
+                                .opacity(isCurrentStepValid && !viewModel.isLoading ? 1.0 : 0.3)
+                        )
+                        .cornerRadius(16)
                     }
-                    .disabled(!isCurrentStepValid)
+                    .disabled(!isCurrentStepValid || viewModel.isLoading)
                     .padding(.horizontal, 24)
                     
                     Spacer()
@@ -330,7 +337,7 @@ struct SignupView: View {
             Text("닉네임")
                 .font(.pretendard.mediumTextRegular)
                 .foregroundColor(.secondary)
-            
+
             TextField("닉네임을 입력하세요", text: $viewModel.nickname)
                 .textFieldStyle(.plain)
                 .textContentType(.nickname)
@@ -338,6 +345,13 @@ struct SignupView: View {
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(12)
+
+            if let nicknameErrorMessage = viewModel.nicknameErrorMessage {
+                Text(nicknameErrorMessage)
+                    .font(.pretendard.mediumTextRegular)
+                    .foregroundColor(.customRed)
+                    .padding(.horizontal, 4)
+            }
         }
     }
     
@@ -432,12 +446,14 @@ struct SignupView: View {
     
     private func handleSignUp() {
         focusedField = nil
-        
-        // TODO: 실제 API 통신 로직 구현
-        print("회원가입 시도: \(viewModel.email), 닉네임: \(viewModel.nickname)")
-        
-        // 회원가입 성공 시 화면 닫기
-        dismiss()
+
+        Task {
+            await viewModel.signup()
+
+            if viewModel.isSignupCompleted {
+                dismiss()
+            }
+        }
     }
 }
 
