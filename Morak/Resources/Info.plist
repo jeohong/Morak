@@ -14,5 +14,10 @@
 		<string>Pretendard-Bold.otf</string>
 		<string>Pretendard-Black.otf</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

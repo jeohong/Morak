@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HeaderView: View {
     @State private var showFilterMenu = false
+    @State private var showLogin = false
     @State private var selectedFilter: FilterOption = .latest
     
     var body: some View {
@@ -17,6 +18,7 @@ struct HeaderView: View {
             Spacer()
             ActionButtons(
                 showFilterMenu: $showFilterMenu,
+                showLogin: $showLogin,
                 selectedFilter: $selectedFilter
             )
         }
@@ -42,6 +44,7 @@ private struct LogoSection: View {
 // MARK: - Action Buttons
 private struct ActionButtons: View {
     @Binding var showFilterMenu: Bool
+    @Binding var showLogin: Bool
     @Binding var selectedFilter: FilterOption
     
     var body: some View {
@@ -52,6 +55,7 @@ private struct ActionButtons: View {
             
             HeaderButton(imageName: "ic_search") {
                 print("검색")
+                showLogin = true
             }
             
             HeaderButton(imageName: "ic_filter") {
@@ -66,6 +70,9 @@ private struct ActionButtons: View {
                         print("\(filter.title) 선택됨")
                     }
                 )
+            }
+            .fullScreenCover(isPresented: $showLogin) {
+                AuthFlowView()
             }
         }
     }
