@@ -24,6 +24,9 @@
 		A372E3572E5EF746001B9CE0 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E34C2E5EF746001B9CE0 /* Pretendard-Regular.otf */; };
 		A372E3582E5EF746001B9CE0 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E3482E5EF746001B9CE0 /* Pretendard-ExtraBold.otf */; };
 		A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */; };
+		A3BDF0F82EB892AC009A26D5 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BDF0F72EB892AC009A26D5 /* Post.swift */; };
+		A3BDF0FD2EB892C4009A26D5 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BDF0FB2EB892C4009A26D5 /* PostViewModel.swift */; };
+		A3BDF0FE2EB892C4009A26D5 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BDF0F92EB892C4009A26D5 /* PostRepository.swift */; };
 		D4B1C7422E76C081001C4743 /* AuthFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7182E76C081001C4743 /* AuthFlowView.swift */; };
 		D4B1C7432E76C081001C4743 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7302E76C081001C4743 /* ChatView.swift */; };
 		D4B1C7442E76C081001C4743 /* serverUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7112E76C081001C4743 /* serverUrl.swift */; };
@@ -92,6 +95,9 @@
 		A372E34E2E5EF746001B9CE0 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		A372E3592E5EF772001B9CE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		A3BDF0F72EB892AC009A26D5 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		A3BDF0F92EB892C4009A26D5 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		A3BDF0FB2EB892C4009A26D5 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		D4B1C70B2E76C081001C4743 /* SecureTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTokenManager.swift; sourceTree = "<group>"; };
 		D4B1C70D2E76C081001C4743 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		D4B1C70E2E76C081001C4743 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -260,6 +266,22 @@
 				A372E34E2E5EF746001B9CE0 /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A3BDF0FA2EB892C4009A26D5 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A3BDF0F92EB892C4009A26D5 /* PostRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		A3BDF0FC2EB892C4009A26D5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A3BDF0FB2EB892C4009A26D5 /* PostViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		D4B1C70C2E76C081001C4743 /* Auth */ = {
@@ -460,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				D4B1C7362E76C081001C4743 /* FilterOption.swift */,
+				A3BDF0F72EB892AC009A26D5 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -479,6 +502,8 @@
 			children = (
 				D4B1C7372E76C081001C4743 /* Models */,
 				D4B1C73B2E76C081001C4743 /* Views */,
+				A3BDF0FA2EB892C4009A26D5 /* Repository */,
+				A3BDF0FC2EB892C4009A26D5 /* ViewModels */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -713,9 +738,12 @@
 				D4B1C74A2E76C081001C4743 /* HeaderView.swift in Sources */,
 				D4B1C74B2E76C081001C4743 /* PostView.swift in Sources */,
 				D4B1C74C2E76C081001C4743 /* FilterPickerSheet.swift in Sources */,
+				A3BDF0FD2EB892C4009A26D5 /* PostViewModel.swift in Sources */,
+				A3BDF0FE2EB892C4009A26D5 /* PostRepository.swift in Sources */,
 				D4B1C74D2E76C081001C4743 /* LoginView.swift in Sources */,
 				D4B1C74E2E76C081001C4743 /* AppState.swift in Sources */,
 				D4B1C74F2E76C081001C4743 /* LoginViewModel.swift in Sources */,
+				A3BDF0F82EB892AC009A26D5 /* Post.swift in Sources */,
 				D4B1C7502E76C081001C4743 /* FilterOption.swift in Sources */,
 				D4B1C7512E76C081001C4743 /* SignupView.swift in Sources */,
 				D4B1C7522E76C081001C4743 /* FriendsView.swift in Sources */,

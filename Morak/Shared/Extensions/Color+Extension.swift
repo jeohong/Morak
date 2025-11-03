@@ -28,11 +28,20 @@ extension Color {
     static var customRed: Color { Color(hex: 0xFF0000) }
     static var point: Color { Color(hex: 0xFF8424) }
     static var lightYellow: Color { Color(hex: 0xFEEDBF) }
-    
+
+    // MARK: - Post View Colors
+    static var postBackground: Color { Color(hex: 0xFFF8F0) }
+    static var cardBackground: Color { .white }
+    static var orangeButton: Color { Color(hex: 0xFF6B35) }
+    static var profilePink: Color { Color(hex: 0xFFE5D9) }
+    static var profileOrange: Color { Color(hex: 0xFFDCC4) }
+    static var profilePeach: Color { Color(hex: 0xFFE9D6) }
+    static var lightGray: Color { Color(hex: 0xF5F5F5) }
+
     // MARK: - Semantic Colors (의미적 색상)
     static var primary: Color { .main }
     static var secondary: Color { .point }
-    static var surface: Color { .lightYellow }
+    static var surface: Color { .postBackground }
     static var textPrimary: Color { .black }
     static var textSecondary: Color { .deepGray }
     static var error: Color { .customRed }
