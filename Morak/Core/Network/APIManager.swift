@@ -43,7 +43,7 @@ final class APIManager: APIManagerProtocol {
         endpoint.headers?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
-        
+
         if endpoint.method != .GET, let requestBody = endpoint.requestBody {
             do {
                 let encoder = JSONEncoder()
@@ -52,14 +52,14 @@ final class APIManager: APIManagerProtocol {
                 throw NetworkError.encodingError
             }
         }
-        
+
         do {
             let (data, response) = try await session.data(for: request)
-            
+
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw NetworkError.invalidResponse
             }
-            
+
             // 상태 코드 체크
             switch httpResponse.statusCode {
             case 200...299:
@@ -73,16 +73,15 @@ final class APIManager: APIManagerProtocol {
             default:
                 throw NetworkError.unknown
             }
-            
+
             guard !data.isEmpty else {
                 throw NetworkError.noData
             }
-            
+
             do {
                 let decodedResponse = try JSONDecoder().decode(responseType, from: data)
                 return decodedResponse
             } catch {
-                print("Decoding error: \(error)")
                 throw NetworkError.decodingError
             }
             

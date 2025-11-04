@@ -1,16 +1,18 @@
 //
-//  HeaderView.swift
+//  PostHeaderView.swift
 //  Morak
 //
-//  Created by 홍정민 on 8/27/25.
+//  Created by 홍정민 on 11/4/25.
 //
 
 import SwiftUI
 
 struct PostHeaderView: View {
+    @ObservedObject var authManager: AuthManager
+    @Binding var showLoginView: Bool
+
     var body: some View {
         HStack(spacing: 12) {
-            // 왼쪽: 로고
             HStack(spacing: 6) {
                 Image("logo")
                     .resizable()
@@ -20,17 +22,14 @@ struct PostHeaderView: View {
                     .font(.pretendard.title)
                     .foregroundColor(.textPrimary)
             }
-
+            
             Spacer()
-
-            // 오른쪽: 글쓰기 버튼
+            
             Button(action: {
-                print("글쓰기")
+                handleWriteButton()
             }) {
                 HStack(spacing: 4) {
-                    Text("✍️")
-                        .font(.system(size: 14))
-                    Text("글쓰기")
+                    Text("✍️  글쓰기")
                         .font(.pretendard.smallTextBold)
                         .foregroundColor(.white)
                 }
@@ -43,5 +42,17 @@ struct PostHeaderView: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 12)
         .background(Color.postBackground)
+    }
+    
+    private func handleWriteButton() {
+        // 로그인 상태 확인
+        guard !authManager.requiresLogin else {
+            print("🔒 [PostHeaderView] 로그인이 필요합니다 - LoginView로 이동")
+            showLoginView = true
+            return
+        }
+
+        print("✍️ [PostHeaderView] 글쓰기 화면으로 이동")
+        // TODO: 글쓰기 화면 내비게이션 구현
     }
 }

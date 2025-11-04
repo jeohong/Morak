@@ -9,30 +9,28 @@ import SwiftUI
 
 struct SettingView: View {
     @StateObject private var logoutViewModel = LogoutViewModel()
+    @ObservedObject private var authManager = AuthManager.shared
     @State private var showLogoutAlert = false
-    
+
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
                 Text("세팅 뷰")
                     .font(.largeTitle)
-                
+
                 Spacer()
                 
-                // TODO: (임시) 사용자 정보 표시
-                if let userEmail = UserDefaults.standard.string(forKey: "user_email"),
-                   let userId = UserDefaults.standard.string(forKey: "user_id"),
-                   let userNickname = UserDefaults.standard.string(forKey: "user_nickname") {
+                if let user = authManager.currentUser {
                     VStack(spacing: 8) {
                         Text("로그인된 사용자")
                             .font(.headline)
-                        Text("이메일: \(userEmail)")
+                        Text("이메일: \(user.email)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        Text("유저아이디: \(userId)")
+                        Text("유저아이디: \(user.id)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        Text("닉네임: \(userNickname)")
+                        Text("닉네임: \(user.nickname)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -41,7 +39,7 @@ struct SettingView: View {
                     .cornerRadius(12)
                     .padding(.horizontal)
                 }
-                
+
                 Spacer()
                 
                 // 로그아웃 버튼

@@ -36,21 +36,19 @@ final class LoginUseCase: LoginUseCaseProtocol {
         }
 
         let response = try await repository.login(request)
-        
-        // 토큰 저장 (하이브리드 방식으로 안전하게 저장)
-        await SecureTokenManager.shared.saveTokens(
-            accessToken: response.data.accessToken,
-            refreshToken: response.data.refreshToken
+
+        let user = User(
+            id: String(response.data.id),
+            email: response.data.email,
+            nickname: response.data.nickname
         )
-        
-        // TODO: 사용자 정보 저장 (UserDefaults에 저장)
-        UserDefaults.standard.set(response.data.id, forKey: "user_id")
-        UserDefaults.standard.set(response.data.email, forKey: "user_email")
-        UserDefaults.standard.set(response.data.nickname, forKey: "user_nickname")
-        
-        
-        print(response.data, "로그인 데이터")
-        
+
+        await AuthManager.shared.login(
+            accessToken: response.data.accessToken,
+            refreshToken: response.data.refreshToken,
+            user: user
+        )
+
         return response.data
     }
 }
