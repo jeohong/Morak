@@ -98,7 +98,7 @@ struct PostView: View {
                 // 현재 상태를 이전 상태로 저장
                 previousIsLoggedIn = newValue
             }
-            .navigationDestination(isPresented: $showLoginView) {
+            .fullScreenCover(isPresented: $showLoginView) {
                 LoginView()
             }
         }

@@ -19,20 +19,21 @@ struct LoginView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            HStack() {
-                Spacer()
-                Button(action: {
-                    dismiss()
-                }) {
-                    Image("ic_close")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.secondary)
+        NavigationStack {
+            VStack(spacing: 0) {
+                HStack() {
+                    Spacer()
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image("ic_close")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding()
                 }
-                .padding()
-            }
-            .padding(.trailing, 8)
+                .padding(.trailing, 8)
             
             Image("logo")
                 .resizable()
@@ -157,20 +158,21 @@ struct LoginView: View {
                 }
             }
             .padding(.bottom, 40)
-        }
-        .onTapGesture {
-            focusedField = nil
-        }
-        .navigationDestination(isPresented: $showSignup) {
-            SignupView()
-        }
-        .onChange(of: viewModel.isLoginSuccessful) { success in
-            if success {
-                dismiss()
             }
-        }
-        .onAppear() {
-            print(SecureTokenManager.shared.getAccessToken(), "저장된 토큰")
+            .onTapGesture {
+                focusedField = nil
+            }
+            .navigationDestination(isPresented: $showSignup) {
+                SignupView()
+            }
+            .onChange(of: viewModel.isLoginSuccessful) { success in
+                if success {
+                    dismiss()
+                }
+            }
+            .onAppear() {
+                print(SecureTokenManager.shared.getAccessToken(), "저장된 토큰")
+            }
         }
     }
     

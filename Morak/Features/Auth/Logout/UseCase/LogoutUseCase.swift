@@ -20,8 +20,7 @@ final class LogoutUseCase: LogoutUseCaseProtocol {
     
     func execute() async throws {
         do {
-            let response = try await repository.logout()
-
+            _ = try await repository.logout()
             await clearAllUserData()
         } catch {
             await clearAllUserData()
