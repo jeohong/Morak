@@ -14,11 +14,13 @@ struct PostView: View {
     @State private var showLoginView: Bool = false
     @State private var previousLoginState: Bool = false
     @State private var previousIsLoggedIn: Bool = false
+    @State private var showErrorAlert: Bool = false
+    @State private var showLoginPrompt: Bool = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                PostHeaderView(authManager: authManager, showLoginView: $showLoginView)
+                PostHeaderView(authManager: authManager, showLoginPrompt: $showLoginPrompt)
                 
                 FilterSectionView(
                     selectedFilter: $selectedFilter,
@@ -33,7 +35,7 @@ struct PostView: View {
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(Array(viewModel.posts.enumerated()), id: \.element.id) { index, post in
-                            PostCardView(post: post, authManager: authManager, showLoginView: $showLoginView)
+                            PostCardView(post: post, authManager: authManager, showLoginPrompt: $showLoginPrompt)
                                 .onAppear {
                                     // 마지막 아이템이거나 마지막에서 3번째 아이템이 나타나면 다음 페이지 로드
                                     let threshold = max(0, viewModel.posts.count - 3)
@@ -57,50 +59,60 @@ struct PostView: View {
             }
             .background(Color.postBackground.ignoresSafeArea())
             .task {
-                print("🚀 [PostView] 화면 로드 - 초기 데이터 가져오기 시작")
                 await viewModel.fetchPosts(sortBy: selectedFilter)
             }
             .onAppear {
-                // 초기 로그인 상태 저장 (onChange가 앱 시작 시 트리거되지 않도록)
                 previousIsLoggedIn = authManager.isLoggedIn
             }
             .onChange(of: showLoginView) { newValue in
-                // LoginView에서 돌아올 때 (true -> false)
                 if previousLoginState == true && newValue == false {
-                    // 로그인 상태 확인
                     authManager.checkLoginStatus()
                     if authManager.isLoggedIn {
-                        print("🔄 [PostView] 로그인 완료 - 데이터 새로고침")
                         Task {
                             await viewModel.fetchPosts(sortBy: selectedFilter, refresh: true)
                         }
-                    } else {
-                        print("ℹ️ [PostView] 로그인하지 않고 돌아옴")
                     }
                 }
-                // 현재 상태를 이전 상태로 저장
                 previousLoginState = newValue
             }
             .onChange(of: authManager.isLoggedIn) { newValue in
                 // 로그인 상태가 변경되었는지 확인
                 if previousIsLoggedIn != newValue {
-                    if newValue {
-                        // 로그인 완료 (false -> true)
-                        print("🔄 [PostView] 로그인 완료 - 데이터 새로고침")
-                    } else {
-                        // 로그아웃 완료 (true -> false)
-                        print("🔄 [PostView] 로그아웃 완료 - 데이터 새로고침")
-                    }
                     Task {
                         await viewModel.fetchPosts(sortBy: selectedFilter, refresh: true)
                     }
                 }
-                // 현재 상태를 이전 상태로 저장
                 previousIsLoggedIn = newValue
             }
             .fullScreenCover(isPresented: $showLoginView) {
                 LoginView()
             }
+            .onChange(of: viewModel.errorMessage) { errorMessage in
+                if errorMessage != nil {
+                    showErrorAlert = true
+                }
+            }
+            .customAlert(
+                isPresented: $showErrorAlert,
+                config: CustomAlertConfig(
+                    title: "오류",
+                    message: viewModel.errorMessage ?? "알 수 없는 오류가 발생했습니다.",
+                    primaryButton: AlertButton(title: "확인", style: .primary) {
+                        // 에러 메시지 초기화
+                        viewModel.errorMessage = nil
+                    }
+                )
+            )
+            .customAlert(
+                isPresented: $showLoginPrompt,
+                config: CustomAlertConfig(
+                    message: "로그인 하고 이용해 주세요",
+                    primaryButton: AlertButton(title: "확인", style: .primary) {
+                        showLoginView = true
+                    },
+                    secondaryButton: AlertButton(title: "취소", style: .cancel)
+                )
+            )
         }
     }
 }
@@ -178,7 +190,7 @@ struct FilterSectionView: View {
 struct PostCardView: View {
     let post: Post
     @ObservedObject var authManager: AuthManager
-    @Binding var showLoginView: Bool
+    @Binding var showLoginPrompt: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -253,38 +265,32 @@ struct PostCardView: View {
     private func handlePostTap() {
         // 로그인 상태 확인
         guard !authManager.requiresLogin else {
-            print("🔒 [PostCardView] 로그인이 필요합니다 - LoginView로 이동")
-            showLoginView = true
+            showLoginPrompt = true
             return
         }
 
-        // 로그인된 경우 포스트 상세로 이동
         print("📖 [PostCardView] 포스트 \(post.id) 상세 화면으로 이동")
         // TODO: 포스트 상세 화면 내비게이션 구현
     }
-    
+
     private func handleCommentButton() {
         // 로그인 상태 확인
         guard !authManager.requiresLogin else {
-            print("🔒 [PostCardView] 로그인이 필요합니다 - LoginView로 이동")
-            showLoginView = true
+            showLoginPrompt = true
             return
         }
 
-        // 로그인된 경우 댓글 화면으로 이동
         print("💬 [PostCardView] 포스트 \(post.id) 댓글 화면으로 이동")
         // TODO: 댓글 화면 내비게이션 구현
     }
-    
+
     private func handleLikeButton() {
         // 로그인 상태 확인
         guard !authManager.requiresLogin else {
-            print("🔒 [PostCardView] 로그인이 필요합니다 - LoginView로 이동")
-            showLoginView = true
+            showLoginPrompt = true
             return
         }
 
-        // 로그인된 경우 좋아요 처리
         print("❤️ [PostCardView] 좋아요 클릭: \(post.id)")
         // TODO: 좋아요 API 호출
     }

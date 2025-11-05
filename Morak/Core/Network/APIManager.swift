@@ -64,8 +64,6 @@ final class APIManager: APIManagerProtocol {
             switch httpResponse.statusCode {
             case 200...299:
                 break
-            case 401:
-                throw NetworkError.unauthorized
             case 400...499, 500...599:
                 // 에러 응답에서 메시지 파싱 시도
                 let errorMessage = parseErrorMessage(from: data)
