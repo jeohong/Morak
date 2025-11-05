@@ -35,7 +35,16 @@ struct PostView: View {
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(Array(viewModel.posts.enumerated()), id: \.element.id) { index, post in
-                            PostCardView(post: post, authManager: authManager, showLoginPrompt: $showLoginPrompt)
+                            PostCardView(
+                                post: post,
+                                authManager: authManager,
+                                showLoginPrompt: $showLoginPrompt,
+                                onLikeTap: { postId in
+                                    Task {
+                                        await viewModel.toggleLike(postId: postId)
+                                    }
+                                }
+                            )
                                 .onAppear {
                                     // 마지막 아이템이거나 마지막에서 3번째 아이템이 나타나면 다음 페이지 로드
                                     let threshold = max(0, viewModel.posts.count - 3)
@@ -92,15 +101,18 @@ struct PostView: View {
                     showErrorAlert = true
                 }
             }
+            .onChange(of: showErrorAlert) { isShowing in
+                // 팝업이 닫히면 에러 메시지 초기화
+                if !isShowing {
+                    viewModel.errorMessage = nil
+                }
+            }
             .customAlert(
                 isPresented: $showErrorAlert,
                 config: CustomAlertConfig(
                     title: "오류",
                     message: viewModel.errorMessage ?? "알 수 없는 오류가 발생했습니다.",
-                    primaryButton: AlertButton(title: "확인", style: .primary) {
-                        // 에러 메시지 초기화
-                        viewModel.errorMessage = nil
-                    }
+                    primaryButton: AlertButton(title: "확인", style: .primary)
                 )
             )
             .customAlert(
@@ -203,6 +215,7 @@ struct PostCardView: View {
     let post: Post
     @ObservedObject var authManager: AuthManager
     @Binding var showLoginPrompt: Bool
+    let onLikeTap: (Int) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -303,7 +316,7 @@ struct PostCardView: View {
             return
         }
 
-        print("❤️ [PostCardView] 좋아요 클릭: \(post.id)")
-        // TODO: 좋아요 API 호출
+        // 좋아요 토글
+        onLikeTap(post.id)
     }
 }

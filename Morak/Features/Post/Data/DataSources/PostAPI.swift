@@ -9,6 +9,7 @@ import Foundation
 
 enum PostEndpoint: APIEndpoint {
     case getPostList(PostListRequest)
+    case likePost(postId: Int)
 
     var baseURL: String {
         return baseUrl
@@ -18,6 +19,8 @@ enum PostEndpoint: APIEndpoint {
         switch self {
         case .getPostList:
             return "api/v1/posts"
+        case .likePost(let postId):
+            return "api/v1/posts/\(postId)/like"
         }
     }
 
@@ -25,6 +28,8 @@ enum PostEndpoint: APIEndpoint {
         switch self {
         case .getPostList:
             return .GET
+        case .likePost:
+            return .POST
         }
     }
 
@@ -57,6 +62,8 @@ enum PostEndpoint: APIEndpoint {
                 "size": "\(request.size)",
                 "sortBy": request.sortBy
             ]
+        case .likePost:
+            return nil
         }
     }
 }

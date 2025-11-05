@@ -12,12 +12,12 @@ struct Post: Identifiable {
     let id: Int
     let nickname: String
     let content: String
-    let likeCount: Int
+    var likeCount: Int
     let commentCount: Int
     let viewCount: Int
     let createdAt: String
     let modifiedAt: String
-    let likedByLoginUser: Bool
+    var likedByLoginUser: Bool
 
     var isLikedByMe: Bool {
         return likedByLoginUser
@@ -73,6 +73,20 @@ struct Post: Identifiable {
 
         let isoFormatter = ISO8601DateFormatter()
         return isoFormatter.date(from: dateString)
+    }
+
+    // MARK: - Like State Management
+    /// - Parameter serverResponse: 서버에서 받은 data 값 (null, true, false)
+    mutating func updateLikeState(serverResponse: Bool?) {
+        guard let newState = serverResponse else { return }
+
+        let oldState = likedByLoginUser
+        likedByLoginUser = newState
+
+        if oldState != newState {
+            if newState { likeCount += 1 }
+            else { likeCount = max(0, likeCount - 1) }
+        }
     }
 }
 

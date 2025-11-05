@@ -18,10 +18,12 @@ final class PostViewModel: ObservableObject {
     @Published var hasMorePages: Bool = true
 
     private let getPostListUseCase: GetPostListUseCaseProtocol
+    private let likePostUseCase: LikePostUseCaseProtocol
     private let pageSize: Int = 10
 
-    init(getPostListUseCase: GetPostListUseCaseProtocol) {
+    init(getPostListUseCase: GetPostListUseCaseProtocol, likePostUseCase: LikePostUseCaseProtocol) {
         self.getPostListUseCase = getPostListUseCase
+        self.likePostUseCase = likePostUseCase
     }
 
     func fetchPosts(sortBy: FilterOption, refresh: Bool = false) async {
@@ -63,12 +65,36 @@ final class PostViewModel: ObservableObject {
 
         isLoading = false
     }
+
+    func toggleLike(postId: Int) async {
+        do {
+            let serverResponse = try await likePostUseCase.execute(postId: postId)
+            
+            if let index = posts.firstIndex(where: { $0.id == postId }) {
+                posts[index].updateLikeState(serverResponse: serverResponse)
+            }
+            
+            if serverResponse == nil {
+                errorMessage = "좋아요 처리 중 오류가 발생했습니다."
+            }
+        } catch let error as NetworkError {
+            // 토큰 만료 에러는 별도 처리
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "알 수 없는 오류가 발생했습니다."
+        }
+    }
 }
 
 // MARK: - Factory
 extension PostViewModel {
     static func makeDefault() -> PostViewModel {
-        let useCase = GetPostListUseCase.makeDefault()
-        return PostViewModel(getPostListUseCase: useCase)
+        let getPostListUseCase = GetPostListUseCase.makeDefault()
+        let likePostUseCase = LikePostUseCase.makeDefault()
+        return PostViewModel(getPostListUseCase: getPostListUseCase, likePostUseCase: likePostUseCase)
     }
 }

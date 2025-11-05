@@ -27,4 +27,15 @@ final class PostRepository: PostRepositoryProtocol {
 
         return domainResponse
     }
+
+    func likePost(postId: Int) async throws -> Bool? {
+        let endpoint = PostEndpoint.likePost(postId: postId)
+
+        let apiResponse: LikeResponseDTO = try await apiManager.request(
+            endpoint,
+            responseType: LikeResponseDTO.self
+        )
+
+        return apiResponse.data
+    }
 }
