@@ -28,6 +28,7 @@ enum AuthEndpoint: APIEndpoint {
     case login(LoginRequest)
     case logout
     case signup(SignupRequest)
+    case refresh(RefreshTokenRequest)
 
     var baseURL: String {
         return baseUrl
@@ -41,16 +42,14 @@ enum AuthEndpoint: APIEndpoint {
             return "api/v1/auth/logout"
         case .signup:
             return "api/v1/auth/signup"
+        case .refresh:
+            return "api/v1/auth/refresh"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .login:
-            return .POST
-        case .logout:
-            return .POST
-        case .signup:
+        case .login, .logout, .signup, .refresh:
             return .POST
         }
     }
@@ -60,14 +59,17 @@ enum AuthEndpoint: APIEndpoint {
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]
-        
-        // 로그아웃 시 Authorization 헤더 추가
-        if case .logout = self {
+
+        // 로그아웃, 리프레시 시 Authorization 헤더 추가
+        switch self {
+        case .logout, .refresh:
             if let accessToken = SecureTokenManager.shared.getAccessToken() {
                 headers["Authorization"] = "Bearer \(accessToken)"
             }
+        default:
+            break
         }
-        
+
         return headers
     }
     
@@ -79,6 +81,8 @@ enum AuthEndpoint: APIEndpoint {
             return nil
         case .signup(let signupRequest):
             return signupRequest
+        case .refresh(let refreshRequest):
+            return refreshRequest
         }
     }
 

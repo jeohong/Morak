@@ -75,6 +75,28 @@ final class AuthManager: ObservableObject {
         isLoggedIn = false
     }
 
+    /// 토큰 갱신 처리
+    func refreshToken() async throws -> Bool {
+        guard let refreshToken = SecureTokenManager.shared.getRefreshToken() else {
+            throw NetworkError.unauthorized
+        }
+
+        let useCase = RefreshTokenUseCase()
+        do {
+            _ = try await useCase.execute(refreshToken)
+            return true
+        } catch {
+            // Refresh 실패 시 강제 로그아웃
+            logout()
+            throw error
+        }
+    }
+
+    /// Refresh Token 가져오기
+    func getRefreshToken() -> String? {
+        return SecureTokenManager.shared.getRefreshToken()
+    }
+
     /// Access Token 가져오기
     func getAccessToken() -> String? {
         return SecureTokenManager.shared.getAccessToken()

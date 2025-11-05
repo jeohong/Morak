@@ -13,17 +13,22 @@ protocol APIManagerProtocol {
 
 final class APIManager: APIManagerProtocol {
     static let shared = APIManager()
-    
+
     private let session: URLSession
-    
+    private var isRefreshing = false
+
     private init() {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30.0
         config.timeoutIntervalForResource = 60.0
         self.session = URLSession(configuration: config)
     }
-    
+
     func request<T: Codable>(_ endpoint: any APIEndpoint, responseType: T.Type) async throws -> T {
+        return try await requestWithRetry(endpoint, responseType: responseType, isRetry: false)
+    }
+
+    private func requestWithRetry<T: Codable>(_ endpoint: any APIEndpoint, responseType: T.Type, isRetry: Bool) async throws -> T {
         var urlString = endpoint.baseURL + endpoint.path
 
         if let queryParameters = endpoint.queryParameters, !queryParameters.isEmpty {
@@ -84,6 +89,26 @@ final class APIManager: APIManagerProtocol {
             }
             
         } catch let error as NetworkError {
+            // 인증 관련 API는 자동 갱신 제외 (로그인, 회원가입, refresh)
+            let shouldSkipRefresh = endpoint.path.contains("/auth/login") ||
+                                   endpoint.path.contains("/auth/signup") ||
+                                   endpoint.path.contains("/auth/refresh")
+
+            // 401 에러이고 아직 재시도하지 않았으면 토큰 갱신 시도
+            if case .serverError(let statusCode, _) = error,
+               statusCode == 401,
+               !isRetry,
+               !shouldSkipRefresh {
+                do {
+                    // 토큰 갱신 시도
+                    _ = try await AuthManager.shared.refreshToken()
+                    // 갱신 성공 시 원래 요청 재시도
+                    return try await requestWithRetry(endpoint, responseType: responseType, isRetry: true)
+                } catch {
+                    // 갱신 실패 시 장기 미접속 에러
+                    throw NetworkError.tokenRefreshFailed
+                }
+            }
             throw error
         } catch {
             if let urlError = error as? URLError {

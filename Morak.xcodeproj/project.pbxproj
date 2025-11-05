@@ -25,6 +25,8 @@
 		A372E3582E5EF746001B9CE0 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E3482E5EF746001B9CE0 /* Pretendard-ExtraBold.otf */; };
 		A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */; };
 		A3815F702EBAC97F002363D3 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3815F6F2EBAC97E002363D3 /* CustomAlert.swift */; };
+		A3815F732EBB3E99002363D3 /* RefreshTokenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3815F712EBB3E99002363D3 /* RefreshTokenModels.swift */; };
+		A3815F772EBB3EAB002363D3 /* RefreshTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3815F742EBB3EAB002363D3 /* RefreshTokenUseCase.swift */; };
 		A392EC5D2EB9CC10000FA26C /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC572EB9CC10000FA26C /* PostViewModel.swift */; };
 		A392EC5E2EB9CC10000FA26C /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC4A2EB9CC10000FA26C /* PostAPI.swift */; };
 		A392EC5F2EB9CC10000FA26C /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC592EB9CC10000FA26C /* PostView.swift */; };
@@ -103,6 +105,8 @@
 		A372E3592E5EF772001B9CE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		A3815F6F2EBAC97E002363D3 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		A3815F712EBB3E99002363D3 /* RefreshTokenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModels.swift; sourceTree = "<group>"; };
+		A3815F742EBB3EAB002363D3 /* RefreshTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenUseCase.swift; sourceTree = "<group>"; };
 		A392EC482EB9CC10000FA26C /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		A392EC4A2EB9CC10000FA26C /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		A392EC4C2EB9CC10000FA26C /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
@@ -283,6 +287,30 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		A3815F722EBB3E99002363D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A3815F712EBB3E99002363D3 /* RefreshTokenModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A3815F752EBB3EAB002363D3 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				A3815F742EBB3EAB002363D3 /* RefreshTokenUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		A3815F762EBB3EAB002363D3 /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				A3815F752EBB3EAB002363D3 /* UseCase */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
 		A392EC492EB9CC10000FA26C /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				D4B1C7192E76C081001C4743 /* Views */,
+				A3815F722EBB3E99002363D3 /* Models */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -565,6 +594,7 @@
 				D4B1C7282E76C081001C4743 /* Logout */,
 				D4B1C72B2E76C081001C4743 /* Repository */,
 				D4B1C72E2E76C081001C4743 /* SignUp */,
+				A3815F762EBB3EAB002363D3 /* Refresh */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -820,6 +850,7 @@
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
 				A3815F702EBAC97F002363D3 /* CustomAlert.swift in Sources */,
 				D4B1C7702E76D47B001C4743 /* SignupUseCase.swift in Sources */,
+				A3815F732EBB3E99002363D3 /* RefreshTokenModels.swift in Sources */,
 				A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */,
 				A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */,
 				D4B1C7422E76C081001C4743 /* AuthFlowView.swift in Sources */,
@@ -847,6 +878,7 @@
 				A392EC622EB9CC10000FA26C /* FilterOption.swift in Sources */,
 				A392EC632EB9CC10000FA26C /* PostDTO.swift in Sources */,
 				A392EC642EB9CC10000FA26C /* Post.swift in Sources */,
+				A3815F772EBB3EAB002363D3 /* RefreshTokenUseCase.swift in Sources */,
 				D4B1C7532E76C081001C4743 /* BaseResponse.swift in Sources */,
 				D4B1C76D2E76D047001C4743 /* EmailRepository.swift in Sources */,
 				D4B1C7542E76C081001C4743 /* APIManager.swift in Sources */,

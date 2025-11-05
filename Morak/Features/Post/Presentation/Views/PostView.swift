@@ -113,6 +113,18 @@ struct PostView: View {
                     secondaryButton: AlertButton(title: "취소", style: .cancel)
                 )
             )
+            .customAlert(
+                isPresented: $viewModel.showTokenExpiredAlert,
+                config: CustomAlertConfig(
+                    message: "장기 미접속으로 로그아웃 되었습니다",
+                    primaryButton: AlertButton(title: "확인", style: .primary) {
+                        // 비로그인 상태로 재호출
+                        Task {
+                            await viewModel.fetchPosts(sortBy: selectedFilter, refresh: true)
+                        }
+                    }
+                )
+            )
         }
     }
 }

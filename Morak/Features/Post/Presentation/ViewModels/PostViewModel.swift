@@ -13,6 +13,7 @@ final class PostViewModel: ObservableObject {
     @Published var posts: [Post] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var showTokenExpiredAlert: Bool = false
     @Published var currentPage: Int = 1
     @Published var hasMorePages: Bool = true
 
@@ -50,7 +51,12 @@ final class PostViewModel: ObservableObject {
             hasMorePages = !response.last
 
         } catch let error as NetworkError {
-            errorMessage = error.localizedDescription
+            // 토큰 만료 (장기 미접속) 에러는 별도 처리
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
         } catch {
             errorMessage = "알 수 없는 오류가 발생했습니다."
         }

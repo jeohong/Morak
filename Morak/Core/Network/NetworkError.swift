@@ -18,6 +18,7 @@ enum NetworkError: Error, LocalizedError {
     case networkUnavailable
     case timeout
     case unknown
+    case tokenRefreshFailed  // Refresh 토큰도 만료됨 (장기 미접속)
     
     var errorDescription: String? {
         switch self {
@@ -41,6 +42,8 @@ enum NetworkError: Error, LocalizedError {
             return "요청 시간이 초과되었습니다."
         case .unknown:
             return "알 수 없는 오류가 발생했습니다."
+        case .tokenRefreshFailed:
+            return "장기 미접속으로 로그아웃 되었습니다."
         }
     }
 }
