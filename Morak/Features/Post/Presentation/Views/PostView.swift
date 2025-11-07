@@ -16,11 +16,13 @@ struct PostView: View {
     @State private var previousIsLoggedIn: Bool = false
     @State private var showErrorAlert: Bool = false
     @State private var showLoginPrompt: Bool = false
+    @State private var showCreatePost: Bool = false
+    @State private var hasInitialLoaded: Bool = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                PostHeaderView(authManager: authManager, showLoginPrompt: $showLoginPrompt)
+                PostHeaderView(authManager: authManager, showLoginPrompt: $showLoginPrompt, showCreatePost: $showCreatePost)
                 
                 FilterSectionView(
                     selectedFilter: $selectedFilter,
@@ -31,7 +33,6 @@ struct PostView: View {
                     }
                 )
                 
-                // 포스트 리스트
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(Array(viewModel.posts.enumerated()), id: \.element.id) { index, post in
@@ -67,16 +68,22 @@ struct PostView: View {
                 .background(Color.postBackground)
             }
             .background(Color.postBackground.ignoresSafeArea())
-            .task {
-                await viewModel.fetchPosts(sortBy: selectedFilter)
-            }
             .onAppear {
                 previousIsLoggedIn = authManager.isLoggedIn
+
+                if !hasInitialLoaded {
+                    hasInitialLoaded = true
+                    Task {
+                        await viewModel.fetchPosts(sortBy: selectedFilter)
+                    }
+                }
             }
             .onChange(of: showLoginView) { newValue in
                 if previousLoginState == true && newValue == false {
                     authManager.checkLoginStatus()
-                    if authManager.isLoggedIn {
+                    let currentLoginState = authManager.isLoggedIn
+                    
+                    if previousIsLoggedIn == currentLoginState {
                         Task {
                             await viewModel.fetchPosts(sortBy: selectedFilter, refresh: true)
                         }
@@ -85,7 +92,6 @@ struct PostView: View {
                 previousLoginState = newValue
             }
             .onChange(of: authManager.isLoggedIn) { newValue in
-                // 로그인 상태가 변경되었는지 확인
                 if previousIsLoggedIn != newValue {
                     Task {
                         await viewModel.fetchPosts(sortBy: selectedFilter, refresh: true)
@@ -96,13 +102,19 @@ struct PostView: View {
             .fullScreenCover(isPresented: $showLoginView) {
                 LoginView()
             }
+            .navigationDestination(isPresented: $showCreatePost) {
+                CreatePostView(onPostCreated: {
+                    Task {
+                        await viewModel.fetchPosts(sortBy: selectedFilter, refresh: true)
+                    }
+                })
+            }
             .onChange(of: viewModel.errorMessage) { errorMessage in
                 if errorMessage != nil {
                     showErrorAlert = true
                 }
             }
             .onChange(of: showErrorAlert) { isShowing in
-                // 팝업이 닫히면 에러 메시지 초기화
                 if !isShowing {
                     viewModel.errorMessage = nil
                 }
@@ -125,198 +137,7 @@ struct PostView: View {
                     secondaryButton: AlertButton(title: "취소", style: .cancel)
                 )
             )
-            .customAlert(
-                isPresented: $viewModel.showTokenExpiredAlert,
-                config: CustomAlertConfig(
-                    message: "장기 미접속으로 로그아웃 되었습니다",
-                    primaryButton: AlertButton(title: "확인", style: .primary) {
-                        // 비로그인 상태로 재호출
-                        Task {
-                            await viewModel.fetchPosts(sortBy: selectedFilter, refresh: true)
-                        }
-                    }
-                )
-            )
+            .tokenExpirationAlert(isPresented: $viewModel.showTokenExpiredAlert)
         }
-    }
-}
-
-// MARK: - Filter Section View
-struct FilterSectionView: View {
-    @Binding var selectedFilter: FilterOption
-    let onFilterChange: (FilterOption) -> Void
-    
-    var body: some View {
-        HStack(spacing: 12) {
-            // 필터 드롭다운 버튼
-            Menu {
-                ForEach(FilterOption.allCases, id: \.self) { option in
-                    Button(action: {
-                        selectedFilter = option
-                        onFilterChange(option)
-                    }) {
-                        HStack {
-                            Text(option.title)
-                            if selectedFilter == option {
-                                Image(systemName: "checkmark")
-                            }
-                        }
-                    }
-                }
-            } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                        .font(.system(size: 16))
-                        .foregroundColor(.textSecondary)
-                    
-                    Text(selectedFilter.title)
-                        .font(.pretendard.mediumTextRegular)
-                        .foregroundColor(.textPrimary)
-                    
-                    Image(systemName: "chevron.down")
-                        .font(.system(size: 10))
-                        .foregroundColor(.textSecondary)
-                }
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
-                .background(Color.cardBackground)
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.textSecondary.opacity(0.2), lineWidth: 1)
-                )
-            }
-            
-            Spacer()
-            
-            // 검색 버튼
-            Button(action: {
-                print("검색")
-            }) {
-                Image(systemName: "magnifyingglass")
-                    .font(.system(size: 16))
-                    .foregroundColor(.textSecondary)
-                    .frame(width: 40, height: 40)
-                    .background(Color.cardBackground)
-                    .cornerRadius(20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.textSecondary.opacity(0.2), lineWidth: 1)
-                    )
-            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 8)
-    }
-}
-
-// MARK: - Post Card View
-struct PostCardView: View {
-    let post: Post
-    @ObservedObject var authManager: AuthManager
-    @Binding var showLoginPrompt: Bool
-    let onLikeTap: (Int) -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // 닉네임과 수정됨 표시
-            HStack {
-                Text(post.nickname)
-                    .font(.pretendard.mediumTextSemiBold)
-                    .foregroundColor(.textPrimary)
-                
-                Spacer()
-                
-                if post.isModified {
-                    Text("수정됨")
-                        .font(.pretendard.smallTextRegular)
-                        .foregroundColor(.textSecondary)
-                }
-            }
-            
-            Text(post.content)
-                .font(.pretendard.mediumTextRegular)
-                .foregroundColor(.textSecondary)
-                .lineLimit(6)
-                .multilineTextAlignment(.leading)
-            
-            // 시간, 좋아요, 댓글
-            HStack {
-                Text(post.formattedCreatedAt)
-                    .font(.pretendard.smallTextRegular)
-                    .foregroundColor(.textSecondary)
-                
-                Spacer()
-                
-                HStack(spacing: 12) {
-                    // 좋아요 버튼
-                    Button(action: {
-                        handleLikeButton()
-                    }) {
-                        HStack(spacing: 4) {
-                            Image(systemName: post.isLikedByMe ? "heart.fill" : "heart")
-                                .font(.system(size: 14))
-                                .foregroundColor(post.isLikedByMe ? .red : .textSecondary)
-                            Text("\(post.likeCount)")
-                                .font(.pretendard.smallTextRegular)
-                                .foregroundColor(.textSecondary)
-                        }
-                    }
-                    
-                    // 댓글 버튼
-                    Button(action: {
-                        handleCommentButton()
-                    }) {
-                        HStack(spacing: 4) {
-                            Image(systemName: "bubble.right")
-                                .font(.system(size: 14))
-                            Text("\(post.commentCount)")
-                                .font(.pretendard.smallTextRegular)
-                        }
-                        .foregroundColor(.textSecondary)
-                    }
-                }
-            }
-        }
-        .padding(16)
-        .background(Color.cardBackground)
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
-        .onTapGesture {
-            handlePostTap()
-        }
-    }
-    
-    private func handlePostTap() {
-        // 로그인 상태 확인
-        guard !authManager.requiresLogin else {
-            showLoginPrompt = true
-            return
-        }
-
-        print("📖 [PostCardView] 포스트 \(post.id) 상세 화면으로 이동")
-        // TODO: 포스트 상세 화면 내비게이션 구현
-    }
-
-    private func handleCommentButton() {
-        // 로그인 상태 확인
-        guard !authManager.requiresLogin else {
-            showLoginPrompt = true
-            return
-        }
-
-        print("💬 [PostCardView] 포스트 \(post.id) 댓글 화면으로 이동")
-        // TODO: 댓글 화면 내비게이션 구현
-    }
-
-    private func handleLikeButton() {
-        // 로그인 상태 확인
-        guard !authManager.requiresLogin else {
-            showLoginPrompt = true
-            return
-        }
-
-        // 좋아요 토글
-        onLikeTap(post.id)
     }
 }

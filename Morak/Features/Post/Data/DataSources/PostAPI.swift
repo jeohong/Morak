@@ -10,6 +10,7 @@ import Foundation
 enum PostEndpoint: APIEndpoint {
     case getPostList(PostListRequest)
     case likePost(postId: Int)
+    case createPost(CreatePostRequest)
 
     var baseURL: String {
         return baseUrl
@@ -21,6 +22,8 @@ enum PostEndpoint: APIEndpoint {
             return "api/v1/posts"
         case .likePost(let postId):
             return "api/v1/posts/\(postId)/like"
+        case .createPost:
+            return "api/v1/posts"
         }
     }
 
@@ -29,6 +32,8 @@ enum PostEndpoint: APIEndpoint {
         case .getPostList:
             return .GET
         case .likePost:
+            return .POST
+        case .createPost:
             return .POST
         }
     }
@@ -42,16 +47,21 @@ enum PostEndpoint: APIEndpoint {
         // 토큰이 있을 때만 Authorization 헤더 추가
         if let accessToken = SecureTokenManager.shared.getAccessToken() {
             headers["Authorization"] = "Bearer \(accessToken)"
-            print("🔑 [PostEndpoint] Authorization 헤더 추가됨")
+            print("🔑 [PostEndpoint] Authorization 헤더 추가됨 - \(method.rawValue) \(path)")
         } else {
-            print("ℹ️ [PostEndpoint] Access Token 없음 - Authorization 헤더 제외")
+            print("ℹ️ [PostEndpoint] Access Token 없음 - Authorization 헤더 제외 - \(method.rawValue) \(path)")
         }
 
         return headers
     }
 
     var requestBody: (any Codable)? {
-        return nil
+        switch self {
+        case .createPost(let request):
+            return request
+        default:
+            return nil
+        }
     }
 
     var queryParameters: [String: String]? {
@@ -62,7 +72,7 @@ enum PostEndpoint: APIEndpoint {
                 "size": "\(request.size)",
                 "sortBy": request.sortBy
             ]
-        case .likePost:
+        case .likePost, .createPost:
             return nil
         }
     }

@@ -38,4 +38,18 @@ final class PostRepository: PostRepositoryProtocol {
 
         return apiResponse.data
     }
+
+    func createPost(content: String) async throws -> Post {
+        let request = CreatePostRequest(content: content)
+        let endpoint = PostEndpoint.createPost(request)
+
+        let apiResponse: BaseResponse<PostDTO> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<PostDTO>.self
+        )
+
+        let domainPost = PostMapper.toDomain(apiResponse.data)
+
+        return domainPost
+    }
 }

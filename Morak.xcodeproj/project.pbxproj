@@ -42,6 +42,13 @@
 		A392EC6B2EB9F17E000FA26C /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */; };
 		A392EC6D2EB9F225000FA26C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6C2EB9F225000FA26C /* AuthManager.swift */; };
 		A392EC6F2EB9F6F1000FA26C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6E2EB9F6F1000FA26C /* User.swift */; };
+		A3B48A452EBD776D005EFD9D /* CreatePostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */; };
+		A3B48A472EBD7798005EFD9D /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A462EBD7798005EFD9D /* CreatePostViewModel.swift */; };
+		A3B48A492EBD77BD005EFD9D /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A482EBD77BD005EFD9D /* CreatePostView.swift */; };
+		A3B48A4B2EBD7EFF005EFD9D /* CreatDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A4A2EBD7EFF005EFD9D /* CreatDTO.swift */; };
+		A3B48A4D2EBD7FA3005EFD9D /* FilterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A4C2EBD7F9C005EFD9D /* FilterSectionView.swift */; };
+		A3B48A4F2EBD7FD9005EFD9D /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A4E2EBD7FD9005EFD9D /* PostCardView.swift */; };
+		A3B48A512EBD80B9005EFD9D /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A502EBD80B9005EFD9D /* View+Extension.swift */; };
 		D4B1C7422E76C081001C4743 /* AuthFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7182E76C081001C4743 /* AuthFlowView.swift */; };
 		D4B1C7432E76C081001C4743 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7302E76C081001C4743 /* ChatView.swift */; };
 		D4B1C7442E76C081001C4743 /* serverUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7112E76C081001C4743 /* serverUrl.swift */; };
@@ -124,6 +131,13 @@
 		A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		A392EC6C2EB9F225000FA26C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A392EC6E2EB9F6F1000FA26C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostUseCase.swift; sourceTree = "<group>"; };
+		A3B48A462EBD7798005EFD9D /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
+		A3B48A482EBD77BD005EFD9D /* CreatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostView.swift; sourceTree = "<group>"; };
+		A3B48A4A2EBD7EFF005EFD9D /* CreatDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatDTO.swift; sourceTree = "<group>"; };
+		A3B48A4C2EBD7F9C005EFD9D /* FilterSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSectionView.swift; sourceTree = "<group>"; };
+		A3B48A4E2EBD7FD9005EFD9D /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
+		A3B48A502EBD80B9005EFD9D /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		D4B1C70B2E76C081001C4743 /* SecureTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTokenManager.swift; sourceTree = "<group>"; };
 		D4B1C70D2E76C081001C4743 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		D4B1C70E2E76C081001C4743 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -271,6 +285,7 @@
 				A36D7BDC2E587B14005F21C2 /* Color+Extension.swift */,
 				A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */,
 				A30975B62E70459800D25838 /* UINavigationController+Extension.swift */,
+				A3B48A502EBD80B9005EFD9D /* View+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -320,6 +335,7 @@
 			children = (
 				A392EC482EB9CC10000FA26C /* PostDTO.swift */,
 				A3815F782EBB43D1002363D3 /* LikeDTO.swift */,
+				A3B48A4A2EBD7EFF005EFD9D /* CreatDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -372,6 +388,7 @@
 			children = (
 				A392EC652EB9D570000FA26C /* GetPostListUseCase.swift */,
 				A3815F7A2EBB4435002363D3 /* LikePostUseCase.swift */,
+				A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -398,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				A392EC572EB9CC10000FA26C /* PostViewModel.swift */,
+				A3B48A462EBD7798005EFD9D /* CreatePostViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -406,7 +424,10 @@
 			isa = PBXGroup;
 			children = (
 				A392EC592EB9CC10000FA26C /* PostView.swift */,
+				A3B48A4E2EBD7FD9005EFD9D /* PostCardView.swift */,
+				A3B48A4C2EBD7F9C005EFD9D /* FilterSectionView.swift */,
 				A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */,
+				A3B48A482EBD77BD005EFD9D /* CreatePostView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -855,13 +876,17 @@
 				A36D7BDE2E587B14005F21C2 /* Color+Extension.swift in Sources */,
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
 				A3815F702EBAC97F002363D3 /* CustomAlert.swift in Sources */,
+				A3B48A4F2EBD7FD9005EFD9D /* PostCardView.swift in Sources */,
 				D4B1C7702E76D47B001C4743 /* SignupUseCase.swift in Sources */,
 				A3815F732EBB3E99002363D3 /* RefreshTokenModels.swift in Sources */,
+				A3B48A4D2EBD7FA3005EFD9D /* FilterSectionView.swift in Sources */,
 				A372E35B2E5EF8A9001B9CE0 /* Font+Extension.swift in Sources */,
 				A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */,
+				A3B48A492EBD77BD005EFD9D /* CreatePostView.swift in Sources */,
 				D4B1C7422E76C081001C4743 /* AuthFlowView.swift in Sources */,
 				D4B1C7432E76C081001C4743 /* ChatView.swift in Sources */,
 				D4B1C7442E76C081001C4743 /* serverUrl.swift in Sources */,
+				A3B48A512EBD80B9005EFD9D /* View+Extension.swift in Sources */,
 				D4B1C7452E76C081001C4743 /* LogoutViewModel.swift in Sources */,
 				A392EC6D2EB9F225000FA26C /* AuthManager.swift in Sources */,
 				D4B1C7462E76C081001C4743 /* LoginUseCase.swift in Sources */,
@@ -882,10 +907,12 @@
 				A392EC5F2EB9CC10000FA26C /* PostView.swift in Sources */,
 				A392EC602EB9CC10000FA26C /* PostRepositoryProtocol.swift in Sources */,
 				A392EC612EB9CC10000FA26C /* PostRepository.swift in Sources */,
+				A3B48A4B2EBD7EFF005EFD9D /* CreatDTO.swift in Sources */,
 				A392EC622EB9CC10000FA26C /* FilterOption.swift in Sources */,
 				A392EC632EB9CC10000FA26C /* PostDTO.swift in Sources */,
 				A392EC642EB9CC10000FA26C /* Post.swift in Sources */,
 				A3815F772EBB3EAB002363D3 /* RefreshTokenUseCase.swift in Sources */,
+				A3B48A452EBD776D005EFD9D /* CreatePostUseCase.swift in Sources */,
 				D4B1C7532E76C081001C4743 /* BaseResponse.swift in Sources */,
 				D4B1C76D2E76D047001C4743 /* EmailRepository.swift in Sources */,
 				D4B1C7542E76C081001C4743 /* APIManager.swift in Sources */,
@@ -894,6 +921,7 @@
 				D4B1C7572E76C081001C4743 /* APIEndpoint.swift in Sources */,
 				D4B1C7582E76C081001C4743 /* LoginModels.swift in Sources */,
 				A3815F7B2EBB4435002363D3 /* LikePostUseCase.swift in Sources */,
+				A3B48A472EBD7798005EFD9D /* CreatePostViewModel.swift in Sources */,
 				D4B1C75A2E76C081001C4743 /* LogoutUseCase.swift in Sources */,
 				A36D7BDB2E58790C005F21C2 /* AppTab.swift in Sources */,
 			);

@@ -10,6 +10,7 @@ import SwiftUI
 struct PostHeaderView: View {
     @ObservedObject var authManager: AuthManager
     @Binding var showLoginPrompt: Bool
+    @Binding var showCreatePost: Bool
 
     var body: some View {
         HStack(spacing: 12) {
@@ -45,13 +46,11 @@ struct PostHeaderView: View {
     }
     
     private func handleWriteButton() {
-        // 로그인 상태 확인
         guard !authManager.requiresLogin else {
             showLoginPrompt = true
             return
         }
-
-        // TODO: 글쓰기 화면 내비게이션 구현
-        print("✍️ [PostHeaderView] 글쓰기 화면으로 이동")
+        
+        showCreatePost = true
     }
 }
