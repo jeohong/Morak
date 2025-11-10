@@ -170,9 +170,6 @@ struct LoginView: View {
                     dismiss()
                 }
             }
-            .onAppear() {
-                print(SecureTokenManager.shared.getAccessToken(), "저장된 토큰")
-            }
         }
     }
     
