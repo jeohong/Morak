@@ -46,6 +46,9 @@ struct PostView: View {
                                     Task {
                                         await viewModel.toggleLike(postId: postId)
                                     }
+                                },
+                                onPostUpdated: { updatedPost in
+                                    viewModel.updatePost(updatedPost)
                                 }
                             )
                                 .onAppear {

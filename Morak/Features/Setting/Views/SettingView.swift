@@ -65,6 +65,9 @@ struct SettingView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 50)
             }
+            .onAppear(perform: {
+                print(SecureTokenManager.shared.getAccessToken())
+            })
             .navigationTitle("설정")
             .alert("로그아웃", isPresented: $showLogoutAlert) {
                 Button("취소", role: .cancel) { }

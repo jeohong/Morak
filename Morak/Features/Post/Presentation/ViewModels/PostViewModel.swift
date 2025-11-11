@@ -144,6 +144,13 @@ final class PostViewModel: ObservableObject {
         }
     }
 
+    /// 특정 포스트 업데이트 (PostDetailView에서 돌아올 때 사용)
+    func updatePost(_ updatedPost: Post) {
+        if let index = posts.firstIndex(where: { $0.id == updatedPost.id }) {
+            posts[index] = updatedPost
+        }
+    }
+
     // MARK: - Private Methods
 
     /// 로그인 상태 변경 관찰

@@ -9,6 +9,7 @@ import Foundation
 
 protocol PostRepositoryProtocol {
     func getPostList(page: Int, size: Int, sortBy: String) async throws -> PostListResponse
+    func getPostDetail(postId: Int) async throws -> Post
     func likePost(postId: Int) async throws -> Bool?
     func createPost(content: String) async throws -> Post
 }

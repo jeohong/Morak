@@ -12,6 +12,9 @@ struct PostCardView: View {
     @ObservedObject var authManager: AuthManager
     @Binding var showLoginPrompt: Bool
     let onLikeTap: (Int) -> Void
+    let onPostUpdated: ((Post) -> Void)?
+
+    @State private var showPostDetail: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -85,16 +88,13 @@ struct PostCardView: View {
         .onTapGesture {
             handlePostTap()
         }
-    }
-    
-    private func handlePostTap() {
-        guard !authManager.requiresLogin else {
-            showLoginPrompt = true
-            return
+        .navigationDestination(isPresented: $showPostDetail) {
+            PostDetailView(postId: post.id, onPostUpdated: onPostUpdated)
         }
+    }
 
-        print("📖 [PostCardView] 포스트 \(post.id) 상세 화면으로 이동")
-        // TODO: 포스트 상세 화면 내비게이션 구현
+    private func handlePostTap() {
+        showPostDetail = true
     }
 
     private func handleCommentButton() {
