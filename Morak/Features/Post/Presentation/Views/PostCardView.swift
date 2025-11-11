@@ -55,7 +55,7 @@ struct PostCardView: View {
                                 .foregroundColor(.textSecondary)
                         }
                     }
-                    
+
                     Button(action: {
                         handleCommentButton()
                     }) {
@@ -67,6 +67,14 @@ struct PostCardView: View {
                         }
                         .foregroundColor(.textSecondary)
                     }
+
+                    HStack(spacing: 4) {
+                        Image(systemName: "eye")
+                            .font(.system(size: 14))
+                        Text("\(post.viewCount)")
+                            .font(.pretendard.smallTextRegular)
+                    }
+                    .foregroundColor(.textSecondary)
                 }
             }
         }
