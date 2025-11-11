@@ -37,12 +37,7 @@ struct CommentItemView: View {
                         .padding(.top, 2)
                 }
 
-                // 프로필 아이콘
-                Image(systemName: "person.circle.fill")
-                    .font(.system(size: 24))
-                    .foregroundColor(.textSecondary)
-
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 8) {
                     // 닉네임 및 액션 버튼
                     HStack {
                         Text(comment.nickname)
@@ -144,7 +139,7 @@ struct CommentItemView: View {
                     }
                     .foregroundColor(.textSecondary)
                 }
-                .padding(.leading, isReply ? 40 : 32)
+                .padding(.leading, isReply ? 20 : 0)
             }
         }
         .padding(.horizontal, 16)

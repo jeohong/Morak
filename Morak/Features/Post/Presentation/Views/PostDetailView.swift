@@ -115,14 +115,13 @@ struct PostDetailView: View {
                             .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
                             .padding(.horizontal, 16)
                             .padding(.top, 12)
-                            
-                            Spacer()
-                            
+
                             // Comment Section
                             CommentSectionView(
                                 viewModel: commentViewModel,
                                 showLoginPrompt: $showLoginPrompt
                             )
+                            .padding(.top, 16)
                         }
                     }
                     .background(Color.postBackground)
