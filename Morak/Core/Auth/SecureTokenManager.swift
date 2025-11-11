@@ -16,7 +16,7 @@ final class SecureTokenManager {
     private let accessTokenKey = "access_token"
     private let refreshTokenKey = "refresh_token"
     private let serviceIdentifier = Bundle.main.bundleIdentifier ?? "com.brokong.Morak"
-    
+
     // 앱 설치 추적용 UserDefaults 키
     private let appInstallUUIDKey = "app_install_uuid"
     
@@ -54,8 +54,8 @@ final class SecureTokenManager {
     func clearTokens() {
         deleteFromKeychain(key: accessTokenKey)
         deleteFromKeychain(key: refreshTokenKey)
-        
-        // 앱 UUID도 삭제 (로그아웃 시)
+
+        // 앱 UUID 삭제 (로그아웃 시)
         UserDefaults.standard.removeObject(forKey: appInstallUUIDKey)
     }
     

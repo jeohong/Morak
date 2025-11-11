@@ -32,6 +32,22 @@
 		A3903BBA2EC2B8EE0004A4C3 /* GetPostDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BB92EC2B8EE0004A4C3 /* GetPostDetailUseCase.swift */; };
 		A3903BBC2EC2B8FC0004A4C3 /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BBB2EC2B8FC0004A4C3 /* PostDetailViewModel.swift */; };
 		A3903BBE2EC2B9030004A4C3 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BBD2EC2B9030004A4C3 /* PostDetailView.swift */; };
+		A3903BDE2EC2DE360004A4C3 /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BC32EC2DE360004A4C3 /* CommentDTO.swift */; };
+		A3903BDF2EC2DE360004A4C3 /* LikeCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BD12EC2DE360004A4C3 /* LikeCommentUseCase.swift */; };
+		A3903BE02EC2DE360004A4C3 /* GetCommentsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BD02EC2DE360004A4C3 /* GetCommentsUseCase.swift */; };
+		A3903BE12EC2DE360004A4C3 /* CommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BC52EC2DE360004A4C3 /* CommentAPI.swift */; };
+		A3903BE22EC2DE360004A4C3 /* CommentSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BDA2EC2DE360004A4C3 /* CommentSectionView.swift */; };
+		A3903BE32EC2DE360004A4C3 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BCC2EC2DE360004A4C3 /* Comment.swift */; };
+		A3903BE42EC2DE360004A4C3 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BD62EC2DE360004A4C3 /* CommentViewModel.swift */; };
+		A3903BE52EC2DE360004A4C3 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BC92EC2DE360004A4C3 /* CommentRepository.swift */; };
+		A3903BE62EC2DE360004A4C3 /* CommentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BD82EC2DE360004A4C3 /* CommentInputView.swift */; };
+		A3903BE72EC2DE360004A4C3 /* CommentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BD92EC2DE360004A4C3 /* CommentItemView.swift */; };
+		A3903BE82EC2DE360004A4C3 /* CommentRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BCE2EC2DE360004A4C3 /* CommentRepositoryProtocol.swift */; };
+		A3903BE92EC2DE360004A4C3 /* CommentMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BC72EC2DE360004A4C3 /* CommentMapper.swift */; };
+		A3903BEA2EC2DE360004A4C3 /* CommentSortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BD42EC2DE360004A4C3 /* CommentSortOption.swift */; };
+		A3903BEC2EC2DFE20004A4C3 /* GetRepliesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BEB2EC2DFE20004A4C3 /* GetRepliesUseCase.swift */; };
+		A3903BF02EC30AE00004A4C3 /* String+RelativeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BEF2EC30AE00004A4C3 /* String+RelativeDate.swift */; };
+		A3903BF22EC30D0F0004A4C3 /* CreateCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3903BF12EC30D0F0004A4C3 /* CreateCommentUseCase.swift */; };
 		A392EC5D2EB9CC10000FA26C /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC572EB9CC10000FA26C /* PostViewModel.swift */; };
 		A392EC5E2EB9CC10000FA26C /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC4A2EB9CC10000FA26C /* PostAPI.swift */; };
 		A392EC5F2EB9CC10000FA26C /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC592EB9CC10000FA26C /* PostView.swift */; };
@@ -124,6 +140,22 @@
 		A3903BB92EC2B8EE0004A4C3 /* GetPostDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostDetailUseCase.swift; sourceTree = "<group>"; };
 		A3903BBB2EC2B8FC0004A4C3 /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
 		A3903BBD2EC2B9030004A4C3 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
+		A3903BC32EC2DE360004A4C3 /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
+		A3903BC52EC2DE360004A4C3 /* CommentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAPI.swift; sourceTree = "<group>"; };
+		A3903BC72EC2DE360004A4C3 /* CommentMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMapper.swift; sourceTree = "<group>"; };
+		A3903BC92EC2DE360004A4C3 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
+		A3903BCC2EC2DE360004A4C3 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		A3903BCE2EC2DE360004A4C3 /* CommentRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepositoryProtocol.swift; sourceTree = "<group>"; };
+		A3903BD02EC2DE360004A4C3 /* GetCommentsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCommentsUseCase.swift; sourceTree = "<group>"; };
+		A3903BD12EC2DE360004A4C3 /* LikeCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCommentUseCase.swift; sourceTree = "<group>"; };
+		A3903BD42EC2DE360004A4C3 /* CommentSortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSortOption.swift; sourceTree = "<group>"; };
+		A3903BD62EC2DE360004A4C3 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		A3903BD82EC2DE360004A4C3 /* CommentInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentInputView.swift; sourceTree = "<group>"; };
+		A3903BD92EC2DE360004A4C3 /* CommentItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentItemView.swift; sourceTree = "<group>"; };
+		A3903BDA2EC2DE360004A4C3 /* CommentSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionView.swift; sourceTree = "<group>"; };
+		A3903BEB2EC2DFE20004A4C3 /* GetRepliesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRepliesUseCase.swift; sourceTree = "<group>"; };
+		A3903BEF2EC30AE00004A4C3 /* String+RelativeDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RelativeDate.swift"; sourceTree = "<group>"; };
+		A3903BF12EC30D0F0004A4C3 /* CreateCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommentUseCase.swift; sourceTree = "<group>"; };
 		A392EC482EB9CC10000FA26C /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		A392EC4A2EB9CC10000FA26C /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		A392EC4C2EB9CC10000FA26C /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
@@ -292,6 +324,7 @@
 				A372E35A2E5EF8A9001B9CE0 /* Font+Extension.swift */,
 				A30975B62E70459800D25838 /* UINavigationController+Extension.swift */,
 				A3B48A502EBD80B9005EFD9D /* View+Extension.swift */,
+				A3903BEF2EC30AE00004A4C3 /* String+RelativeDate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -334,6 +367,132 @@
 				A3815F752EBB3EAB002363D3 /* UseCase */,
 			);
 			path = Refresh;
+			sourceTree = "<group>";
+		};
+		A3903BC42EC2DE360004A4C3 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BC32EC2DE360004A4C3 /* CommentDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		A3903BC62EC2DE360004A4C3 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BC42EC2DE360004A4C3 /* DTOs */,
+				A3903BC52EC2DE360004A4C3 /* CommentAPI.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		A3903BC82EC2DE360004A4C3 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BC72EC2DE360004A4C3 /* CommentMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		A3903BCA2EC2DE360004A4C3 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BC92EC2DE360004A4C3 /* CommentRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		A3903BCB2EC2DE360004A4C3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BC62EC2DE360004A4C3 /* DataSources */,
+				A3903BC82EC2DE360004A4C3 /* Mappers */,
+				A3903BCA2EC2DE360004A4C3 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A3903BCD2EC2DE360004A4C3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BCC2EC2DE360004A4C3 /* Comment.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A3903BCF2EC2DE360004A4C3 /* RepositoryInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BCE2EC2DE360004A4C3 /* CommentRepositoryProtocol.swift */,
+			);
+			path = RepositoryInterfaces;
+			sourceTree = "<group>";
+		};
+		A3903BD22EC2DE360004A4C3 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BD02EC2DE360004A4C3 /* GetCommentsUseCase.swift */,
+				A3903BD12EC2DE360004A4C3 /* LikeCommentUseCase.swift */,
+				A3903BEB2EC2DFE20004A4C3 /* GetRepliesUseCase.swift */,
+				A3903BF12EC30D0F0004A4C3 /* CreateCommentUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		A3903BD32EC2DE360004A4C3 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BCD2EC2DE360004A4C3 /* Entities */,
+				A3903BCF2EC2DE360004A4C3 /* RepositoryInterfaces */,
+				A3903BD22EC2DE360004A4C3 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		A3903BD52EC2DE360004A4C3 /* PresentationModels */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BD42EC2DE360004A4C3 /* CommentSortOption.swift */,
+			);
+			path = PresentationModels;
+			sourceTree = "<group>";
+		};
+		A3903BD72EC2DE360004A4C3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BD62EC2DE360004A4C3 /* CommentViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A3903BDB2EC2DE360004A4C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BD82EC2DE360004A4C3 /* CommentInputView.swift */,
+				A3903BD92EC2DE360004A4C3 /* CommentItemView.swift */,
+				A3903BDA2EC2DE360004A4C3 /* CommentSectionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A3903BDC2EC2DE360004A4C3 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BD52EC2DE360004A4C3 /* PresentationModels */,
+				A3903BD72EC2DE360004A4C3 /* ViewModels */,
+				A3903BDB2EC2DE360004A4C3 /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A3903BDD2EC2DE360004A4C3 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				A3903BCB2EC2DE360004A4C3 /* Data */,
+				A3903BD32EC2DE360004A4C3 /* Domain */,
+				A3903BDC2EC2DE360004A4C3 /* Presentation */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		A392EC492EB9CC10000FA26C /* DTOs */ = {
@@ -695,6 +854,7 @@
 			children = (
 				D4B1C72F2E76C081001C4743 /* Auth */,
 				A392EC5C2EB9CC10000FA26C /* Post */,
+				A3903BDD2EC2DE360004A4C3 /* Comment */,
 				D4B1C7322E76C081001C4743 /* Chat */,
 				D4B1C7352E76C081001C4743 /* Friends */,
 				D4B1C73D2E76C081001C4743 /* Search */,
@@ -909,6 +1069,21 @@
 				D4B1C74E2E76C081001C4743 /* AppState.swift in Sources */,
 				D4B1C74F2E76C081001C4743 /* LoginViewModel.swift in Sources */,
 				A392EC6F2EB9F6F1000FA26C /* User.swift in Sources */,
+				A3903BDE2EC2DE360004A4C3 /* CommentDTO.swift in Sources */,
+				A3903BDF2EC2DE360004A4C3 /* LikeCommentUseCase.swift in Sources */,
+				A3903BE02EC2DE360004A4C3 /* GetCommentsUseCase.swift in Sources */,
+				A3903BE12EC2DE360004A4C3 /* CommentAPI.swift in Sources */,
+				A3903BF22EC30D0F0004A4C3 /* CreateCommentUseCase.swift in Sources */,
+				A3903BE22EC2DE360004A4C3 /* CommentSectionView.swift in Sources */,
+				A3903BE32EC2DE360004A4C3 /* Comment.swift in Sources */,
+				A3903BE42EC2DE360004A4C3 /* CommentViewModel.swift in Sources */,
+				A3903BE52EC2DE360004A4C3 /* CommentRepository.swift in Sources */,
+				A3903BE62EC2DE360004A4C3 /* CommentInputView.swift in Sources */,
+				A3903BE72EC2DE360004A4C3 /* CommentItemView.swift in Sources */,
+				A3903BE82EC2DE360004A4C3 /* CommentRepositoryProtocol.swift in Sources */,
+				A3903BE92EC2DE360004A4C3 /* CommentMapper.swift in Sources */,
+				A3903BEC2EC2DFE20004A4C3 /* GetRepliesUseCase.swift in Sources */,
+				A3903BEA2EC2DE360004A4C3 /* CommentSortOption.swift in Sources */,
 				D4B1C7512E76C081001C4743 /* SignupView.swift in Sources */,
 				D4B1C7522E76C081001C4743 /* FriendsView.swift in Sources */,
 				A392EC662EB9D570000FA26C /* GetPostListUseCase.swift in Sources */,
@@ -932,6 +1107,7 @@
 				D4B1C7562E76C081001C4743 /* NetworkError.swift in Sources */,
 				D4B1C7572E76C081001C4743 /* APIEndpoint.swift in Sources */,
 				D4B1C7582E76C081001C4743 /* LoginModels.swift in Sources */,
+				A3903BF02EC30AE00004A4C3 /* String+RelativeDate.swift in Sources */,
 				A3815F7B2EBB4435002363D3 /* LikePostUseCase.swift in Sources */,
 				A3B48A472EBD7798005EFD9D /* CreatePostViewModel.swift in Sources */,
 				D4B1C75A2E76C081001C4743 /* LogoutUseCase.swift in Sources */,

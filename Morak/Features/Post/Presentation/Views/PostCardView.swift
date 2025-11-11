@@ -15,6 +15,7 @@ struct PostCardView: View {
     let onPostUpdated: ((Post) -> Void)?
 
     @State private var showPostDetail: Bool = false
+    @State private var shouldFocusComment: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -89,23 +90,22 @@ struct PostCardView: View {
             handlePostTap()
         }
         .navigationDestination(isPresented: $showPostDetail) {
-            PostDetailView(postId: post.id, onPostUpdated: onPostUpdated)
+            PostDetailView(
+                postId: post.id,
+                onPostUpdated: onPostUpdated,
+                shouldFocusComment: shouldFocusComment
+            )
         }
     }
 
     private func handlePostTap() {
+        shouldFocusComment = false
         showPostDetail = true
     }
 
     private func handleCommentButton() {
-        // 로그인 상태 확인
-        guard !authManager.requiresLogin else {
-            showLoginPrompt = true
-            return
-        }
-
-        print("💬 [PostCardView] 포스트 \(post.id) 댓글 화면으로 이동")
-        // TODO: 댓글 화면 내비게이션 구현
+        shouldFocusComment = true
+        showPostDetail = true
     }
 
     private func handleLikeButton() {

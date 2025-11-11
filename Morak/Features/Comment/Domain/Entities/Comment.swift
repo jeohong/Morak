@@ -1,23 +1,26 @@
 //
-//  Post.swift
+//  Comment.swift
 //  Morak
 //
-//  Created by Hong jeongmin on 11/3/25.
+//  Created by Hong jeongmin on 11/11/25.
 //
 
 import Foundation
 
-// MARK: - Post Entity (순수한 도메인 모델)
-struct Post: Identifiable {
+// MARK: - Comment Entity (순수한 도메인 모델)
+struct Comment: Identifiable, Equatable {
     let id: Int
-    let nickname: String
     let content: String
+    let nickname: String
+    let userId: Int
+    let postId: Int
+    let parentId: Int?
     var likeCount: Int
-    let commentCount: Int
-    let viewCount: Int
+    var likedByLoginUser: Bool
     let createdAt: String
     let modifiedAt: String
-    var likedByLoginUser: Bool
+    let hasChildren: Bool
+    let deleted: Bool
 
     var isLikedByMe: Bool {
         return likedByLoginUser
@@ -27,12 +30,15 @@ struct Post: Identifiable {
         return createdAt != modifiedAt
     }
 
+    var isRootComment: Bool {
+        return parentId == nil
+    }
+
     var formattedCreatedAt: String {
         return createdAt.formattedAsRelativeTime
     }
 
     // MARK: - Like State Management
-    /// - Parameter serverResponse: 서버에서 받은 data 값 (null, true, false)
     mutating func updateLikeState(serverResponse: Bool?) {
         guard let newState = serverResponse else { return }
 
@@ -46,9 +52,9 @@ struct Post: Identifiable {
     }
 }
 
-// MARK: - Post List Response
-struct PostListResponse {
-    let content: [Post]
+// MARK: - Comment List Response
+struct CommentListResponse {
+    let content: [Comment]
     let totalPages: Int
     let totalElements: Int
     let size: Int
