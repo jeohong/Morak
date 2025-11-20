@@ -11,6 +11,7 @@ struct PostDetailView: View {
     // MARK: - Properties
     let postId: Int
     let onPostUpdated: ((Post) -> Void)?
+    let onPostDeleted: ((Int) -> Void)?
     let shouldFocusComment: Bool
     @StateObject private var viewModel: PostDetailViewModel
     @StateObject private var commentViewModel: CommentViewModel
@@ -25,9 +26,10 @@ struct PostDetailView: View {
     @State private var showDeleteConfirmation: Bool = false
     @FocusState private var isCommentInputFocused: Bool
 
-    init(postId: Int, onPostUpdated: ((Post) -> Void)? = nil, shouldFocusComment: Bool = false) {
+    init(postId: Int, onPostUpdated: ((Post) -> Void)? = nil, onPostDeleted: ((Int) -> Void)? = nil, shouldFocusComment: Bool = false) {
         self.postId = postId
         self.onPostUpdated = onPostUpdated
+        self.onPostDeleted = onPostDeleted
         self.shouldFocusComment = shouldFocusComment
         _viewModel = StateObject(wrappedValue: PostDetailViewModel.makeDefault(postId: postId))
         _commentViewModel = StateObject(wrappedValue: CommentViewModel.makeDefault(postId: postId))
@@ -253,6 +255,13 @@ struct PostDetailView: View {
                 viewModel.errorMessage = errorMessage
             }
         }
+        .onChange(of: viewModel.isDeleted) { isDeleted in
+            // 삭제 성공 시 메인 화면으로 돌아가기
+            if isDeleted {
+                onPostDeleted?(postId)
+                dismiss()
+            }
+        }
         .customAlert(
             isPresented: $showErrorAlert,
             config: CustomAlertConfig(
@@ -346,7 +355,8 @@ struct PostDetailView: View {
     }
 
     private func handleDeletePost() {
-        // TODO: 게시글 삭제 API 호출
-        print("게시글 삭제")
+        Task {
+            await viewModel.deletePost()
+        }
     }
 }

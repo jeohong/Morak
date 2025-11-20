@@ -15,10 +15,12 @@ final class PostDetailViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var showTokenExpiredAlert: Bool = false
+    @Published var isDeleted: Bool = false
 
     // MARK: - Private Properties
     private let getPostDetailUseCase: GetPostDetailUseCaseProtocol
     private let likePostUseCase: LikePostUseCaseProtocol
+    private let deletePostUseCase: DeletePostUseCaseProtocol
     private let postId: Int
 
     // MARK: - Computed Properties
@@ -33,11 +35,13 @@ final class PostDetailViewModel: ObservableObject {
     init(
         postId: Int,
         getPostDetailUseCase: GetPostDetailUseCaseProtocol,
-        likePostUseCase: LikePostUseCaseProtocol
+        likePostUseCase: LikePostUseCaseProtocol,
+        deletePostUseCase: DeletePostUseCaseProtocol
     ) {
         self.postId = postId
         self.getPostDetailUseCase = getPostDetailUseCase
         self.likePostUseCase = likePostUseCase
+        self.deletePostUseCase = deletePostUseCase
     }
 
     // MARK: - Public Methods
@@ -91,6 +95,30 @@ final class PostDetailViewModel: ObservableObject {
             errorMessage = "알 수 없는 오류가 발생했습니다."
         }
     }
+
+    func deletePost() async {
+        guard !isLoading else { return }
+
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            try await deletePostUseCase.execute(postId: postId)
+            isDeleted = true
+
+        } catch let error as NetworkError {
+            // 토큰 만료 에러는 별도 처리
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "알 수 없는 오류가 발생했습니다."
+        }
+
+        isLoading = false
+    }
 }
 
 // MARK: - Factory
@@ -98,10 +126,12 @@ extension PostDetailViewModel {
     static func makeDefault(postId: Int) -> PostDetailViewModel {
         let getPostDetailUseCase = GetPostDetailUseCase.makeDefault()
         let likePostUseCase = LikePostUseCase.makeDefault()
+        let deletePostUseCase = DeletePostUseCase.makeDefault()
         return PostDetailViewModel(
             postId: postId,
             getPostDetailUseCase: getPostDetailUseCase,
-            likePostUseCase: likePostUseCase
+            likePostUseCase: likePostUseCase,
+            deletePostUseCase: deletePostUseCase
         )
     }
 }

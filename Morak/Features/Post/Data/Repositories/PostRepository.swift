@@ -65,4 +65,13 @@ final class PostRepository: PostRepositoryProtocol {
 
         return domainPost
     }
+
+    func deletePost(postId: Int) async throws {
+        let endpoint = PostEndpoint.deletePost(postId: postId)
+
+        let _: BaseResponse<EmptyData> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<EmptyData>.self
+        )
+    }
 }

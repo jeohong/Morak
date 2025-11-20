@@ -12,6 +12,7 @@ enum PostEndpoint: APIEndpoint {
     case getPostDetail(postId: Int)
     case likePost(postId: Int)
     case createPost(CreatePostRequest)
+    case deletePost(postId: Int)
 
     var baseURL: String {
         return baseUrl
@@ -27,6 +28,8 @@ enum PostEndpoint: APIEndpoint {
             return "api/v1/posts/\(postId)/like"
         case .createPost:
             return "api/v1/posts"
+        case .deletePost(let postId):
+            return "api/v1/posts/\(postId)"
         }
     }
 
@@ -38,6 +41,8 @@ enum PostEndpoint: APIEndpoint {
             return .POST
         case .createPost:
             return .POST
+        case .deletePost:
+            return .DELETE
         }
     }
 
@@ -75,7 +80,7 @@ enum PostEndpoint: APIEndpoint {
                 "size": "\(request.size)",
                 "sortBy": request.sortBy
             ]
-        case .getPostDetail, .likePost, .createPost:
+        case .getPostDetail, .likePost, .createPost, .deletePost:
             return nil
         }
     }

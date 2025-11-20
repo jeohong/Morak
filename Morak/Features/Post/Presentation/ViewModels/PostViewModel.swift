@@ -151,6 +151,11 @@ final class PostViewModel: ObservableObject {
         }
     }
 
+    /// 삭제된 포스트 제거
+    func removePost(_ deletedPostId: Int) {
+        posts.removeAll(where: { $0.id == deletedPostId })
+    }
+
     // MARK: - Private Methods
 
     /// 로그인 상태 변경 관찰

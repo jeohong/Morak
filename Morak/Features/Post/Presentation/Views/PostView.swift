@@ -49,6 +49,9 @@ struct PostView: View {
                                 },
                                 onPostUpdated: { updatedPost in
                                     viewModel.updatePost(updatedPost)
+                                },
+                                onPostDeleted: { deletedPostId in
+                                    viewModel.removePost(deletedPostId)
                                 }
                             )
                                 .onAppear {

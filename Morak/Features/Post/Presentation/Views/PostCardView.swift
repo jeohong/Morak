@@ -13,6 +13,7 @@ struct PostCardView: View {
     @Binding var showLoginPrompt: Bool
     let onLikeTap: (Int) -> Void
     let onPostUpdated: ((Post) -> Void)?
+    let onPostDeleted: ((Int) -> Void)?
 
     @State private var showPostDetail: Bool = false
     @State private var shouldFocusComment: Bool = false
@@ -93,6 +94,7 @@ struct PostCardView: View {
             PostDetailView(
                 postId: post.id,
                 onPostUpdated: onPostUpdated,
+                onPostDeleted: onPostDeleted,
                 shouldFocusComment: shouldFocusComment
             )
         }
