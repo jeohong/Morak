@@ -21,6 +21,15 @@ final class PostDetailViewModel: ObservableObject {
     private let likePostUseCase: LikePostUseCaseProtocol
     private let postId: Int
 
+    // MARK: - Computed Properties
+    var isMyPost: Bool {
+        guard let post = post,
+              let currentUserNickname = AuthManager.shared.currentUser?.nickname else {
+            return false
+        }
+        return post.nickname == currentUserNickname
+    }
+
     init(
         postId: Int,
         getPostDetailUseCase: GetPostDetailUseCaseProtocol,

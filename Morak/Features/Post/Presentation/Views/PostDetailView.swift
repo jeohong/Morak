@@ -22,6 +22,7 @@ struct PostDetailView: View {
     @State private var showLoginPrompt: Bool = false
     @State private var navigateToLogin: Bool = false
     @State private var commentText: String = ""
+    @State private var showDeleteConfirmation: Bool = false
     @FocusState private var isCommentInputFocused: Bool
 
     init(postId: Int, onPostUpdated: ((Post) -> Void)? = nil, shouldFocusComment: Bool = false) {
@@ -177,6 +178,28 @@ struct PostDetailView: View {
                         .font(.system(size: 17, weight: .semibold))
                 }
             }
+
+            if viewModel.isMyPost {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button(action: {
+                            handleEditPost()
+                        }) {
+                            Label("수정", systemImage: "pencil")
+                        }
+
+                        Button(role: .destructive, action: {
+                            showDeleteConfirmation = true
+                        }) {
+                            Label("삭제", systemImage: "trash")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.black)
+                            .font(.system(size: 17, weight: .semibold))
+                    }
+                }
+            }
         }
         .onAppear {
             Task {
@@ -252,6 +275,17 @@ struct PostDetailView: View {
             LoginView()
         }
         .tokenExpirationAlert(isPresented: $viewModel.showTokenExpiredAlert)
+        .customAlert(
+            isPresented: $showDeleteConfirmation,
+            config: CustomAlertConfig(
+                title: "게시글 삭제",
+                message: "정말로 이 게시글을 삭제하시겠습니까?",
+                primaryButton: AlertButton(title: "삭제", style: .destructive) {
+                    handleDeletePost()
+                },
+                secondaryButton: AlertButton(title: "취소", style: .cancel)
+            )
+        )
     }
     
     private func dismissKeyboard() {
@@ -285,24 +319,34 @@ struct PostDetailView: View {
             showLoginPrompt = true
             return
         }
-        
+
         guard !commentText.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
-        
+
         let parentId = commentViewModel.replyingTo?.id
-        
+
         Task {
             let success = await commentViewModel.createComment(
                 content: commentText,
                 parentId: parentId
             )
-            
+
             if success {
                 commentText = ""
                 commentViewModel.replyingTo = nil
                 isCommentInputFocused = false
             }
         }
+    }
+
+    private func handleEditPost() {
+        // TODO: 게시글 수정 화면으로 이동
+        print("게시글 수정")
+    }
+
+    private func handleDeletePost() {
+        // TODO: 게시글 삭제 API 호출
+        print("게시글 삭제")
     }
 }
