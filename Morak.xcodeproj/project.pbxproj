@@ -14,6 +14,10 @@
 		A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B992E4B641C00232643 /* RootTabView.swift */; };
 		A36D7BDB2E58790C005F21C2 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BD92E58790C005F21C2 /* AppTab.swift */; };
 		A36D7BDE2E587B14005F21C2 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36D7BDC2E587B14005F21C2 /* Color+Extension.swift */; };
+		A3721BB82ECFFF0A00F3E794 /* UpdateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3721BB72ECFFF0A00F3E794 /* UpdateDTO.swift */; };
+		A3721BBA2ECFFF3300F3E794 /* UpdatePostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3721BB92ECFFF3300F3E794 /* UpdatePostUseCase.swift */; };
+		A3721BBC2ECFFF5100F3E794 /* EditPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3721BBB2ECFFF5100F3E794 /* EditPostViewModel.swift */; };
+		A3721BBE2ECFFF6500F3E794 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3721BBD2ECFFF6500F3E794 /* EditPostView.swift */; };
 		A372E3502E5EF746001B9CE0 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E34E2E5EF746001B9CE0 /* Pretendard-Thin.otf */; };
 		A372E3512E5EF746001B9CE0 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E3492E5EF746001B9CE0 /* Pretendard-ExtraLight.otf */; };
 		A372E3522E5EF746001B9CE0 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A372E3472E5EF746001B9CE0 /* Pretendard-Bold.otf */; };
@@ -121,6 +125,10 @@
 		A3488B992E4B641C00232643 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		A36D7BD92E58790C005F21C2 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
 		A36D7BDC2E587B14005F21C2 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		A3721BB72ECFFF0A00F3E794 /* UpdateDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDTO.swift; sourceTree = "<group>"; };
+		A3721BB92ECFFF3300F3E794 /* UpdatePostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePostUseCase.swift; sourceTree = "<group>"; };
+		A3721BBB2ECFFF5100F3E794 /* EditPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostViewModel.swift; sourceTree = "<group>"; };
+		A3721BBD2ECFFF6500F3E794 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		A372E3462E5EF746001B9CE0 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		A372E3472E5EF746001B9CE0 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		A372E3482E5EF746001B9CE0 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -501,6 +509,7 @@
 				A392EC482EB9CC10000FA26C /* PostDTO.swift */,
 				A3815F782EBB43D1002363D3 /* LikeDTO.swift */,
 				A3B48A4A2EBD7EFF005EFD9D /* CreatDTO.swift */,
+				A3721BB72ECFFF0A00F3E794 /* UpdateDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -555,6 +564,7 @@
 				A3815F7A2EBB4435002363D3 /* LikePostUseCase.swift */,
 				A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */,
 				A3903BB92EC2B8EE0004A4C3 /* GetPostDetailUseCase.swift */,
+				A3721BB92ECFFF3300F3E794 /* UpdatePostUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -583,6 +593,7 @@
 				A392EC572EB9CC10000FA26C /* PostViewModel.swift */,
 				A3B48A462EBD7798005EFD9D /* CreatePostViewModel.swift */,
 				A3903BBB2EC2B8FC0004A4C3 /* PostDetailViewModel.swift */,
+				A3721BBB2ECFFF5100F3E794 /* EditPostViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -596,6 +607,7 @@
 				A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */,
 				A3B48A482EBD77BD005EFD9D /* CreatePostView.swift */,
 				A3903BBD2EC2B9030004A4C3 /* PostDetailView.swift */,
+				A3721BBD2ECFFF6500F3E794 /* EditPostView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1042,11 +1054,13 @@
 				A3903BBE2EC2B9030004A4C3 /* PostDetailView.swift in Sources */,
 				A3488B9A2E4B641C00232643 /* RootTabView.swift in Sources */,
 				A392EC6B2EB9F17E000FA26C /* PostHeaderView.swift in Sources */,
+				A3721BBA2ECFFF3300F3E794 /* UpdatePostUseCase.swift in Sources */,
 				D4B1C75D2E76CD74001C4743 /* SignupModels.swift in Sources */,
 				A36D7BDE2E587B14005F21C2 /* Color+Extension.swift in Sources */,
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
 				A3815F702EBAC97F002363D3 /* CustomAlert.swift in Sources */,
 				A3B48A4F2EBD7FD9005EFD9D /* PostCardView.swift in Sources */,
+				A3721BB82ECFFF0A00F3E794 /* UpdateDTO.swift in Sources */,
 				D4B1C7702E76D47B001C4743 /* SignupUseCase.swift in Sources */,
 				A3815F732EBB3E99002363D3 /* RefreshTokenModels.swift in Sources */,
 				A3B48A4D2EBD7FA3005EFD9D /* FilterSectionView.swift in Sources */,
@@ -1056,6 +1070,7 @@
 				A3903BBA2EC2B8EE0004A4C3 /* GetPostDetailUseCase.swift in Sources */,
 				D4B1C7422E76C081001C4743 /* AuthFlowView.swift in Sources */,
 				D4B1C7432E76C081001C4743 /* ChatView.swift in Sources */,
+				A3721BBE2ECFFF6500F3E794 /* EditPostView.swift in Sources */,
 				D4B1C7442E76C081001C4743 /* serverUrl.swift in Sources */,
 				A3B48A512EBD80B9005EFD9D /* View+Extension.swift in Sources */,
 				D4B1C7452E76C081001C4743 /* LogoutViewModel.swift in Sources */,
@@ -1099,6 +1114,7 @@
 				A3903BBC2EC2B8FC0004A4C3 /* PostDetailViewModel.swift in Sources */,
 				A392EC642EB9CC10000FA26C /* Post.swift in Sources */,
 				A3815F772EBB3EAB002363D3 /* RefreshTokenUseCase.swift in Sources */,
+				A3721BBC2ECFFF5100F3E794 /* EditPostViewModel.swift in Sources */,
 				A3B48A452EBD776D005EFD9D /* CreatePostUseCase.swift in Sources */,
 				D4B1C7532E76C081001C4743 /* BaseResponse.swift in Sources */,
 				D4B1C76D2E76D047001C4743 /* EmailRepository.swift in Sources */,

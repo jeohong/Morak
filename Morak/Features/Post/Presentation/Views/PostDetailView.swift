@@ -24,6 +24,7 @@ struct PostDetailView: View {
     @State private var navigateToLogin: Bool = false
     @State private var commentText: String = ""
     @State private var showDeleteConfirmation: Bool = false
+    @State private var navigateToEdit: Bool = false
     @FocusState private var isCommentInputFocused: Bool
 
     init(postId: Int, onPostUpdated: ((Post) -> Void)? = nil, onPostDeleted: ((Int) -> Void)? = nil, shouldFocusComment: Bool = false) {
@@ -283,6 +284,15 @@ struct PostDetailView: View {
         .fullScreenCover(isPresented: $navigateToLogin) {
             LoginView()
         }
+        .navigationDestination(isPresented: $navigateToEdit) {
+            if let post = viewModel.post {
+                EditPostView(postId: post.id, initialContent: post.content) {
+                    Task {
+                        await viewModel.fetchPostDetail()
+                    }
+                }
+            }
+        }
         .tokenExpirationAlert(isPresented: $viewModel.showTokenExpiredAlert)
         .customAlert(
             isPresented: $showDeleteConfirmation,
@@ -350,8 +360,7 @@ struct PostDetailView: View {
     }
 
     private func handleEditPost() {
-        // TODO: 게시글 수정 화면으로 이동
-        print("게시글 수정")
+        navigateToEdit = true
     }
 
     private func handleDeletePost() {

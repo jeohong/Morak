@@ -66,6 +66,20 @@ final class PostRepository: PostRepositoryProtocol {
         return domainPost
     }
 
+    func updatePost(postId: Int, content: String) async throws -> Post {
+        let request = UpdatePostRequest(content: content)
+        let endpoint = PostEndpoint.updatePost(postId: postId, request)
+
+        let apiResponse: BaseResponse<PostDTO> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<PostDTO>.self
+        )
+
+        let domainPost = PostMapper.toDomain(apiResponse.data)
+
+        return domainPost
+    }
+
     func deletePost(postId: Int) async throws {
         let endpoint = PostEndpoint.deletePost(postId: postId)
 
