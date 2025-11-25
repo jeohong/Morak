@@ -56,6 +56,20 @@ final class CommentRepository: CommentRepositoryProtocol {
         return domainComment
     }
 
+    func updateComment(commentId: Int, content: String) async throws -> Comment {
+        let request = UpdateCommentRequest(content: content)
+        let endpoint = CommentEndpoint.updateComment(commentId: commentId, request: request)
+
+        let apiResponse: BaseResponse<CommentDTO> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<CommentDTO>.self
+        )
+
+        let domainComment = CommentMapper.toDomain(apiResponse.data)
+
+        return domainComment
+    }
+
     func likeComment(commentId: Int) async throws -> Bool? {
         let endpoint = CommentEndpoint.likeComment(commentId: commentId)
 

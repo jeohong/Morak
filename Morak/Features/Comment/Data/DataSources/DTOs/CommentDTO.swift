@@ -48,6 +48,15 @@ struct CreateCommentRequest: Codable {
     }
 }
 
+// MARK: - Update Comment Request
+struct UpdateCommentRequest: Codable {
+    let content: String
+
+    enum CodingKeys: String, CodingKey {
+        case content
+    }
+}
+
 // MARK: - Comment DTO (API 응답 구조)
 struct CommentDTO: Codable {
     let id: Int

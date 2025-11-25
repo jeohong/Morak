@@ -12,6 +12,7 @@ struct CommentItemView: View {
     let isReply: Bool
     let onLikeTap: () -> Void
     let onReportTap: () -> Void
+    let onEditTap: (() -> Void)?
     let onReplyTap: (() -> Void)?
     let onToggleReplies: (() -> Void)?
     let isExpanded: Bool
@@ -62,8 +63,7 @@ struct CommentItemView: View {
                         Menu {
                             if isMyComment {
                                 Button(action: {
-                                    print("✏️ [CommentItemView] 댓글 \(comment.id) 수정")
-                                    // TODO: 댓글 수정 기능 구현
+                                    onEditTap?()
                                 }) {
                                     Label("수정", systemImage: "pencil")
                                 }

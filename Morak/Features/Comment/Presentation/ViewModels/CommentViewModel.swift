@@ -26,12 +26,16 @@ final class CommentViewModel: ObservableObject {
     // 답글 작성 모드
     @Published var replyingTo: Comment?  // 현재 답글 작성 중인 댓글
 
+    // 수정 모드
+    @Published var editingComment: Comment?  // 현재 수정 중인 댓글
+
     // MARK: - Private Properties
     private var currentPage: Int = 1
     private var hasMorePages: Bool = true
     private let getCommentsUseCase: GetCommentsUseCaseProtocol
     private let getRepliesUseCase: GetRepliesUseCaseProtocol
     private let createCommentUseCase: CreateCommentUseCaseProtocol
+    private let updateCommentUseCase: UpdateCommentUseCaseProtocol
     private let likeCommentUseCase: LikeCommentUseCaseProtocol
     private let pageSize: Int = 10
     private let replyPageSize: Int = 5
@@ -45,12 +49,14 @@ final class CommentViewModel: ObservableObject {
         getCommentsUseCase: GetCommentsUseCaseProtocol,
         getRepliesUseCase: GetRepliesUseCaseProtocol,
         createCommentUseCase: CreateCommentUseCaseProtocol,
+        updateCommentUseCase: UpdateCommentUseCaseProtocol,
         likeCommentUseCase: LikeCommentUseCaseProtocol
     ) {
         self.postId = postId
         self.getCommentsUseCase = getCommentsUseCase
         self.getRepliesUseCase = getRepliesUseCase
         self.createCommentUseCase = createCommentUseCase
+        self.updateCommentUseCase = updateCommentUseCase
         self.likeCommentUseCase = likeCommentUseCase
     }
 
@@ -241,6 +247,42 @@ final class CommentViewModel: ObservableObject {
         }
     }
 
+    func updateComment(commentId: Int, content: String, parentId: Int?) async -> Bool {
+        do {
+            let updatedComment = try await updateCommentUseCase.execute(
+                commentId: commentId,
+                content: content
+            )
+
+            if let parentId = parentId {
+                // 대댓글인 경우: repliesMap에서 해당 댓글 업데이트
+                if var replies = repliesMap[parentId],
+                   let index = replies.firstIndex(where: { $0.id == commentId }) {
+                    replies[index] = updatedComment
+                    repliesMap[parentId] = replies
+                }
+            } else {
+                // 루트 댓글인 경우: comments에서 해당 댓글 업데이트
+                if let index = comments.firstIndex(where: { $0.id == commentId }) {
+                    comments[index] = updatedComment
+                }
+            }
+
+            return true
+
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+            return false
+        } catch {
+            errorMessage = "댓글 수정 중 오류가 발생했습니다."
+            return false
+        }
+    }
+
     var totalComments: Int {
         return comments.count
     }
@@ -252,12 +294,14 @@ extension CommentViewModel {
         let getCommentsUseCase = GetCommentsUseCase.makeDefault()
         let getRepliesUseCase = GetRepliesUseCase.makeDefault()
         let createCommentUseCase = CreateCommentUseCase.makeDefault()
+        let updateCommentUseCase = UpdateCommentUseCase.makeDefault()
         let likeCommentUseCase = LikeCommentUseCase.makeDefault()
         return CommentViewModel(
             postId: postId,
             getCommentsUseCase: getCommentsUseCase,
             getRepliesUseCase: getRepliesUseCase,
             createCommentUseCase: createCommentUseCase,
+            updateCommentUseCase: updateCommentUseCase,
             likeCommentUseCase: likeCommentUseCase
         )
     }

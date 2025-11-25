@@ -65,6 +65,7 @@
 		A392EC6B2EB9F17E000FA26C /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */; };
 		A392EC6D2EB9F225000FA26C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6C2EB9F225000FA26C /* AuthManager.swift */; };
 		A392EC6F2EB9F6F1000FA26C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6E2EB9F6F1000FA26C /* User.swift */; };
+		A3AA92BD2ED587F100226E79 /* UpdateCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AA92BC2ED587F100226E79 /* UpdateCommentUseCase.swift */; };
 		A3B48A452EBD776D005EFD9D /* CreatePostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */; };
 		A3B48A472EBD7798005EFD9D /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A462EBD7798005EFD9D /* CreatePostViewModel.swift */; };
 		A3B48A492EBD77BD005EFD9D /* CreatePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A482EBD77BD005EFD9D /* CreatePostView.swift */; };
@@ -177,6 +178,7 @@
 		A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		A392EC6C2EB9F225000FA26C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A392EC6E2EB9F6F1000FA26C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A3AA92BC2ED587F100226E79 /* UpdateCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCommentUseCase.swift; sourceTree = "<group>"; };
 		A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostUseCase.swift; sourceTree = "<group>"; };
 		A3B48A462EBD7798005EFD9D /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
 		A3B48A482EBD77BD005EFD9D /* CreatePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostView.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				A3903BD12EC2DE360004A4C3 /* LikeCommentUseCase.swift */,
 				A3903BEB2EC2DFE20004A4C3 /* GetRepliesUseCase.swift */,
 				A3903BF12EC30D0F0004A4C3 /* CreateCommentUseCase.swift */,
+				A3AA92BC2ED587F100226E79 /* UpdateCommentUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				A3815F7B2EBB4435002363D3 /* LikePostUseCase.swift in Sources */,
 				A3B48A472EBD7798005EFD9D /* CreatePostViewModel.swift in Sources */,
 				D4B1C75A2E76C081001C4743 /* LogoutUseCase.swift in Sources */,
+				A3AA92BD2ED587F100226E79 /* UpdateCommentUseCase.swift in Sources */,
 				A36D7BDB2E58790C005F21C2 /* AppTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

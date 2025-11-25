@@ -141,8 +141,23 @@ struct PostDetailView: View {
                         if let comment = replyingTo {
                             // 키보드 올리기
                             isCommentInputFocused = true
-                            
+
                             // 해당 댓글로 스크롤 (입력창 바로 위에 위치)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                withAnimation {
+                                    scrollProxy.scrollTo(comment.id, anchor: .bottom)
+                                }
+                            }
+                        }
+                    }
+                    .onChange(of: commentViewModel.editingComment) { editingComment in
+                        if let comment = editingComment {
+                            // 기존 댓글 내용을 입력창에 설정
+                            commentText = comment.content
+                            // 키보드 올리기
+                            isCommentInputFocused = true
+
+                            // 해당 댓글로 스크롤
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                 withAnimation {
                                     scrollProxy.scrollTo(comment.id, anchor: .bottom)
@@ -156,8 +171,13 @@ struct PostDetailView: View {
                     text: $commentText,
                     onSubmit: handleCommentSubmit,
                     replyingTo: commentViewModel.replyingTo,
+                    editingComment: commentViewModel.editingComment,
                     onCancelReply: {
                         commentViewModel.replyingTo = nil
+                        commentText = ""
+                    },
+                    onCancelEdit: {
+                        commentViewModel.editingComment = nil
                         commentText = ""
                     },
                     onLoginRequired: {
@@ -311,6 +331,7 @@ struct PostDetailView: View {
         isCommentInputFocused = false
         commentText = ""
         commentViewModel.replyingTo = nil
+        commentViewModel.editingComment = nil
     }
     
     private func handleCommentButton() {
@@ -343,6 +364,25 @@ struct PostDetailView: View {
             return
         }
 
+        // 수정 모드인 경우
+        if let editingComment = commentViewModel.editingComment {
+            Task {
+                let success = await commentViewModel.updateComment(
+                    commentId: editingComment.id,
+                    content: commentText,
+                    parentId: editingComment.parentId
+                )
+
+                if success {
+                    commentText = ""
+                    commentViewModel.editingComment = nil
+                    isCommentInputFocused = false
+                }
+            }
+            return
+        }
+
+        // 새 댓글 또는 답글 작성
         let parentId = commentViewModel.replyingTo?.id
 
         Task {

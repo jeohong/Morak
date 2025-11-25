@@ -71,6 +71,9 @@ struct CommentSectionView: View {
                                 onReportTap: {
                                     handleCommentReport(commentId: comment.id)
                                 },
+                                onEditTap: {
+                                    handleEdit(comment: comment)
+                                },
                                 onReplyTap: {
                                     handleReply(to: comment)
                                 },
@@ -92,6 +95,9 @@ struct CommentSectionView: View {
                                         },
                                         onReportTap: {
                                             handleCommentReport(commentId: reply.id)
+                                        },
+                                        onEditTap: {
+                                            handleEdit(comment: reply)
                                         },
                                         onReplyTap: nil,
                                         onToggleReplies: nil,
@@ -180,5 +186,9 @@ struct CommentSectionView: View {
         }
 
         viewModel.replyingTo = comment
+    }
+
+    private func handleEdit(comment: Comment) {
+        viewModel.editingComment = comment
     }
 }
