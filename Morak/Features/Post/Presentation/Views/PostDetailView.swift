@@ -325,6 +325,17 @@ struct PostDetailView: View {
                 secondaryButton: AlertButton(title: "취소", style: .cancel)
             )
         )
+        .customAlert(
+            isPresented: $commentViewModel.showDeleteConfirmation,
+            config: CustomAlertConfig(
+                title: "댓글 삭제",
+                message: "정말로 이 댓글을 삭제하시겠습니까?",
+                primaryButton: AlertButton(title: "삭제", style: .destructive) {
+                    handleCommentDelete()
+                },
+                secondaryButton: AlertButton(title: "취소", style: .cancel)
+            )
+        )
     }
     
     private func dismissKeyboard() {
@@ -407,5 +418,15 @@ struct PostDetailView: View {
         Task {
             await viewModel.deletePost()
         }
+    }
+
+    private func handleCommentDelete() {
+        guard let comment = commentViewModel.commentToDelete else { return }
+
+        Task {
+            await commentViewModel.deleteComment(commentId: comment.id, parentId: comment.parentId)
+        }
+
+        commentViewModel.commentToDelete = nil
     }
 }

@@ -12,6 +12,7 @@ enum CommentEndpoint: APIEndpoint {
     case getReplies(ReplyListRequest)
     case createComment(CreateCommentRequest)
     case updateComment(commentId: Int, request: UpdateCommentRequest)
+    case deleteComment(commentId: Int)
     case likeComment(commentId: Int)
 
     var baseURL: String {
@@ -28,6 +29,8 @@ enum CommentEndpoint: APIEndpoint {
             return "api/v1/comments"
         case .updateComment(let commentId, _):
             return "api/v1/comments/\(commentId)"
+        case .deleteComment(let commentId):
+            return "api/v1/comments/\(commentId)"
         case .likeComment(let commentId):
             return "api/v1/comments/\(commentId)/like"
         }
@@ -41,6 +44,8 @@ enum CommentEndpoint: APIEndpoint {
             return .POST
         case .updateComment:
             return .PUT
+        case .deleteComment:
+            return .DELETE
         }
     }
 
@@ -86,7 +91,7 @@ enum CommentEndpoint: APIEndpoint {
                 "page": "\(request.page)",
                 "size": "\(request.size)"
             ]
-        case .createComment, .updateComment, .likeComment:
+        case .createComment, .updateComment, .deleteComment, .likeComment:
             return nil
         }
     }

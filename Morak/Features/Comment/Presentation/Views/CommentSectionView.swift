@@ -12,6 +12,15 @@ struct CommentSectionView: View {
     @ObservedObject var authManager = AuthManager.shared
     @Binding var showLoginPrompt: Bool
 
+    // deleted == true && hasChildren == false 인 댓글 필터링
+    private var visibleComments: [Comment] {
+        viewModel.comments.filter { !$0.deleted || $0.hasChildren }
+    }
+
+    private func visibleReplies(for parentId: Int) -> [Comment] {
+        (viewModel.repliesMap[parentId] ?? []).filter { !$0.deleted }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
@@ -50,7 +59,7 @@ struct CommentSectionView: View {
 
             Divider()
             
-            if viewModel.comments.isEmpty && !viewModel.isLoading {
+            if visibleComments.isEmpty && !viewModel.isLoading {
                 VStack(spacing: 8) {
                     Text("첫 댓글을 남겨보세요")
                         .font(.pretendard.mediumTextRegular)
@@ -60,7 +69,7 @@ struct CommentSectionView: View {
                 .padding(.vertical, 40)
             } else {
                 LazyVStack(spacing: 0) {
-                    ForEach(Array(viewModel.comments.enumerated()), id: \.element.id) { index, comment in
+                    ForEach(Array(visibleComments.enumerated()), id: \.element.id) { index, comment in
                         VStack(spacing: 0) {
                             CommentItemView(
                                 comment: comment,
@@ -74,6 +83,9 @@ struct CommentSectionView: View {
                                 onEditTap: {
                                     handleEdit(comment: comment)
                                 },
+                                onDeleteTap: {
+                                    handleDelete(comment: comment)
+                                },
                                 onReplyTap: {
                                     handleReply(to: comment)
                                 },
@@ -84,8 +96,8 @@ struct CommentSectionView: View {
                             )
                             .id(comment.id)
                             
-                            if viewModel.expandedComments.contains(comment.id),
-                               let replies = viewModel.repliesMap[comment.id] {
+                            if viewModel.expandedComments.contains(comment.id) {
+                                let replies = visibleReplies(for: comment.id)
                                 ForEach(replies) { reply in
                                     CommentItemView(
                                         comment: reply,
@@ -98,6 +110,9 @@ struct CommentSectionView: View {
                                         },
                                         onEditTap: {
                                             handleEdit(comment: reply)
+                                        },
+                                        onDeleteTap: {
+                                            handleDelete(comment: reply)
                                         },
                                         onReplyTap: nil,
                                         onToggleReplies: nil,
@@ -190,5 +205,10 @@ struct CommentSectionView: View {
 
     private func handleEdit(comment: Comment) {
         viewModel.editingComment = comment
+    }
+
+    private func handleDelete(comment: Comment) {
+        viewModel.commentToDelete = comment
+        viewModel.showDeleteConfirmation = true
     }
 }

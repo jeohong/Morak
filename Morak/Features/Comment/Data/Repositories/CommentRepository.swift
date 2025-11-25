@@ -70,6 +70,15 @@ final class CommentRepository: CommentRepositoryProtocol {
         return domainComment
     }
 
+    func deleteComment(commentId: Int) async throws {
+        let endpoint = CommentEndpoint.deleteComment(commentId: commentId)
+
+        let _: BaseResponse<EmptyData> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<EmptyData>.self
+        )
+    }
+
     func likeComment(commentId: Int) async throws -> Bool? {
         let endpoint = CommentEndpoint.likeComment(commentId: commentId)
 

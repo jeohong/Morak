@@ -29,6 +29,10 @@ final class CommentViewModel: ObservableObject {
     // 수정 모드
     @Published var editingComment: Comment?  // 현재 수정 중인 댓글
 
+    // 삭제 확인
+    @Published var showDeleteConfirmation: Bool = false
+    @Published var commentToDelete: Comment?
+
     // MARK: - Private Properties
     private var currentPage: Int = 1
     private var hasMorePages: Bool = true
@@ -36,6 +40,7 @@ final class CommentViewModel: ObservableObject {
     private let getRepliesUseCase: GetRepliesUseCaseProtocol
     private let createCommentUseCase: CreateCommentUseCaseProtocol
     private let updateCommentUseCase: UpdateCommentUseCaseProtocol
+    private let deleteCommentUseCase: DeleteCommentUseCaseProtocol
     private let likeCommentUseCase: LikeCommentUseCaseProtocol
     private let pageSize: Int = 10
     private let replyPageSize: Int = 5
@@ -50,6 +55,7 @@ final class CommentViewModel: ObservableObject {
         getRepliesUseCase: GetRepliesUseCaseProtocol,
         createCommentUseCase: CreateCommentUseCaseProtocol,
         updateCommentUseCase: UpdateCommentUseCaseProtocol,
+        deleteCommentUseCase: DeleteCommentUseCaseProtocol,
         likeCommentUseCase: LikeCommentUseCaseProtocol
     ) {
         self.postId = postId
@@ -57,6 +63,7 @@ final class CommentViewModel: ObservableObject {
         self.getRepliesUseCase = getRepliesUseCase
         self.createCommentUseCase = createCommentUseCase
         self.updateCommentUseCase = updateCommentUseCase
+        self.deleteCommentUseCase = deleteCommentUseCase
         self.likeCommentUseCase = likeCommentUseCase
     }
 
@@ -283,6 +290,36 @@ final class CommentViewModel: ObservableObject {
         }
     }
 
+    func deleteComment(commentId: Int, parentId: Int?) async -> Bool {
+        do {
+            try await deleteCommentUseCase.execute(commentId: commentId)
+
+            if let parentId = parentId {
+                // 대댓글인 경우: repliesMap에서 해당 댓글 제거
+                if var replies = repliesMap[parentId] {
+                    replies.removeAll { $0.id == commentId }
+                    repliesMap[parentId] = replies
+                }
+            } else {
+                // 루트 댓글인 경우: comments에서 해당 댓글 제거
+                comments.removeAll { $0.id == commentId }
+            }
+
+            return true
+
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+            return false
+        } catch {
+            errorMessage = "댓글 삭제 중 오류가 발생했습니다."
+            return false
+        }
+    }
+
     var totalComments: Int {
         return comments.count
     }
@@ -295,6 +332,7 @@ extension CommentViewModel {
         let getRepliesUseCase = GetRepliesUseCase.makeDefault()
         let createCommentUseCase = CreateCommentUseCase.makeDefault()
         let updateCommentUseCase = UpdateCommentUseCase.makeDefault()
+        let deleteCommentUseCase = DeleteCommentUseCase.makeDefault()
         let likeCommentUseCase = LikeCommentUseCase.makeDefault()
         return CommentViewModel(
             postId: postId,
@@ -302,6 +340,7 @@ extension CommentViewModel {
             getRepliesUseCase: getRepliesUseCase,
             createCommentUseCase: createCommentUseCase,
             updateCommentUseCase: updateCommentUseCase,
+            deleteCommentUseCase: deleteCommentUseCase,
             likeCommentUseCase: likeCommentUseCase
         )
     }

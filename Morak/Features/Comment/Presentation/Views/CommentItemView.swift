@@ -13,6 +13,7 @@ struct CommentItemView: View {
     let onLikeTap: () -> Void
     let onReportTap: () -> Void
     let onEditTap: (() -> Void)?
+    let onDeleteTap: (() -> Void)?
     let onReplyTap: (() -> Void)?
     let onToggleReplies: (() -> Void)?
     let isExpanded: Bool
@@ -68,8 +69,7 @@ struct CommentItemView: View {
                                     Label("수정", systemImage: "pencil")
                                 }
                                 Button(role: .destructive, action: {
-                                    print("🗑️ [CommentItemView] 댓글 \(comment.id) 삭제")
-                                    // TODO: 댓글 삭제 기능 구현
+                                    onDeleteTap?()
                                 }) {
                                     Label("삭제", systemImage: "trash")
                                 }
