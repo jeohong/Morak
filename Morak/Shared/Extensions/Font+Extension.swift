@@ -20,9 +20,11 @@ extension Font {
         var largeTextRegular: Font { return font(for: 16, weight: .regular) }
         
         var mediumTextSemiBold: Font { return font(for: 14, weight: .semibold) }
+        var mediumTextMedium: Font { return font(for: 14, weight: .medium) }
         var mediumTextRegular: Font { return font(for: 14, weight: .regular) }
-        
+
         var smallTextBold: Font { return font(for: 12, weight: .bold) }
+        var smallTextMedium: Font { return font(for: 12, weight: .medium) }
         var smallTextRegular: Font { return font(for: 12, weight: .regular) }
         
         var tinyTextBold: Font { return font(for: 10, weight: .semibold) }

@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30975B62E70459800D25838 /* UINavigationController+Extension.swift */; };
+		A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444B2ED843C600820814 /* FriendListTabView.swift */; };
+		A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44492ED843C600820814 /* FriendsViewModel.swift */; };
+		A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444D2ED843C600820814 /* FriendSearchTabView.swift */; };
+		A33B44552ED843C600820814 /* FriendsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44472ED843C600820814 /* FriendsTab.swift */; };
+		A33B44562ED843C600820814 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444E2ED843C600820814 /* FriendsView.swift */; };
+		A33B44572ED843C600820814 /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44442ED843C600820814 /* FriendRequest.swift */; };
+		A33B44582ED843C600820814 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44432ED843C600820814 /* Friend.swift */; };
+		A33B44592ED843C600820814 /* FriendRequestTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444C2ED843C600820814 /* FriendRequestTabView.swift */; };
 		A3488B8C2E4B60BC00232643 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3488B872E4B60BC00232643 /* Assets.xcassets */; };
 		A3488B8D2E4B60BC00232643 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3488B892E4B60BC00232643 /* Launch Screen.storyboard */; };
 		A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3488B8A2E4B60BC00232643 /* MorakApp.swift */; };
@@ -85,7 +93,6 @@
 		D4B1C74E2E76C081001C4743 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7132E76C081001C4743 /* AppState.swift */; };
 		D4B1C74F2E76C081001C4743 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C71F2E76C081001C4743 /* LoginViewModel.swift */; };
 		D4B1C7512E76C081001C4743 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C72C2E76C081001C4743 /* SignupView.swift */; };
-		D4B1C7522E76C081001C4743 /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C7332E76C081001C4743 /* FriendsView.swift */; };
 		D4B1C7532E76C081001C4743 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C70F2E76C081001C4743 /* BaseResponse.swift */; };
 		D4B1C7542E76C081001C4743 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C70E2E76C081001C4743 /* APIManager.swift */; };
 		D4B1C7552E76C081001C4743 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1C73E2E76C081001C4743 /* SettingView.swift */; };
@@ -121,6 +128,14 @@
 		A31D1C202E40BA3500318EC7 /* Morak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C2D2E40BA3600318EC7 /* MorakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A33B44432ED843C600820814 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		A33B44442ED843C600820814 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
+		A33B44472ED843C600820814 /* FriendsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTab.swift; sourceTree = "<group>"; };
+		A33B44492ED843C600820814 /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
+		A33B444B2ED843C600820814 /* FriendListTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListTabView.swift; sourceTree = "<group>"; };
+		A33B444C2ED843C600820814 /* FriendRequestTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestTabView.swift; sourceTree = "<group>"; };
+		A33B444D2ED843C600820814 /* FriendSearchTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSearchTabView.swift; sourceTree = "<group>"; };
+		A33B444E2ED843C600820814 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		A3488B872E4B60BC00232643 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3488B892E4B60BC00232643 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A3488B8A2E4B60BC00232643 /* MorakApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorakApp.swift; sourceTree = "<group>"; };
@@ -205,7 +220,6 @@
 		D4B1C7292E76C081001C4743 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		D4B1C72C2E76C081001C4743 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		D4B1C7302E76C081001C4743 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		D4B1C7332E76C081001C4743 /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		D4B1C73E2E76C081001C4743 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		D4B1C75B2E76CD74001C4743 /* SignupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModels.swift; sourceTree = "<group>"; };
 		D4B1C7682E76CDE0001C4743 /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -269,6 +283,69 @@
 				A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A33B44452ED843C600820814 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A33B44432ED843C600820814 /* Friend.swift */,
+				A33B44442ED843C600820814 /* FriendRequest.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A33B44462ED843C600820814 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				A33B44452ED843C600820814 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		A33B44482ED843C600820814 /* PresentationModels */ = {
+			isa = PBXGroup;
+			children = (
+				A33B44472ED843C600820814 /* FriendsTab.swift */,
+			);
+			path = PresentationModels;
+			sourceTree = "<group>";
+		};
+		A33B444A2ED843C600820814 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A33B44492ED843C600820814 /* FriendsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A33B444F2ED843C600820814 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A33B444B2ED843C600820814 /* FriendListTabView.swift */,
+				A33B444C2ED843C600820814 /* FriendRequestTabView.swift */,
+				A33B444D2ED843C600820814 /* FriendSearchTabView.swift */,
+				A33B444E2ED843C600820814 /* FriendsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A33B44502ED843C600820814 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A33B44482ED843C600820814 /* PresentationModels */,
+				A33B444A2ED843C600820814 /* ViewModels */,
+				A33B444F2ED843C600820814 /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A33B44512ED843C600820814 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				A33B44462ED843C600820814 /* Domain */,
+				A33B44502ED843C600820814 /* Presentation */,
+			);
+			path = Friends;
 			sourceTree = "<group>";
 		};
 		A3488B8B2E4B60BC00232643 /* Morak */ = {
@@ -828,22 +905,6 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		D4B1C7342E76C081001C4743 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D4B1C7332E76C081001C4743 /* FriendsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		D4B1C7352E76C081001C4743 /* Friends */ = {
-			isa = PBXGroup;
-			children = (
-				D4B1C7342E76C081001C4743 /* Views */,
-			);
-			path = Friends;
-			sourceTree = "<group>";
-		};
 		D4B1C73D2E76C081001C4743 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,7 +935,7 @@
 				A392EC5C2EB9CC10000FA26C /* Post */,
 				A3903BDD2EC2DE360004A4C3 /* Comment */,
 				D4B1C7322E76C081001C4743 /* Chat */,
-				D4B1C7352E76C081001C4743 /* Friends */,
+				A33B44512ED843C600820814 /* Friends */,
 				D4B1C73D2E76C081001C4743 /* Search */,
 				D4B1C7402E76C081001C4743 /* Setting */,
 			);
@@ -1107,7 +1168,6 @@
 				A3903BEC2EC2DFE20004A4C3 /* GetRepliesUseCase.swift in Sources */,
 				A3903BEA2EC2DE360004A4C3 /* CommentSortOption.swift in Sources */,
 				D4B1C7512E76C081001C4743 /* SignupView.swift in Sources */,
-				D4B1C7522E76C081001C4743 /* FriendsView.swift in Sources */,
 				A392EC662EB9D570000FA26C /* GetPostListUseCase.swift in Sources */,
 				A392EC692EB9DE2B000FA26C /* PostMapper.swift in Sources */,
 				A392EC5D2EB9CC10000FA26C /* PostViewModel.swift in Sources */,
@@ -1121,6 +1181,14 @@
 				A3903BBC2EC2B8FC0004A4C3 /* PostDetailViewModel.swift in Sources */,
 				A392EC642EB9CC10000FA26C /* Post.swift in Sources */,
 				A3815F772EBB3EAB002363D3 /* RefreshTokenUseCase.swift in Sources */,
+				A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */,
+				A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */,
+				A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */,
+				A33B44552ED843C600820814 /* FriendsTab.swift in Sources */,
+				A33B44562ED843C600820814 /* FriendsView.swift in Sources */,
+				A33B44572ED843C600820814 /* FriendRequest.swift in Sources */,
+				A33B44582ED843C600820814 /* Friend.swift in Sources */,
+				A33B44592ED843C600820814 /* FriendRequestTabView.swift in Sources */,
 				A3721BBC2ECFFF5100F3E794 /* EditPostViewModel.swift in Sources */,
 				A3B48A452EBD776D005EFD9D /* CreatePostUseCase.swift in Sources */,
 				D4B1C7532E76C081001C4743 /* BaseResponse.swift in Sources */,
