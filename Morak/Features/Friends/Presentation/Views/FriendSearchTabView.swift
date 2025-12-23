@@ -63,16 +63,6 @@ struct SearchResultRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // Avatar
-            Circle()
-                .fill(Color.profilePeach)
-                .frame(width: 48, height: 48)
-                .overlay(
-                    Text(String(friend.nickname.prefix(1)))
-                        .font(.pretendard.mediumTextMedium)
-                        .foregroundColor(.point)
-                )
-
             // Name
             Text(friend.nickname)
                 .font(.pretendard.mediumTextMedium)

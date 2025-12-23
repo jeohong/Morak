@@ -147,3 +147,43 @@ enum EmailEndpoint: APIEndpoint {
         }
     }
 }
+
+enum UserEndpoint: APIEndpoint {
+    case search(nickname: String)
+
+    var baseURL: String {
+        return baseUrl
+    }
+
+    var path: String {
+        switch self {
+        case .search:
+            return "api/v1/users/search"
+        }
+    }
+
+    var method: HTTPMethod {
+        switch self {
+        case .search:
+            return .GET
+        }
+    }
+
+    var headers: [String: String]? {
+        return [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+    }
+
+    var requestBody: (any Codable)? {
+        return nil
+    }
+
+    var queryParameters: [String: String]? {
+        switch self {
+        case .search(let nickname):
+            return ["nickname": nickname]
+        }
+    }
+}

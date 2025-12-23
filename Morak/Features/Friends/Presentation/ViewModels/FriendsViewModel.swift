@@ -17,9 +17,14 @@ final class FriendsViewModel: ObservableObject {
     @Published var searchResults: [Friend] = []
     @Published var isLoading: Bool = false
     @Published var requestBadgeCount: Int = 0
+    @Published var errorMessage: String?
+
+    // MARK: - Private Properties
+    private let searchUsersUseCase: SearchUsersUseCaseProtocol
 
     // MARK: - Initialization
-    init() {
+    init(searchUsersUseCase: SearchUsersUseCaseProtocol = SearchUsersUseCase.makeDefault()) {
+        self.searchUsersUseCase = searchUsersUseCase
         loadMockData()
     }
 
@@ -47,10 +52,24 @@ final class FriendsViewModel: ObservableObject {
             searchResults = []
             return
         }
-        // TODO: API 연동 시 구현
+
+        Task {
+            await performSearch()
+        }
+    }
+
+    private func performSearch() async {
         isLoading = true
-        // 목업: 검색 결과 없음
-        searchResults = []
+        errorMessage = nil
+
+        do {
+            let results = try await searchUsersUseCase.execute(nickname: searchText)
+            searchResults = results
+        } catch {
+            errorMessage = "검색 중 오류가 발생했습니다."
+            searchResults = []
+        }
+
         isLoading = false
     }
 
