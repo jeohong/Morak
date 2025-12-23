@@ -60,9 +60,9 @@ enum AuthEndpoint: APIEndpoint {
             "Accept": "application/json"
         ]
 
-        // 로그아웃, 리프레시 시 Authorization 헤더 추가
+        // 로그아웃 시 Authorization 헤더 추가
         switch self {
-        case .logout, .refresh:
+        case .logout:
             if let accessToken = SecureTokenManager.shared.getAccessToken() {
                 headers["Authorization"] = "Bearer \(accessToken)"
             }
