@@ -11,6 +11,7 @@ struct FriendSearchTabView: View {
     @Binding var searchText: String
     let searchResults: [Friend]
     let onSearch: () -> Void
+    let onAddFriend: (Friend) -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -45,7 +46,10 @@ struct FriendSearchTabView: View {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         ForEach(searchResults) { friend in
-                            SearchResultRowView(friend: friend)
+                            SearchResultRowView(
+                                friend: friend,
+                                onAddFriend: { onAddFriend(friend) }
+                            )
                         }
                     }
                     .padding(.top, 16)
@@ -60,6 +64,7 @@ struct FriendSearchTabView: View {
 // MARK: - Search Result Row
 struct SearchResultRowView: View {
     let friend: Friend
+    let onAddFriend: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -72,7 +77,7 @@ struct SearchResultRowView: View {
 
             // Add Friend Button
             Button {
-                // TODO: 친구 추가 요청
+                onAddFriend()
             } label: {
                 Text("친구 추가")
                     .font(.pretendard.smallTextMedium)
@@ -96,7 +101,8 @@ struct SearchResultRowView: View {
     FriendSearchTabView(
         searchText: .constant(""),
         searchResults: [],
-        onSearch: {}
+        onSearch: {},
+        onAddFriend: { _ in }
     )
     .background(Color.postBackground)
 }

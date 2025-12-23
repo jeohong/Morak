@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendListTabView: View {
     let friends: [Friend]
-    let onProfileTap: (Friend) -> Void
+    let onDeleteFriend: (Friend) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -33,7 +33,7 @@ struct FriendListTabView: View {
                     ForEach(friends) { friend in
                         FriendRowView(
                             friend: friend,
-                            onProfileTap: { onProfileTap(friend) }
+                            onDelete: { onDeleteFriend(friend) }
                         )
                     }
                 }
@@ -46,7 +46,7 @@ struct FriendListTabView: View {
 // MARK: - Friend Row View
 struct FriendRowView: View {
     let friend: Friend
-    let onProfileTap: () -> Void
+    let onDelete: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -63,24 +63,24 @@ struct FriendRowView: View {
 
             Spacer()
 
-            // Profile Button
+            // Delete Button
             Button {
-                onProfileTap()
+                onDelete()
             } label: {
                 HStack(spacing: 4) {
-                    Image(systemName: "person.fill")
+                    Image(systemName: "person.badge.minus")
                         .font(.system(size: 12))
-                    Text("프로필")
+                    Text("친구삭제")
                         .font(.pretendard.smallTextMedium)
                 }
-                .foregroundColor(.textSecondary)
+                .foregroundColor(.red)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 8)
                 .background(Color.cardBackground)
                 .cornerRadius(16)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.textSecondary.opacity(0.2), lineWidth: 1)
+                        .stroke(Color.red.opacity(0.3), lineWidth: 1)
                 )
             }
         }
@@ -97,7 +97,7 @@ struct FriendRowView: View {
             Friend(id: 1, nickname: "김작가"),
             Friend(id: 2, nickname: "이소설")
         ],
-        onProfileTap: { _ in }
+        onDeleteFriend: { _ in }
     )
     .background(Color.postBackground)
 }

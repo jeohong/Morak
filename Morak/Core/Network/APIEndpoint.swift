@@ -187,3 +187,63 @@ enum UserEndpoint: APIEndpoint {
         }
     }
 }
+
+enum FriendEndpoint: APIEndpoint {
+    case getFriends
+    case getReceivedRequests
+    case acceptRequest(requestId: Int)
+    case rejectRequest(requestId: Int)
+    case sendRequest(receiverId: Int)
+    case deleteFriend(friendId: Int)
+
+    var baseURL: String {
+        return baseUrl
+    }
+
+    var path: String {
+        switch self {
+        case .getFriends:
+            return "api/v1/friends"
+        case .getReceivedRequests:
+            return "api/v1/friends/requests/received"
+        case .acceptRequest(let requestId):
+            return "api/v1/friends/request/\(requestId)/accept"
+        case .rejectRequest(let requestId):
+            return "api/v1/friends/request/\(requestId)/reject"
+        case .sendRequest(let receiverId):
+            return "api/v1/friends/request/\(receiverId)"
+        case .deleteFriend(let friendId):
+            return "api/v1/friends/\(friendId)/delete"
+        }
+    }
+
+    var method: HTTPMethod {
+        switch self {
+        case .getFriends, .getReceivedRequests:
+            return .GET
+        case .acceptRequest, .rejectRequest, .sendRequest, .deleteFriend:
+            return .POST
+        }
+    }
+
+    var headers: [String: String]? {
+        var headers = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
+
+        if let accessToken = SecureTokenManager.shared.getAccessToken() {
+            headers["Authorization"] = "Bearer \(accessToken)"
+        }
+
+        return headers
+    }
+
+    var requestBody: (any Codable)? {
+        return nil
+    }
+
+    var queryParameters: [String: String]? {
+        return nil
+    }
+}

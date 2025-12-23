@@ -45,6 +45,10 @@ extension String {
     }
 
     /// ISO8601 문자열을 Date로 파싱
+    func toDate() -> Date? {
+        return parseISO8601Date()
+    }
+
     private func parseISO8601Date() -> Date? {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
