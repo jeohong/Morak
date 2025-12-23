@@ -18,6 +18,7 @@ struct Post: Identifiable {
     let createdAt: String
     let modifiedAt: String
     var likedByLoginUser: Bool
+    let wroteByLoginUser: Bool
 
     var isLikedByMe: Bool {
         return likedByLoginUser

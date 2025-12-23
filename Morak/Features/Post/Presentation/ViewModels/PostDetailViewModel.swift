@@ -25,11 +25,7 @@ final class PostDetailViewModel: ObservableObject {
 
     // MARK: - Computed Properties
     var isMyPost: Bool {
-        guard let post = post,
-              let currentUserNickname = AuthManager.shared.currentUser?.nickname else {
-            return false
-        }
-        return post.nickname == currentUserNickname
+        return post?.wroteByLoginUser ?? false
     }
 
     init(

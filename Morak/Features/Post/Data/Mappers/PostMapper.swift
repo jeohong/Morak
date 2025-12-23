@@ -20,7 +20,8 @@ struct PostMapper {
             viewCount: dto.viewCount,
             createdAt: dto.createdAt,
             modifiedAt: dto.modifiedAt,
-            likedByLoginUser: dto.likedByLoginUser
+            likedByLoginUser: dto.likedByLoginUser,
+            wroteByLoginUser: dto.wroteByLoginUser
         )
     }
 

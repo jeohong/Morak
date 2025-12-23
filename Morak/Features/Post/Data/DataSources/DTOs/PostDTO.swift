@@ -31,6 +31,7 @@ struct PostDTO: Codable {
     let createdAt: String
     let modifiedAt: String
     let likedByLoginUser: Bool
+    let wroteByLoginUser: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -42,6 +43,7 @@ struct PostDTO: Codable {
         case createdAt
         case modifiedAt
         case likedByLoginUser
+        case wroteByLoginUser
     }
 }
 
