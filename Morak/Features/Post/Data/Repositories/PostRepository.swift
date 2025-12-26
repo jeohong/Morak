@@ -88,4 +88,16 @@ final class PostRepository: PostRepositoryProtocol {
             responseType: BaseResponse<EmptyData>.self
         )
     }
+
+    func reportPost(postId: Int, reason: String) async throws -> String {
+        let request = ReportPostRequest(reason: reason)
+        let endpoint = PostEndpoint.reportPost(postId: postId, request)
+
+        let apiResponse: BaseResponse<EmptyData> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<EmptyData>.self
+        )
+
+        return apiResponse.message
+    }
 }

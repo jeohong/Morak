@@ -67,6 +67,7 @@ struct SettingView: View {
             }
             .onAppear(perform: {
                 print(SecureTokenManager.shared.getAccessToken())
+                print(SecureTokenManager.shared.getRefreshToken())
             })
             .navigationTitle("설정")
             .alert("로그아웃", isPresented: $showLogoutAlert) {

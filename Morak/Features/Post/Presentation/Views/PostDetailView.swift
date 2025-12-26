@@ -222,6 +222,20 @@ struct PostDetailView: View {
                             .font(.system(size: 17, weight: .semibold))
                     }
                 }
+            } else if viewModel.post != nil {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button(role: .destructive, action: {
+                            handleReportPost()
+                        }) {
+                            Label("신고", systemImage: "exclamationmark.triangle")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.black)
+                            .font(.system(size: 17, weight: .semibold))
+                    }
+                }
             }
         }
         .onAppear {
@@ -336,6 +350,27 @@ struct PostDetailView: View {
                 secondaryButton: AlertButton(title: "취소", style: .cancel)
             )
         )
+        .sheet(isPresented: $viewModel.showReportSheet) {
+            ReportReasonSheet(
+                onReasonSelected: { reason in
+                    viewModel.showReportSheet = false
+                    Task {
+                        await viewModel.reportPost(reason: reason)
+                    }
+                },
+                onCancel: {
+                    viewModel.showReportSheet = false
+                }
+            )
+        }
+        .customAlert(
+            isPresented: $viewModel.showReportSuccessAlert,
+            config: CustomAlertConfig(
+                title: "신고 완료",
+                message: viewModel.reportSuccessMessage,
+                primaryButton: AlertButton(title: "확인", style: .primary)
+            )
+        )
     }
     
     private func dismissKeyboard() {
@@ -418,6 +453,15 @@ struct PostDetailView: View {
         Task {
             await viewModel.deletePost()
         }
+    }
+
+    private func handleReportPost() {
+        guard !authManager.requiresLogin else {
+            showLoginPrompt = true
+            return
+        }
+
+        viewModel.showReportSheet = true
     }
 
     private func handleCommentDelete() {

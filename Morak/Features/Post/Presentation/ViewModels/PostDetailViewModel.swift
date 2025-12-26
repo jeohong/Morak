@@ -16,11 +16,15 @@ final class PostDetailViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var showTokenExpiredAlert: Bool = false
     @Published var isDeleted: Bool = false
+    @Published var showReportSheet: Bool = false
+    @Published var showReportSuccessAlert: Bool = false
+    @Published var reportSuccessMessage: String = ""
 
     // MARK: - Private Properties
     private let getPostDetailUseCase: GetPostDetailUseCaseProtocol
     private let likePostUseCase: LikePostUseCaseProtocol
     private let deletePostUseCase: DeletePostUseCaseProtocol
+    private let reportPostUseCase: ReportPostUseCaseProtocol
     private let postId: Int
 
     // MARK: - Computed Properties
@@ -32,12 +36,14 @@ final class PostDetailViewModel: ObservableObject {
         postId: Int,
         getPostDetailUseCase: GetPostDetailUseCaseProtocol,
         likePostUseCase: LikePostUseCaseProtocol,
-        deletePostUseCase: DeletePostUseCaseProtocol
+        deletePostUseCase: DeletePostUseCaseProtocol,
+        reportPostUseCase: ReportPostUseCaseProtocol
     ) {
         self.postId = postId
         self.getPostDetailUseCase = getPostDetailUseCase
         self.likePostUseCase = likePostUseCase
         self.deletePostUseCase = deletePostUseCase
+        self.reportPostUseCase = reportPostUseCase
     }
 
     // MARK: - Public Methods
@@ -115,6 +121,30 @@ final class PostDetailViewModel: ObservableObject {
 
         isLoading = false
     }
+
+    func reportPost(reason: String) async {
+        guard !isLoading else { return }
+
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let message = try await reportPostUseCase.execute(postId: postId, reason: reason)
+            reportSuccessMessage = message
+            showReportSuccessAlert = true
+
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "알 수 없는 오류가 발생했습니다."
+        }
+
+        isLoading = false
+    }
 }
 
 // MARK: - Factory
@@ -123,11 +153,13 @@ extension PostDetailViewModel {
         let getPostDetailUseCase = GetPostDetailUseCase.makeDefault()
         let likePostUseCase = LikePostUseCase.makeDefault()
         let deletePostUseCase = DeletePostUseCase.makeDefault()
+        let reportPostUseCase = ReportPostUseCase.makeDefault()
         return PostDetailViewModel(
             postId: postId,
             getPostDetailUseCase: getPostDetailUseCase,
             likePostUseCase: likePostUseCase,
-            deletePostUseCase: deletePostUseCase
+            deletePostUseCase: deletePostUseCase,
+            reportPostUseCase: reportPostUseCase
         )
     }
 }

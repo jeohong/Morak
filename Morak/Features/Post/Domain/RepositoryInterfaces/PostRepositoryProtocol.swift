@@ -14,4 +14,5 @@ protocol PostRepositoryProtocol {
     func createPost(content: String) async throws -> Post
     func updatePost(postId: Int, content: String) async throws -> Post
     func deletePost(postId: Int) async throws
+    func reportPost(postId: Int, reason: String) async throws -> String
 }

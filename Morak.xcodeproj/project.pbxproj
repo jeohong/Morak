@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30975B62E70459800D25838 /* UINavigationController+Extension.swift */; };
+		A32CC9472EFE2FE7004C589F /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9462EFE2FE7004C589F /* ReportDTO.swift */; };
+		A32CC9492EFE2FFB004C589F /* ReportPostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9482EFE2FFB004C589F /* ReportPostUseCase.swift */; };
+		A32CC94B2EFE3030004C589F /* ReportReasonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */; };
 		A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444B2ED843C600820814 /* FriendListTabView.swift */; };
 		A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44492ED843C600820814 /* FriendsViewModel.swift */; };
 		A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444D2ED843C600820814 /* FriendSearchTabView.swift */; };
@@ -142,6 +145,9 @@
 		A31D1C202E40BA3500318EC7 /* Morak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C2D2E40BA3600318EC7 /* MorakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A32CC9462EFE2FE7004C589F /* ReportDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDTO.swift; sourceTree = "<group>"; };
+		A32CC9482EFE2FFB004C589F /* ReportPostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostUseCase.swift; sourceTree = "<group>"; };
+		A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonSheet.swift; sourceTree = "<group>"; };
 		A33B44432ED843C600820814 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A33B44442ED843C600820814 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		A33B44472ED843C600820814 /* FriendsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTab.swift; sourceTree = "<group>"; };
@@ -624,6 +630,7 @@
 				A3815F782EBB43D1002363D3 /* LikeDTO.swift */,
 				A3B48A4A2EBD7EFF005EFD9D /* CreatDTO.swift */,
 				A3721BB72ECFFF0A00F3E794 /* UpdateDTO.swift */,
+				A32CC9462EFE2FE7004C589F /* ReportDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -679,6 +686,7 @@
 				A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */,
 				A3903BB92EC2B8EE0004A4C3 /* GetPostDetailUseCase.swift */,
 				A3721BB92ECFFF3300F3E794 /* UpdatePostUseCase.swift */,
+				A32CC9482EFE2FFB004C589F /* ReportPostUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -722,6 +730,7 @@
 				A3B48A482EBD77BD005EFD9D /* CreatePostView.swift */,
 				A3903BBD2EC2B9030004A4C3 /* PostDetailView.swift */,
 				A3721BBD2ECFFF6500F3E794 /* EditPostView.swift */,
+				A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1233,6 +1242,7 @@
 				D4B1C76A2E76CDE0001C4743 /* SignupViewModel.swift in Sources */,
 				D4B1C7492E76C081001C4743 /* AuthRepository.swift in Sources */,
 				D4B1C74D2E76C081001C4743 /* LoginView.swift in Sources */,
+				A32CC94B2EFE3030004C589F /* ReportReasonSheet.swift in Sources */,
 				A3815F792EBB43D1002363D3 /* LikeDTO.swift in Sources */,
 				D4B1C74E2E76C081001C4743 /* AppState.swift in Sources */,
 				D4B1C74F2E76C081001C4743 /* LoginViewModel.swift in Sources */,
@@ -1267,6 +1277,7 @@
 				A392EC612EB9CC10000FA26C /* PostRepository.swift in Sources */,
 				A3B48A4B2EBD7EFF005EFD9D /* CreatDTO.swift in Sources */,
 				A392EC622EB9CC10000FA26C /* FilterOption.swift in Sources */,
+				A32CC9492EFE2FFB004C589F /* ReportPostUseCase.swift in Sources */,
 				A392EC632EB9CC10000FA26C /* PostDTO.swift in Sources */,
 				A3903BBC2EC2B8FC0004A4C3 /* PostDetailViewModel.swift in Sources */,
 				A392EC642EB9CC10000FA26C /* Post.swift in Sources */,
@@ -1280,6 +1291,7 @@
 				A33B44552ED843C600820814 /* FriendsTab.swift in Sources */,
 				A33B44562ED843C600820814 /* FriendsView.swift in Sources */,
 				A33B44572ED843C600820814 /* FriendRequest.swift in Sources */,
+				A32CC9472EFE2FE7004C589F /* ReportDTO.swift in Sources */,
 				A33B44582ED843C600820814 /* Friend.swift in Sources */,
 				A33B44592ED843C600820814 /* FriendRequestTabView.swift in Sources */,
 				A3721BBC2ECFFF5100F3E794 /* EditPostViewModel.swift in Sources */,
