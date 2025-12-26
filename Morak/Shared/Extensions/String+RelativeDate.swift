@@ -60,6 +60,12 @@ extension String {
             return date
         }
 
+        // 공백 구분 형식 (yyyy-MM-dd HH:mm:ss)
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        if let date = formatter.date(from: self) {
+            return date
+        }
+
         // 표준 ISO8601 형식
         let isoFormatter = ISO8601DateFormatter()
         return isoFormatter.date(from: self)
