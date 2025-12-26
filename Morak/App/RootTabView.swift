@@ -13,20 +13,21 @@ struct RootTabView: View {
     var body: some View {
         TabView(selection: $appState.selectedTab) {
             PostView()
-                .tabItem { 
+                .tabItem {
                     Image(AppTab.post.systemImage)
                         .renderingMode(.template)
                     Text(AppTab.post.title)
                 }
                 .tag(AppTab.post)
 
-            ChatView()
-                .tabItem { 
-                    Image(AppTab.chat.systemImage)
-                        .renderingMode(.template)
-                    Text(AppTab.chat.title)
-                }
-                .tag(AppTab.chat)
+            // TODO: 채팅 기능 추가 시 활성화
+            // ChatView()
+            //     .tabItem {
+            //         Image(AppTab.chat.systemImage)
+            //             .renderingMode(.template)
+            //         Text(AppTab.chat.title)
+            //     }
+            //     .tag(AppTab.chat)
 
             FriendsView()
                 .tabItem { 
