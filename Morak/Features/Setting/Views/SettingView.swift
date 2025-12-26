@@ -100,10 +100,9 @@ struct SettingView: View {
                 LoginView()
             }
             .tokenExpirationAlert(isPresented: $viewModel.showTokenExpiredAlert)
-            // TODO: 내가 쓴 게시물 화면으로 이동
-            // .navigationDestination(isPresented: $navigateToMyPosts) {
-            //     MyPostsView()
-            // }
+            .navigationDestination(isPresented: $navigateToMyPosts) {
+                MyPostsView()
+            }
         }
     }
 
@@ -203,7 +202,6 @@ struct SettingView: View {
                 title: "내가 쓴 게시물",
                 showChevron: true
             ) {
-                // TODO: 내가 쓴 게시물 목록 API 구현
                 navigateToMyPosts = true
             }
 

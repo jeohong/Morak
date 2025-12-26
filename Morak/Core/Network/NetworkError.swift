@@ -17,6 +17,7 @@ enum NetworkError: Error, LocalizedError {
     case unauthorized
     case networkUnavailable
     case timeout
+    case cancelled
     case unknown
     case tokenRefreshFailed  // Refresh 토큰도 만료됨 (장기 미접속)
     
@@ -40,6 +41,8 @@ enum NetworkError: Error, LocalizedError {
             return "네트워크 연결을 확인해주세요."
         case .timeout:
             return "요청 시간이 초과되었습니다."
+        case .cancelled:
+            return nil  // 취소된 요청은 에러 메시지 표시 안 함
         case .unknown:
             return "알 수 없는 오류가 발생했습니다."
         case .tokenRefreshFailed:

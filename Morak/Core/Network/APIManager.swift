@@ -43,7 +43,7 @@ final class APIManager: APIManagerProtocol {
 
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
-        
+
         // 헤더 설정
         endpoint.headers?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
@@ -117,6 +117,8 @@ final class APIManager: APIManagerProtocol {
                     throw NetworkError.networkUnavailable
                 case .timedOut:
                     throw NetworkError.timeout
+                case .cancelled:
+                    throw NetworkError.cancelled
                 default:
                     throw NetworkError.unknown
                 }

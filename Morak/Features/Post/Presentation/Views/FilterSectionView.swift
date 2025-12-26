@@ -50,23 +50,24 @@ struct FilterSectionView: View {
                         .stroke(Color.textSecondary.opacity(0.2), lineWidth: 1)
                 )
             }
-            
+
             Spacer()
-            
-            Button(action: {
-                print("검색")
-            }) {
-                Image(systemName: "magnifyingglass")
-                    .font(.system(size: 16))
-                    .foregroundColor(.textSecondary)
-                    .frame(width: 40, height: 40)
-                    .background(Color.cardBackground)
-                    .cornerRadius(20)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.textSecondary.opacity(0.2), lineWidth: 1)
-                    )
-            }
+
+            // TODO: 검색 기능 추가 시 활성화
+            // Button(action: {
+            //     print("검색")
+            // }) {
+            //     Image(systemName: "magnifyingglass")
+            //         .font(.system(size: 16))
+            //         .foregroundColor(.textSecondary)
+            //         .frame(width: 40, height: 40)
+            //         .background(Color.cardBackground)
+            //         .cornerRadius(20)
+            //         .overlay(
+            //             RoundedRectangle(cornerRadius: 20)
+            //                 .stroke(Color.textSecondary.opacity(0.2), lineWidth: 1)
+            //         )
+            // }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)

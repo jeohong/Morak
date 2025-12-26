@@ -20,6 +20,9 @@
 		A32CC9652EFE5CAC004C589F /* MyInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9532EFE5CAC004C589F /* MyInfoDTO.swift */; };
 		A32CC9662EFE5CAC004C589F /* MyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC95B2EFE5CAC004C589F /* MyInfo.swift */; };
 		A32CC9672EFE5CAC004C589F /* SettingRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC95D2EFE5CAC004C589F /* SettingRepositoryProtocol.swift */; };
+		A32CC9692EFE5E9F004C589F /* GetMyPostsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9682EFE5E9F004C589F /* GetMyPostsUseCase.swift */; };
+		A32CC96B2EFE5EB3004C589F /* MyPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC96A2EFE5EB3004C589F /* MyPostsViewModel.swift */; };
+		A32CC96D2EFE5EC8004C589F /* MyPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC96C2EFE5EC8004C589F /* MyPostsView.swift */; };
 		A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444B2ED843C600820814 /* FriendListTabView.swift */; };
 		A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44492ED843C600820814 /* FriendsViewModel.swift */; };
 		A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444D2ED843C600820814 /* FriendSearchTabView.swift */; };
@@ -166,6 +169,9 @@
 		A32CC95B2EFE5CAC004C589F /* MyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfo.swift; sourceTree = "<group>"; };
 		A32CC95D2EFE5CAC004C589F /* SettingRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepositoryProtocol.swift; sourceTree = "<group>"; };
 		A32CC95F2EFE5CAC004C589F /* GetMyInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyInfoUseCase.swift; sourceTree = "<group>"; };
+		A32CC9682EFE5E9F004C589F /* GetMyPostsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyPostsUseCase.swift; sourceTree = "<group>"; };
+		A32CC96A2EFE5EB3004C589F /* MyPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewModel.swift; sourceTree = "<group>"; };
+		A32CC96C2EFE5EC8004C589F /* MyPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsView.swift; sourceTree = "<group>"; };
 		A33B44432ED843C600820814 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A33B44442ED843C600820814 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		A33B44472ED843C600820814 /* FriendsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTab.swift; sourceTree = "<group>"; };
@@ -791,6 +797,7 @@
 				A3903BB92EC2B8EE0004A4C3 /* GetPostDetailUseCase.swift */,
 				A3721BB92ECFFF3300F3E794 /* UpdatePostUseCase.swift */,
 				A32CC9482EFE2FFB004C589F /* ReportPostUseCase.swift */,
+				A32CC9682EFE5E9F004C589F /* GetMyPostsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -820,6 +827,7 @@
 				A3B48A462EBD7798005EFD9D /* CreatePostViewModel.swift */,
 				A3903BBB2EC2B8FC0004A4C3 /* PostDetailViewModel.swift */,
 				A3721BBB2ECFFF5100F3E794 /* EditPostViewModel.swift */,
+				A32CC96A2EFE5EB3004C589F /* MyPostsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -835,6 +843,7 @@
 				A3903BBD2EC2B9030004A4C3 /* PostDetailView.swift */,
 				A3721BBD2ECFFF6500F3E794 /* EditPostView.swift */,
 				A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */,
+				A32CC96C2EFE5EC8004C589F /* MyPostsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1330,6 +1339,7 @@
 				A32CC9662EFE5CAC004C589F /* MyInfo.swift in Sources */,
 				A32CC9672EFE5CAC004C589F /* SettingRepositoryProtocol.swift in Sources */,
 				A36D7BDE2E587B14005F21C2 /* Color+Extension.swift in Sources */,
+				A32CC96D2EFE5EC8004C589F /* MyPostsView.swift in Sources */,
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
 				A3815F702EBAC97F002363D3 /* CustomAlert.swift in Sources */,
 				A3B48A4F2EBD7FD9005EFD9D /* PostCardView.swift in Sources */,
@@ -1357,6 +1367,7 @@
 				D4B1C74D2E76C081001C4743 /* LoginView.swift in Sources */,
 				A32CC94B2EFE3030004C589F /* ReportReasonSheet.swift in Sources */,
 				A3815F792EBB43D1002363D3 /* LikeDTO.swift in Sources */,
+				A32CC9692EFE5E9F004C589F /* GetMyPostsUseCase.swift in Sources */,
 				D4B1C74E2E76C081001C4743 /* AppState.swift in Sources */,
 				D4B1C74F2E76C081001C4743 /* LoginViewModel.swift in Sources */,
 				A392EC6F2EB9F6F1000FA26C /* User.swift in Sources */,
@@ -1387,6 +1398,7 @@
 				A3E505842EFA636A009EECBA /* FriendRequestDTO.swift in Sources */,
 				A3E505742EFA3A10009EECBA /* UserRepository.swift in Sources */,
 				A392EC5F2EB9CC10000FA26C /* PostView.swift in Sources */,
+				A32CC96B2EFE5EB3004C589F /* MyPostsViewModel.swift in Sources */,
 				A392EC602EB9CC10000FA26C /* PostRepositoryProtocol.swift in Sources */,
 				A392EC612EB9CC10000FA26C /* PostRepository.swift in Sources */,
 				A3B48A4B2EBD7EFF005EFD9D /* CreatDTO.swift in Sources */,

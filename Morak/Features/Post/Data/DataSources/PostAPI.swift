@@ -9,6 +9,7 @@ import Foundation
 
 enum PostEndpoint: APIEndpoint {
     case getPostList(PostListRequest)
+    case getMyPosts(PostListRequest)
     case getPostDetail(postId: Int)
     case likePost(postId: Int)
     case createPost(CreatePostRequest)
@@ -24,6 +25,8 @@ enum PostEndpoint: APIEndpoint {
         switch self {
         case .getPostList:
             return "api/v1/posts"
+        case .getMyPosts:
+            return "api/v1/posts/me"
         case .getPostDetail(let postId):
             return "api/v1/posts/\(postId)"
         case .likePost(let postId):
@@ -41,7 +44,7 @@ enum PostEndpoint: APIEndpoint {
 
     var method: HTTPMethod {
         switch self {
-        case .getPostList, .getPostDetail:
+        case .getPostList, .getMyPosts, .getPostDetail:
             return .GET
         case .likePost, .createPost, .reportPost:
             return .POST
@@ -84,7 +87,7 @@ enum PostEndpoint: APIEndpoint {
 
     var queryParameters: [String: String]? {
         switch self {
-        case .getPostList(let request):
+        case .getPostList(let request), .getMyPosts(let request):
             return [
                 "page": "\(request.page)",
                 "size": "\(request.size)",

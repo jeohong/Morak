@@ -28,6 +28,20 @@ final class PostRepository: PostRepositoryProtocol {
         return domainResponse
     }
 
+    func getMyPosts(page: Int, size: Int, sortBy: String) async throws -> PostListResponse {
+        let request = PostListRequest(page: page, size: size, sortBy: sortBy)
+        let endpoint = PostEndpoint.getMyPosts(request)
+
+        let apiResponse: BaseResponse<PostListResponseDTO> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<PostListResponseDTO>.self
+        )
+
+        let domainResponse = PostMapper.toDomain(apiResponse.data)
+
+        return domainResponse
+    }
+
     func getPostDetail(postId: Int) async throws -> Post {
         let endpoint = PostEndpoint.getPostDetail(postId: postId)
 
