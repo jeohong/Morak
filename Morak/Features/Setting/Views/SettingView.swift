@@ -8,91 +8,266 @@
 import SwiftUI
 
 struct SettingView: View {
-    @StateObject private var logoutViewModel = LogoutViewModel()
+    @StateObject private var viewModel = SettingViewModel()
     @ObservedObject private var authManager = AuthManager.shared
-    @State private var showLogoutAlert = false
+
+    // UI State
+    @State private var showLogoutAlert: Bool = false
+    @State private var showWithdrawAlert: Bool = false
+    @State private var showErrorAlert: Bool = false
+    @State private var navigateToLogin: Bool = false
+    @State private var navigateToMyPosts: Bool = false
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Text("세팅 뷰")
-                    .font(.largeTitle)
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 16) {
+                    // Profile Section
+                    profileSection
 
-                Spacer()
-                
-                if let user = authManager.currentUser {
-                    VStack(spacing: 8) {
-                        Text("로그인된 사용자")
-                            .font(.headline)
-                        Text("이메일: \(user.email)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Text("유저아이디: \(user.id)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Text("닉네임: \(user.nickname)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                    if authManager.isLoggedIn {
+                        // Menu Section
+                        menuSection
                     }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
-                    .padding(.horizontal)
-                }
 
-                Spacer()
-                
-                // 로그아웃 버튼
-                Button(action: {
-                    showLogoutAlert = true
-                }) {
-                    HStack {
-                        if logoutViewModel.isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                .scaleEffect(0.8)
-                        }
-                        Text(logoutViewModel.isLoading ? "로그아웃 중..." : "로그아웃")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 56)
-                    .background(Color.red)
-                    .cornerRadius(16)
+                    Spacer()
                 }
-                .disabled(logoutViewModel.isLoading)
-                .padding(.horizontal)
-                .padding(.bottom, 50)
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
             }
-            .onAppear(perform: {
-                print(SecureTokenManager.shared.getAccessToken())
-                print(SecureTokenManager.shared.getRefreshToken())
-            })
+            .background(Color.postBackground.ignoresSafeArea())
             .navigationTitle("설정")
-            .alert("로그아웃", isPresented: $showLogoutAlert) {
-                Button("취소", role: .cancel) { }
-                Button("로그아웃", role: .destructive) {
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                if authManager.isLoggedIn {
                     Task {
-                        await logoutViewModel.logout()
+                        await viewModel.fetchMyInfo()
                     }
                 }
-            } message: {
-                Text("정말 로그아웃하시겠습니까?")
             }
-            .alert("로그아웃 오류", isPresented: $logoutViewModel.showError) {
-                Button("확인") {
-                    logoutViewModel.clearError()
-                }
-            } message: {
-                Text(logoutViewModel.errorMessage)
-            }
-            .onChange(of: logoutViewModel.isLogoutSuccessful) { success in
-                if success {
-                    // TODO: 로그인 화면으로 이동하거나 앱 상태 리셋
-                    print("로그아웃 완료 - 로그인 화면으로 이동 필요")
+            .onChange(of: authManager.isLoggedIn) { isLoggedIn in
+                if isLoggedIn {
+                    Task {
+                        await viewModel.fetchMyInfo()
+                    }
+                } else {
+                    viewModel.clearUserInfo()
                 }
             }
+            .onChange(of: viewModel.errorMessage) { errorMessage in
+                if errorMessage != nil {
+                    showErrorAlert = true
+                }
+            }
+            .onChange(of: showErrorAlert) { isShowing in
+                if !isShowing {
+                    viewModel.errorMessage = nil
+                }
+            }
+            .customAlert(
+                isPresented: $showLogoutAlert,
+                config: CustomAlertConfig(
+                    title: "로그아웃",
+                    message: "정말 로그아웃하시겠습니까?",
+                    primaryButton: AlertButton(title: "로그아웃", style: .destructive) {
+                        Task {
+                            await viewModel.logout()
+                        }
+                    },
+                    secondaryButton: AlertButton(title: "취소", style: .cancel)
+                )
+            )
+            .customAlert(
+                isPresented: $showWithdrawAlert,
+                config: CustomAlertConfig(
+                    title: "회원탈퇴",
+                    message: "정말 탈퇴하시겠습니까?\n탈퇴 시 모든 데이터가 삭제됩니다.",
+                    primaryButton: AlertButton(title: "탈퇴", style: .destructive) {
+                        // TODO: 회원탈퇴 API 구현
+                    },
+                    secondaryButton: AlertButton(title: "취소", style: .cancel)
+                )
+            )
+            .customAlert(
+                isPresented: $showErrorAlert,
+                config: CustomAlertConfig(
+                    title: "오류",
+                    message: viewModel.errorMessage ?? "알 수 없는 오류가 발생했습니다.",
+                    primaryButton: AlertButton(title: "확인", style: .primary)
+                )
+            )
+            .fullScreenCover(isPresented: $navigateToLogin) {
+                LoginView()
+            }
+            // TODO: 내가 쓴 게시물 화면으로 이동
+            // .navigationDestination(isPresented: $navigateToMyPosts) {
+            //     MyPostsView()
+            // }
+        }
+    }
+
+    // MARK: - Profile Section
+    @ViewBuilder
+    private var profileSection: some View {
+        VStack(spacing: 0) {
+            if authManager.isLoggedIn {
+                // 로그인 상태: 유저 정보 표시
+                loggedInProfileCard
+            } else {
+                // 비로그인 상태: 로그인 유도
+                loggedOutProfileCard
+            }
+        }
+    }
+
+    private var loggedInProfileCard: some View {
+        VStack(spacing: 16) {
+            // 프로필 로고
+            Image("logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 72, height: 72)
+
+            // 유저 정보
+            VStack(spacing: 8) {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .frame(height: 40)
+                } else {
+                    Text(viewModel.nickname ?? "닉네임")
+                        .font(.pretendard.largeTextBold)
+                        .foregroundColor(.textPrimary)
+
+                    Text(viewModel.email ?? "이메일")
+                        .font(.pretendard.mediumTextRegular)
+                        .foregroundColor(.textSecondary)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 24)
+        .background(Color.cardBackground)
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+
+    private var loggedOutProfileCard: some View {
+        VStack(spacing: 16) {
+            // 프로필 로고
+            Image("logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 72, height: 72)
+                .opacity(0.5)
+
+            // 로그인 유도 텍스트
+            VStack(spacing: 8) {
+                Text("로그인이 필요합니다")
+                    .font(.pretendard.largeTextBold)
+                    .foregroundColor(.textPrimary)
+
+                Text("로그인하고 모든 기능을 이용해보세요")
+                    .font(.pretendard.mediumTextRegular)
+                    .foregroundColor(.textSecondary)
+            }
+
+            // 로그인 버튼
+            Button(action: {
+                navigateToLogin = true
+            }) {
+                Text("로그인")
+                    .font(.pretendard.mediumTextSemiBold)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 48)
+                    .background(Color.main)
+                    .cornerRadius(12)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 8)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 24)
+        .background(Color.cardBackground)
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+
+    // MARK: - Menu Section
+    private var menuSection: some View {
+        VStack(spacing: 0) {
+            // 내가 쓴 게시물
+            SettingMenuRow(
+                icon: "square.and.pencil",
+                title: "내가 쓴 게시물",
+                showChevron: true
+            ) {
+                // TODO: 내가 쓴 게시물 목록 API 구현
+                navigateToMyPosts = true
+            }
+
+            Divider()
+                .padding(.leading, 52)
+
+            // 로그아웃
+            SettingMenuRow(
+                icon: "rectangle.portrait.and.arrow.right",
+                title: "로그아웃",
+                titleColor: .textPrimary,
+                showChevron: false
+            ) {
+                showLogoutAlert = true
+            }
+
+            Divider()
+                .padding(.leading, 52)
+
+            // 회원탈퇴
+            SettingMenuRow(
+                icon: "person.slash",
+                title: "회원탈퇴",
+                titleColor: .error,
+                showChevron: false
+            ) {
+                showWithdrawAlert = true
+            }
+        }
+        .background(Color.cardBackground)
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
+    }
+}
+
+// MARK: - Setting Menu Row
+struct SettingMenuRow: View {
+    let icon: String
+    let title: String
+    var titleColor: Color = .textPrimary
+    var showChevron: Bool = true
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 16) {
+                Image(systemName: icon)
+                    .font(.system(size: 18))
+                    .foregroundColor(.textSecondary)
+                    .frame(width: 24)
+
+                Text(title)
+                    .font(.pretendard.mediumTextRegular)
+                    .foregroundColor(titleColor)
+
+                Spacer()
+
+                if showChevron {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14))
+                        .foregroundColor(.textSecondary)
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 16)
         }
     }
 }

@@ -13,6 +13,7 @@
 		A32CC94B2EFE3030004C589F /* ReportReasonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */; };
 		A32CC94D2EFE3181004C589F /* ReportCommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94C2EFE3181004C589F /* ReportCommentDTO.swift */; };
 		A32CC94F2EFE319F004C589F /* ReportCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94E2EFE319F004C589F /* ReportCommentUseCase.swift */; };
+		A32CC9522EFE5A93004C589F /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9502EFE5A93004C589F /* SettingViewModel.swift */; };
 		A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444B2ED843C600820814 /* FriendListTabView.swift */; };
 		A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44492ED843C600820814 /* FriendsViewModel.swift */; };
 		A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444D2ED843C600820814 /* FriendSearchTabView.swift */; };
@@ -152,6 +153,7 @@
 		A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonSheet.swift; sourceTree = "<group>"; };
 		A32CC94C2EFE3181004C589F /* ReportCommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentDTO.swift; sourceTree = "<group>"; };
 		A32CC94E2EFE319F004C589F /* ReportCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentUseCase.swift; sourceTree = "<group>"; };
+		A32CC9502EFE5A93004C589F /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		A33B44432ED843C600820814 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A33B44442ED843C600820814 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		A33B44472ED843C600820814 /* FriendsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTab.swift; sourceTree = "<group>"; };
@@ -321,6 +323,14 @@
 				A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A32CC9512EFE5A93004C589F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC9502EFE5A93004C589F /* SettingViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		A33B44452ED843C600820814 /* Entities */ = {
@@ -1021,6 +1031,7 @@
 			isa = PBXGroup;
 			children = (
 				D4B1C73F2E76C081001C4743 /* Views */,
+				A32CC9512EFE5A93004C589F /* ViewModels */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1272,6 +1283,7 @@
 				A3903BEA2EC2DE360004A4C3 /* CommentSortOption.swift in Sources */,
 				D4B1C7512E76C081001C4743 /* SignupView.swift in Sources */,
 				A392EC662EB9D570000FA26C /* GetPostListUseCase.swift in Sources */,
+				A32CC9522EFE5A93004C589F /* SettingViewModel.swift in Sources */,
 				A392EC692EB9DE2B000FA26C /* PostMapper.swift in Sources */,
 				A392EC5D2EB9CC10000FA26C /* PostViewModel.swift in Sources */,
 				A392EC5E2EB9CC10000FA26C /* PostAPI.swift in Sources */,
