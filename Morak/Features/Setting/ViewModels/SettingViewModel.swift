@@ -14,15 +14,19 @@ final class SettingViewModel: ObservableObject {
     @Published var nickname: String?
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var showTokenExpiredAlert: Bool = false
 
     // MARK: - Private Properties
     private let logoutUseCase: LogoutUseCaseProtocol
-    // TODO: 내정보 가져오기 UseCase 추가
-    // private let getMyInfoUseCase: GetMyInfoUseCaseProtocol
+    private let getMyInfoUseCase: GetMyInfoUseCaseProtocol
 
     // MARK: - Init
-    init(logoutUseCase: LogoutUseCaseProtocol = LogoutUseCase()) {
+    init(
+        logoutUseCase: LogoutUseCaseProtocol = LogoutUseCase(),
+        getMyInfoUseCase: GetMyInfoUseCaseProtocol = GetMyInfoUseCase.makeDefault()
+    ) {
         self.logoutUseCase = logoutUseCase
+        self.getMyInfoUseCase = getMyInfoUseCase
     }
 
     // MARK: - Public Methods
@@ -34,25 +38,18 @@ final class SettingViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
-        // TODO: 내정보 가져오기 API 구현
-        // do {
-        //     let userInfo = try await getMyInfoUseCase.execute()
-        //     email = userInfo.email
-        //     nickname = userInfo.nickname
-        // } catch let error as NetworkError {
-        //     if case .tokenRefreshFailed = error {
-        //         // 토큰 만료 처리
-        //     } else {
-        //         errorMessage = error.localizedDescription
-        //     }
-        // } catch {
-        //     errorMessage = "내 정보를 불러오는 중 오류가 발생했습니다."
-        // }
-
-        // 임시: AuthManager에서 가져오기 (API 구현 전까지)
-        if let user = AuthManager.shared.currentUser {
-            email = user.email
-            nickname = user.nickname
+        do {
+            let myInfo = try await getMyInfoUseCase.execute()
+            email = myInfo.email
+            nickname = myInfo.nickname
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "내 정보를 불러오는 중 오류가 발생했습니다."
         }
 
         isLoading = false

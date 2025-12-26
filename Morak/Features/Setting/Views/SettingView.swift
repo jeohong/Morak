@@ -99,6 +99,7 @@ struct SettingView: View {
             .fullScreenCover(isPresented: $navigateToLogin) {
                 LoginView()
             }
+            .tokenExpirationAlert(isPresented: $viewModel.showTokenExpiredAlert)
             // TODO: 내가 쓴 게시물 화면으로 이동
             // .navigationDestination(isPresented: $navigateToMyPosts) {
             //     MyPostsView()

@@ -14,6 +14,12 @@
 		A32CC94D2EFE3181004C589F /* ReportCommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94C2EFE3181004C589F /* ReportCommentDTO.swift */; };
 		A32CC94F2EFE319F004C589F /* ReportCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94E2EFE319F004C589F /* ReportCommentUseCase.swift */; };
 		A32CC9522EFE5A93004C589F /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9502EFE5A93004C589F /* SettingViewModel.swift */; };
+		A32CC9622EFE5CAC004C589F /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9582EFE5CAC004C589F /* SettingRepository.swift */; };
+		A32CC9632EFE5CAC004C589F /* GetMyInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC95F2EFE5CAC004C589F /* GetMyInfoUseCase.swift */; };
+		A32CC9642EFE5CAC004C589F /* MyInfoMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9562EFE5CAC004C589F /* MyInfoMapper.swift */; };
+		A32CC9652EFE5CAC004C589F /* MyInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9532EFE5CAC004C589F /* MyInfoDTO.swift */; };
+		A32CC9662EFE5CAC004C589F /* MyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC95B2EFE5CAC004C589F /* MyInfo.swift */; };
+		A32CC9672EFE5CAC004C589F /* SettingRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC95D2EFE5CAC004C589F /* SettingRepositoryProtocol.swift */; };
 		A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444B2ED843C600820814 /* FriendListTabView.swift */; };
 		A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44492ED843C600820814 /* FriendsViewModel.swift */; };
 		A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444D2ED843C600820814 /* FriendSearchTabView.swift */; };
@@ -154,6 +160,12 @@
 		A32CC94C2EFE3181004C589F /* ReportCommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentDTO.swift; sourceTree = "<group>"; };
 		A32CC94E2EFE319F004C589F /* ReportCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentUseCase.swift; sourceTree = "<group>"; };
 		A32CC9502EFE5A93004C589F /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		A32CC9532EFE5CAC004C589F /* MyInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDTO.swift; sourceTree = "<group>"; };
+		A32CC9562EFE5CAC004C589F /* MyInfoMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoMapper.swift; sourceTree = "<group>"; };
+		A32CC9582EFE5CAC004C589F /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
+		A32CC95B2EFE5CAC004C589F /* MyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfo.swift; sourceTree = "<group>"; };
+		A32CC95D2EFE5CAC004C589F /* SettingRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepositoryProtocol.swift; sourceTree = "<group>"; };
+		A32CC95F2EFE5CAC004C589F /* GetMyInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyInfoUseCase.swift; sourceTree = "<group>"; };
 		A33B44432ED843C600820814 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A33B44442ED843C600820814 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		A33B44472ED843C600820814 /* FriendsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTab.swift; sourceTree = "<group>"; };
@@ -331,6 +343,82 @@
 				A32CC9502EFE5A93004C589F /* SettingViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A32CC9542EFE5CAC004C589F /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC9532EFE5CAC004C589F /* MyInfoDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		A32CC9552EFE5CAC004C589F /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC9542EFE5CAC004C589F /* DTOs */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		A32CC9572EFE5CAC004C589F /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC9562EFE5CAC004C589F /* MyInfoMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		A32CC9592EFE5CAC004C589F /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC9582EFE5CAC004C589F /* SettingRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		A32CC95A2EFE5CAC004C589F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC9552EFE5CAC004C589F /* DataSources */,
+				A32CC9572EFE5CAC004C589F /* Mappers */,
+				A32CC9592EFE5CAC004C589F /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A32CC95C2EFE5CAC004C589F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC95B2EFE5CAC004C589F /* MyInfo.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		A32CC95E2EFE5CAC004C589F /* RepositoryInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC95D2EFE5CAC004C589F /* SettingRepositoryProtocol.swift */,
+			);
+			path = RepositoryInterfaces;
+			sourceTree = "<group>";
+		};
+		A32CC9602EFE5CAC004C589F /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC95F2EFE5CAC004C589F /* GetMyInfoUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		A32CC9612EFE5CAC004C589F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				A32CC95C2EFE5CAC004C589F /* Entities */,
+				A32CC95E2EFE5CAC004C589F /* RepositoryInterfaces */,
+				A32CC9602EFE5CAC004C589F /* UseCases */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		A33B44452ED843C600820814 /* Entities */ = {
@@ -1032,6 +1120,8 @@
 			children = (
 				D4B1C73F2E76C081001C4743 /* Views */,
 				A32CC9512EFE5A93004C589F /* ViewModels */,
+				A32CC95A2EFE5CAC004C589F /* Data */,
+				A32CC9612EFE5CAC004C589F /* Domain */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1233,6 +1323,12 @@
 				A3E5058E2EFA6F87009EECBA /* DeleteFriendUseCase.swift in Sources */,
 				A3721BBA2ECFFF3300F3E794 /* UpdatePostUseCase.swift in Sources */,
 				D4B1C75D2E76CD74001C4743 /* SignupModels.swift in Sources */,
+				A32CC9622EFE5CAC004C589F /* SettingRepository.swift in Sources */,
+				A32CC9632EFE5CAC004C589F /* GetMyInfoUseCase.swift in Sources */,
+				A32CC9642EFE5CAC004C589F /* MyInfoMapper.swift in Sources */,
+				A32CC9652EFE5CAC004C589F /* MyInfoDTO.swift in Sources */,
+				A32CC9662EFE5CAC004C589F /* MyInfo.swift in Sources */,
+				A32CC9672EFE5CAC004C589F /* SettingRepositoryProtocol.swift in Sources */,
 				A36D7BDE2E587B14005F21C2 /* Color+Extension.swift in Sources */,
 				A3488B8F2E4B60BC00232643 /* MorakApp.swift in Sources */,
 				A3815F702EBAC97F002363D3 /* CustomAlert.swift in Sources */,

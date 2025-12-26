@@ -150,6 +150,7 @@ enum EmailEndpoint: APIEndpoint {
 
 enum UserEndpoint: APIEndpoint {
     case search(nickname: String)
+    case getMyInfo
 
     var baseURL: String {
         return baseUrl
@@ -159,21 +160,29 @@ enum UserEndpoint: APIEndpoint {
         switch self {
         case .search:
             return "api/v1/users/search"
+        case .getMyInfo:
+            return "api/v1/users/me"
         }
     }
 
     var method: HTTPMethod {
         switch self {
-        case .search:
+        case .search, .getMyInfo:
             return .GET
         }
     }
 
     var headers: [String: String]? {
-        return [
+        var headers = [
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]
+
+        if let accessToken = SecureTokenManager.shared.getAccessToken() {
+            headers["Authorization"] = "Bearer \(accessToken)"
+        }
+
+        return headers
     }
 
     var requestBody: (any Codable)? {
@@ -184,6 +193,8 @@ enum UserEndpoint: APIEndpoint {
         switch self {
         case .search(let nickname):
             return ["nickname": nickname]
+        case .getMyInfo:
+            return nil
         }
     }
 }
