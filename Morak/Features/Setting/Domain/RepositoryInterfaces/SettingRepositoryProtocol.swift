@@ -9,4 +9,5 @@ import Foundation
 
 protocol SettingRepositoryProtocol {
     func getMyInfo() async throws -> MyInfo
+    func withdraw() async throws -> String
 }

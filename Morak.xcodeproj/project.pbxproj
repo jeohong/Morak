@@ -23,6 +23,7 @@
 		A32CC9692EFE5E9F004C589F /* GetMyPostsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9682EFE5E9F004C589F /* GetMyPostsUseCase.swift */; };
 		A32CC96B2EFE5EB3004C589F /* MyPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC96A2EFE5EB3004C589F /* MyPostsViewModel.swift */; };
 		A32CC96D2EFE5EC8004C589F /* MyPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC96C2EFE5EC8004C589F /* MyPostsView.swift */; };
+		A32CC9712EFE66F8004C589F /* WithdrawUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9702EFE66F8004C589F /* WithdrawUseCase.swift */; };
 		A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444B2ED843C600820814 /* FriendListTabView.swift */; };
 		A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44492ED843C600820814 /* FriendsViewModel.swift */; };
 		A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444D2ED843C600820814 /* FriendSearchTabView.swift */; };
@@ -172,6 +173,7 @@
 		A32CC9682EFE5E9F004C589F /* GetMyPostsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyPostsUseCase.swift; sourceTree = "<group>"; };
 		A32CC96A2EFE5EB3004C589F /* MyPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewModel.swift; sourceTree = "<group>"; };
 		A32CC96C2EFE5EC8004C589F /* MyPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsView.swift; sourceTree = "<group>"; };
+		A32CC9702EFE66F8004C589F /* WithdrawUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawUseCase.swift; sourceTree = "<group>"; };
 		A33B44432ED843C600820814 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A33B44442ED843C600820814 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		A33B44472ED843C600820814 /* FriendsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTab.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				A32CC95F2EFE5CAC004C589F /* GetMyInfoUseCase.swift */,
+				A32CC9702EFE66F8004C589F /* WithdrawUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1432,6 +1435,7 @@
 				A3E5058A2EFA6C6A009EECBA /* RejectFriendRequestUseCase.swift in Sources */,
 				A3E5057E2EFA6213009EECBA /* FriendRepositoryProtocol.swift in Sources */,
 				A32CC94D2EFE3181004C589F /* ReportCommentDTO.swift in Sources */,
+				A32CC9712EFE66F8004C589F /* WithdrawUseCase.swift in Sources */,
 				D4B1C7572E76C081001C4743 /* APIEndpoint.swift in Sources */,
 				D4B1C7582E76C081001C4743 /* LoginModels.swift in Sources */,
 				A3903BF02EC30AE00004A4C3 /* String+RelativeDate.swift in Sources */,

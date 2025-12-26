@@ -26,4 +26,15 @@ final class SettingRepository: SettingRepositoryProtocol {
 
         return domainMyInfo
     }
+
+    func withdraw() async throws -> String {
+        let endpoint = UserEndpoint.withdrawal
+
+        let apiResponse: BaseResponse<String> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<String>.self
+        )
+
+        return apiResponse.message
+    }
 }

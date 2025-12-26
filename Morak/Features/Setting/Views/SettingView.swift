@@ -83,7 +83,9 @@ struct SettingView: View {
                     title: "회원탈퇴",
                     message: "정말 탈퇴하시겠습니까?\n탈퇴 시 모든 데이터가 삭제됩니다.",
                     primaryButton: AlertButton(title: "탈퇴", style: .destructive) {
-                        // TODO: 회원탈퇴 API 구현
+                        Task {
+                            await viewModel.withdraw()
+                        }
                     },
                     secondaryButton: AlertButton(title: "취소", style: .cancel)
                 )
@@ -93,6 +95,14 @@ struct SettingView: View {
                 config: CustomAlertConfig(
                     title: "오류",
                     message: viewModel.errorMessage ?? "알 수 없는 오류가 발생했습니다.",
+                    primaryButton: AlertButton(title: "확인", style: .primary)
+                )
+            )
+            .customAlert(
+                isPresented: $viewModel.showWithdrawSuccessAlert,
+                config: CustomAlertConfig(
+                    title: "회원탈퇴 완료",
+                    message: "회원탈퇴가 완료되었습니다.",
                     primaryButton: AlertButton(title: "확인", style: .primary)
                 )
             )

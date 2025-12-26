@@ -151,6 +151,7 @@ enum EmailEndpoint: APIEndpoint {
 enum UserEndpoint: APIEndpoint {
     case search(nickname: String)
     case getMyInfo
+    case withdrawal
 
     var baseURL: String {
         return baseUrl
@@ -162,6 +163,8 @@ enum UserEndpoint: APIEndpoint {
             return "api/v1/users/search"
         case .getMyInfo:
             return "api/v1/users/me"
+        case .withdrawal:
+            return "api/v1/users/withdrawal"
         }
     }
 
@@ -169,6 +172,8 @@ enum UserEndpoint: APIEndpoint {
         switch self {
         case .search, .getMyInfo:
             return .GET
+        case .withdrawal:
+            return .POST
         }
     }
 
@@ -193,7 +198,7 @@ enum UserEndpoint: APIEndpoint {
         switch self {
         case .search(let nickname):
             return ["nickname": nickname]
-        case .getMyInfo:
+        case .getMyInfo, .withdrawal:
             return nil
         }
     }

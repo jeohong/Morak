@@ -15,18 +15,22 @@ final class SettingViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var showTokenExpiredAlert: Bool = false
+    @Published var showWithdrawSuccessAlert: Bool = false
 
     // MARK: - Private Properties
     private let logoutUseCase: LogoutUseCaseProtocol
     private let getMyInfoUseCase: GetMyInfoUseCaseProtocol
+    private let withdrawUseCase: WithdrawUseCaseProtocol
 
     // MARK: - Init
     init(
         logoutUseCase: LogoutUseCaseProtocol = LogoutUseCase(),
-        getMyInfoUseCase: GetMyInfoUseCaseProtocol = GetMyInfoUseCase.makeDefault()
+        getMyInfoUseCase: GetMyInfoUseCaseProtocol = GetMyInfoUseCase.makeDefault(),
+        withdrawUseCase: WithdrawUseCaseProtocol = WithdrawUseCase.makeDefault()
     ) {
         self.logoutUseCase = logoutUseCase
         self.getMyInfoUseCase = getMyInfoUseCase
+        self.withdrawUseCase = withdrawUseCase
     }
 
     // MARK: - Public Methods
@@ -79,16 +83,22 @@ final class SettingViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
-        // TODO: 회원탈퇴 API 구현
-        // do {
-        //     try await withdrawUseCase.execute()
-        //     clearUserInfo()
-        //     AuthManager.shared.logout()
-        // } catch let error as NetworkError {
-        //     errorMessage = error.localizedDescription
-        // } catch {
-        //     errorMessage = "회원탈퇴 중 오류가 발생했습니다."
-        // }
+        do {
+            _ = try await withdrawUseCase.execute()
+            // 성공 시 모든 저장 정보 삭제
+            clearUserInfo()
+            SecureTokenManager.shared.clearTokens()
+            AuthManager.shared.logout()
+            showWithdrawSuccessAlert = true
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "회원탈퇴 중 오류가 발생했습니다."
+        }
 
         isLoading = false
     }
