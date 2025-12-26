@@ -14,4 +14,5 @@ protocol CommentRepositoryProtocol {
     func updateComment(commentId: Int, content: String) async throws -> Comment
     func deleteComment(commentId: Int) async throws
     func likeComment(commentId: Int) async throws -> Bool?
+    func reportComment(commentId: Int, reason: String) async throws -> String
 }

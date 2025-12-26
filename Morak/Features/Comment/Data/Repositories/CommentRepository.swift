@@ -89,4 +89,16 @@ final class CommentRepository: CommentRepositoryProtocol {
 
         return apiResponse.data
     }
+
+    func reportComment(commentId: Int, reason: String) async throws -> String {
+        let request = ReportCommentRequest(reason: reason)
+        let endpoint = CommentEndpoint.reportComment(commentId: commentId, request)
+
+        let apiResponse: BaseResponse<EmptyData> = try await apiManager.request(
+            endpoint,
+            responseType: BaseResponse<EmptyData>.self
+        )
+
+        return apiResponse.message
+    }
 }

@@ -33,6 +33,12 @@ final class CommentViewModel: ObservableObject {
     @Published var showDeleteConfirmation: Bool = false
     @Published var commentToDelete: Comment?
 
+    // 신고
+    @Published var showReportSheet: Bool = false
+    @Published var commentToReport: Comment?
+    @Published var showReportSuccessAlert: Bool = false
+    @Published var reportSuccessMessage: String = ""
+
     // MARK: - Private Properties
     private var currentPage: Int = 1
     private var hasMorePages: Bool = true
@@ -42,6 +48,7 @@ final class CommentViewModel: ObservableObject {
     private let updateCommentUseCase: UpdateCommentUseCaseProtocol
     private let deleteCommentUseCase: DeleteCommentUseCaseProtocol
     private let likeCommentUseCase: LikeCommentUseCaseProtocol
+    private let reportCommentUseCase: ReportCommentUseCaseProtocol
     private let pageSize: Int = 10
     private let replyPageSize: Int = 5
     private let postId: Int
@@ -56,7 +63,8 @@ final class CommentViewModel: ObservableObject {
         createCommentUseCase: CreateCommentUseCaseProtocol,
         updateCommentUseCase: UpdateCommentUseCaseProtocol,
         deleteCommentUseCase: DeleteCommentUseCaseProtocol,
-        likeCommentUseCase: LikeCommentUseCaseProtocol
+        likeCommentUseCase: LikeCommentUseCaseProtocol,
+        reportCommentUseCase: ReportCommentUseCaseProtocol
     ) {
         self.postId = postId
         self.getCommentsUseCase = getCommentsUseCase
@@ -65,6 +73,7 @@ final class CommentViewModel: ObservableObject {
         self.updateCommentUseCase = updateCommentUseCase
         self.deleteCommentUseCase = deleteCommentUseCase
         self.likeCommentUseCase = likeCommentUseCase
+        self.reportCommentUseCase = reportCommentUseCase
     }
 
     // MARK: - Public Methods
@@ -323,6 +332,24 @@ final class CommentViewModel: ObservableObject {
     var totalComments: Int {
         return comments.count
     }
+
+    func reportComment(commentId: Int, reason: String) async {
+        do {
+            let message = try await reportCommentUseCase.execute(commentId: commentId, reason: reason)
+            reportSuccessMessage = message
+            showReportSuccessAlert = true
+            commentToReport = nil
+
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "신고 처리 중 오류가 발생했습니다."
+        }
+    }
 }
 
 // MARK: - Factory
@@ -334,6 +361,7 @@ extension CommentViewModel {
         let updateCommentUseCase = UpdateCommentUseCase.makeDefault()
         let deleteCommentUseCase = DeleteCommentUseCase.makeDefault()
         let likeCommentUseCase = LikeCommentUseCase.makeDefault()
+        let reportCommentUseCase = ReportCommentUseCase.makeDefault()
         return CommentViewModel(
             postId: postId,
             getCommentsUseCase: getCommentsUseCase,
@@ -341,7 +369,8 @@ extension CommentViewModel {
             createCommentUseCase: createCommentUseCase,
             updateCommentUseCase: updateCommentUseCase,
             deleteCommentUseCase: deleteCommentUseCase,
-            likeCommentUseCase: likeCommentUseCase
+            likeCommentUseCase: likeCommentUseCase,
+            reportCommentUseCase: reportCommentUseCase
         )
     }
 }

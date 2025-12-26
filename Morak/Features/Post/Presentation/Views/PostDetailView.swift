@@ -371,6 +371,30 @@ struct PostDetailView: View {
                 primaryButton: AlertButton(title: "확인", style: .primary)
             )
         )
+        .sheet(isPresented: $commentViewModel.showReportSheet) {
+            ReportReasonSheet(
+                onReasonSelected: { reason in
+                    commentViewModel.showReportSheet = false
+                    if let comment = commentViewModel.commentToReport {
+                        Task {
+                            await commentViewModel.reportComment(commentId: comment.id, reason: reason)
+                        }
+                    }
+                },
+                onCancel: {
+                    commentViewModel.showReportSheet = false
+                    commentViewModel.commentToReport = nil
+                }
+            )
+        }
+        .customAlert(
+            isPresented: $commentViewModel.showReportSuccessAlert,
+            config: CustomAlertConfig(
+                title: "신고 완료",
+                message: commentViewModel.reportSuccessMessage,
+                primaryButton: AlertButton(title: "확인", style: .primary)
+            )
+        )
     }
     
     private func dismissKeyboard() {

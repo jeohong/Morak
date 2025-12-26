@@ -11,6 +11,8 @@
 		A32CC9472EFE2FE7004C589F /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9462EFE2FE7004C589F /* ReportDTO.swift */; };
 		A32CC9492EFE2FFB004C589F /* ReportPostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9482EFE2FFB004C589F /* ReportPostUseCase.swift */; };
 		A32CC94B2EFE3030004C589F /* ReportReasonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */; };
+		A32CC94D2EFE3181004C589F /* ReportCommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94C2EFE3181004C589F /* ReportCommentDTO.swift */; };
+		A32CC94F2EFE319F004C589F /* ReportCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94E2EFE319F004C589F /* ReportCommentUseCase.swift */; };
 		A33B44522ED843C600820814 /* FriendListTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444B2ED843C600820814 /* FriendListTabView.swift */; };
 		A33B44532ED843C600820814 /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B44492ED843C600820814 /* FriendsViewModel.swift */; };
 		A33B44542ED843C600820814 /* FriendSearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33B444D2ED843C600820814 /* FriendSearchTabView.swift */; };
@@ -148,6 +150,8 @@
 		A32CC9462EFE2FE7004C589F /* ReportDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDTO.swift; sourceTree = "<group>"; };
 		A32CC9482EFE2FFB004C589F /* ReportPostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostUseCase.swift; sourceTree = "<group>"; };
 		A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonSheet.swift; sourceTree = "<group>"; };
+		A32CC94C2EFE3181004C589F /* ReportCommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentDTO.swift; sourceTree = "<group>"; };
+		A32CC94E2EFE319F004C589F /* ReportCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentUseCase.swift; sourceTree = "<group>"; };
 		A33B44432ED843C600820814 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A33B44442ED843C600820814 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		A33B44472ED843C600820814 /* FriendsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTab.swift; sourceTree = "<group>"; };
@@ -499,6 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				A3903BC32EC2DE360004A4C3 /* CommentDTO.swift */,
+				A32CC94C2EFE3181004C589F /* ReportCommentDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				A3903BF12EC30D0F0004A4C3 /* CreateCommentUseCase.swift */,
 				A3AA92BC2ED587F100226E79 /* UpdateCommentUseCase.swift */,
 				A3AA92BE2ED58AC100226E79 /* DeleteCommentUseCase.swift */,
+				A32CC94E2EFE319F004C589F /* ReportCommentUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1299,11 +1305,13 @@
 				A3E5057A2EFA3A30009EECBA /* SearchUsersUseCase.swift in Sources */,
 				D4B1C7532E76C081001C4743 /* BaseResponse.swift in Sources */,
 				D4B1C76D2E76D047001C4743 /* EmailRepository.swift in Sources */,
+				A32CC94F2EFE319F004C589F /* ReportCommentUseCase.swift in Sources */,
 				D4B1C7542E76C081001C4743 /* APIManager.swift in Sources */,
 				D4B1C7552E76C081001C4743 /* SettingView.swift in Sources */,
 				D4B1C7562E76C081001C4743 /* NetworkError.swift in Sources */,
 				A3E5058A2EFA6C6A009EECBA /* RejectFriendRequestUseCase.swift in Sources */,
 				A3E5057E2EFA6213009EECBA /* FriendRepositoryProtocol.swift in Sources */,
+				A32CC94D2EFE3181004C589F /* ReportCommentDTO.swift in Sources */,
 				D4B1C7572E76C081001C4743 /* APIEndpoint.swift in Sources */,
 				D4B1C7582E76C081001C4743 /* LoginModels.swift in Sources */,
 				A3903BF02EC30AE00004A4C3 /* String+RelativeDate.swift in Sources */,

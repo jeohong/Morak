@@ -78,7 +78,7 @@ struct CommentSectionView: View {
                                     handleCommentLike(commentId: comment.id)
                                 },
                                 onReportTap: {
-                                    handleCommentReport(commentId: comment.id)
+                                    handleCommentReport(comment: comment)
                                 },
                                 onEditTap: {
                                     handleEdit(comment: comment)
@@ -106,7 +106,7 @@ struct CommentSectionView: View {
                                             handleCommentLike(commentId: reply.id)
                                         },
                                         onReportTap: {
-                                            handleCommentReport(commentId: reply.id)
+                                            handleCommentReport(comment: reply)
                                         },
                                         onEditTap: {
                                             handleEdit(comment: reply)
@@ -184,14 +184,14 @@ struct CommentSectionView: View {
         }
     }
 
-    private func handleCommentReport(commentId: Int) {
+    private func handleCommentReport(comment: Comment) {
         guard !authManager.requiresLogin else {
             showLoginPrompt = true
             return
         }
 
-        print("🚨 [CommentSectionView] 댓글 \(commentId) 신고")
-        // TODO: 신고 기능 구현
+        viewModel.commentToReport = comment
+        viewModel.showReportSheet = true
     }
 
     private func handleReply(to comment: Comment) {
