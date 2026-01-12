@@ -19,6 +19,11 @@ final class FriendsViewModel: ObservableObject {
     @Published var requestBadgeCount: Int = 0
     @Published var errorMessage: String?
 
+    // 차단
+    @Published var showBlockConfirmation: Bool = false
+    @Published var userToBlock: Friend?
+    @Published var showBlockSuccessAlert: Bool = false
+
     // MARK: - Private Properties
     private let searchUsersUseCase: SearchUsersUseCaseProtocol
     private let getFriendsUseCase: GetFriendsUseCaseProtocol
@@ -27,6 +32,7 @@ final class FriendsViewModel: ObservableObject {
     private let rejectFriendRequestUseCase: RejectFriendRequestUseCaseProtocol
     private let sendFriendRequestUseCase: SendFriendRequestUseCaseProtocol
     private let deleteFriendUseCase: DeleteFriendUseCaseProtocol
+    private let blockUserUseCase: BlockUserUseCaseProtocol
 
     // MARK: - Initialization
     init(
@@ -36,7 +42,8 @@ final class FriendsViewModel: ObservableObject {
         acceptFriendRequestUseCase: AcceptFriendRequestUseCaseProtocol = AcceptFriendRequestUseCase.makeDefault(),
         rejectFriendRequestUseCase: RejectFriendRequestUseCaseProtocol = RejectFriendRequestUseCase.makeDefault(),
         sendFriendRequestUseCase: SendFriendRequestUseCaseProtocol = SendFriendRequestUseCase.makeDefault(),
-        deleteFriendUseCase: DeleteFriendUseCaseProtocol = DeleteFriendUseCase.makeDefault()
+        deleteFriendUseCase: DeleteFriendUseCaseProtocol = DeleteFriendUseCase.makeDefault(),
+        blockUserUseCase: BlockUserUseCaseProtocol = BlockUserUseCase.makeDefault()
     ) {
         self.searchUsersUseCase = searchUsersUseCase
         self.getFriendsUseCase = getFriendsUseCase
@@ -45,6 +52,7 @@ final class FriendsViewModel: ObservableObject {
         self.rejectFriendRequestUseCase = rejectFriendRequestUseCase
         self.sendFriendRequestUseCase = sendFriendRequestUseCase
         self.deleteFriendUseCase = deleteFriendUseCase
+        self.blockUserUseCase = blockUserUseCase
     }
 
     // MARK: - Actions
@@ -153,6 +161,22 @@ final class FriendsViewModel: ObservableObject {
         } catch {
             errorMessage = "친구 요청 전송에 실패했습니다."
             return false
+        }
+    }
+
+    func blockUser() async {
+        guard let user = userToBlock else { return }
+
+        do {
+            _ = try await blockUserUseCase.execute(userId: user.id)
+            // 검색 결과에서 해당 유저 제거
+            searchResults.removeAll { $0.id == user.id }
+            showBlockSuccessAlert = true
+            userToBlock = nil
+        } catch let error as NetworkError {
+            errorMessage = error.localizedDescription
+        } catch {
+            errorMessage = "차단 처리 중 오류가 발생했습니다."
         }
     }
 

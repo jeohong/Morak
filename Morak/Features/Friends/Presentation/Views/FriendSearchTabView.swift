@@ -12,6 +12,7 @@ struct FriendSearchTabView: View {
     let searchResults: [Friend]
     let onSearch: () -> Void
     let onAddFriend: (Friend) -> Void
+    let onBlockUser: (Friend) -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -48,7 +49,8 @@ struct FriendSearchTabView: View {
                         ForEach(searchResults) { friend in
                             SearchResultRowView(
                                 friend: friend,
-                                onAddFriend: { onAddFriend(friend) }
+                                onAddFriend: { onAddFriend(friend) },
+                                onBlockUser: { onBlockUser(friend) }
                             )
                         }
                     }
@@ -65,6 +67,7 @@ struct FriendSearchTabView: View {
 struct SearchResultRowView: View {
     let friend: Friend
     let onAddFriend: () -> Void
+    let onBlockUser: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -87,6 +90,19 @@ struct SearchResultRowView: View {
                     .background(Color.orangeButton)
                     .cornerRadius(16)
             }
+
+            // Block User Button
+            Button {
+                onBlockUser()
+            } label: {
+                Text("차단")
+                    .font(.pretendard.smallTextMedium)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .background(Color.red.opacity(0.8))
+                    .cornerRadius(16)
+            }
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
@@ -102,7 +118,8 @@ struct SearchResultRowView: View {
         searchText: .constant(""),
         searchResults: [],
         onSearch: {},
-        onAddFriend: { _ in }
+        onAddFriend: { _ in },
+        onBlockUser: { _ in }
     )
     .background(Color.postBackground)
 }

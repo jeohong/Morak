@@ -35,7 +35,8 @@ struct FriendsView: View {
                     searchText: $viewModel.searchText,
                     searchResults: viewModel.searchResults,
                     onSearch: viewModel.searchFriends,
-                    onAddFriend: handleAddFriend
+                    onAddFriend: handleAddFriend,
+                    onBlockUser: handleBlockUser
                 )
                 .tag(FriendsTab.search)
 
@@ -115,6 +116,29 @@ struct FriendsView: View {
                 }
             )
         )
+        .customAlert(
+            isPresented: $viewModel.showBlockConfirmation,
+            config: CustomAlertConfig(
+                title: "사용자 차단",
+                message: "\(viewModel.userToBlock?.nickname ?? "")님을 차단하시겠습니까?\n차단된 사용자의 게시글과 댓글이 더 이상 표시되지 않습니다.",
+                primaryButton: AlertButton(title: "차단", style: .destructive) {
+                    Task {
+                        await viewModel.blockUser()
+                    }
+                },
+                secondaryButton: AlertButton(title: "취소", style: .cancel) {
+                    viewModel.userToBlock = nil
+                }
+            )
+        )
+        .customAlert(
+            isPresented: $viewModel.showBlockSuccessAlert,
+            config: CustomAlertConfig(
+                title: "차단 완료",
+                message: "사용자가 차단되었습니다.",
+                primaryButton: AlertButton(title: "확인", style: .primary)
+            )
+        )
         .fullScreenCover(isPresented: $navigateToLogin) {
             LoginView()
         }
@@ -135,6 +159,16 @@ struct FriendsView: View {
     private func handleDeleteFriend(_ friend: Friend) {
         friendToDelete = friend
         showDeleteConfirmation = true
+    }
+
+    private func handleBlockUser(_ friend: Friend) {
+        guard !authManager.requiresLogin else {
+            showLoginPrompt = true
+            return
+        }
+
+        viewModel.userToBlock = friend
+        viewModel.showBlockConfirmation = true
     }
 }
 
