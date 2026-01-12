@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A30975B72E70459800D25838 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30975B62E70459800D25838 /* UINavigationController+Extension.swift */; };
+		A310549C2F149DF7006F1042 /* BlockUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31054982F149DF7006F1042 /* BlockUserUseCase.swift */; };
+		A310549D2F149DF7006F1042 /* BlockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31054952F149DF7006F1042 /* BlockRepository.swift */; };
+		A310549E2F149DF7006F1042 /* BlockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31054932F149DF7006F1042 /* BlockAPI.swift */; };
 		A32CC9472EFE2FE7004C589F /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9462EFE2FE7004C589F /* ReportDTO.swift */; };
 		A32CC9492EFE2FFB004C589F /* ReportPostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC9482EFE2FFB004C589F /* ReportPostUseCase.swift */; };
 		A32CC94B2EFE3030004C589F /* ReportReasonSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32CC94A2EFE3030004C589F /* ReportReasonSheet.swift */; };
@@ -155,6 +158,9 @@
 
 /* Begin PBXFileReference section */
 		A30975B62E70459800D25838 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		A31054932F149DF7006F1042 /* BlockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockAPI.swift; sourceTree = "<group>"; };
+		A31054952F149DF7006F1042 /* BlockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockRepository.swift; sourceTree = "<group>"; };
+		A31054982F149DF7006F1042 /* BlockUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserUseCase.swift; sourceTree = "<group>"; };
 		A31D1C202E40BA3500318EC7 /* Morak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C2D2E40BA3600318EC7 /* MorakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A31D1C372E40BA3600318EC7 /* MorakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -325,6 +331,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A31054942F149DF7006F1042 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				A31054932F149DF7006F1042 /* BlockAPI.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		A31054962F149DF7006F1042 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				A31054952F149DF7006F1042 /* BlockRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		A31054972F149DF7006F1042 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A31054942F149DF7006F1042 /* DataSources */,
+				A31054962F149DF7006F1042 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A31054992F149DF7006F1042 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				A31054982F149DF7006F1042 /* BlockUserUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		A310549A2F149DF7006F1042 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				A31054992F149DF7006F1042 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		A310549B2F149DF7006F1042 /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				A31054972F149DF7006F1042 /* Data */,
+				A310549A2F149DF7006F1042 /* Domain */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
 		A31D1C172E40BA3500318EC7 = {
 			isa = PBXGroup;
 			children = (
@@ -1148,6 +1204,7 @@
 				A33B44512ED843C600820814 /* Friends */,
 				D4B1C73D2E76C081001C4743 /* Search */,
 				D4B1C7402E76C081001C4743 /* Setting */,
+				A310549B2F149DF7006F1042 /* Block */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -1390,6 +1447,9 @@
 				A3903BE82EC2DE360004A4C3 /* CommentRepositoryProtocol.swift in Sources */,
 				A3903BE92EC2DE360004A4C3 /* CommentMapper.swift in Sources */,
 				A3903BEC2EC2DFE20004A4C3 /* GetRepliesUseCase.swift in Sources */,
+				A310549C2F149DF7006F1042 /* BlockUserUseCase.swift in Sources */,
+				A310549D2F149DF7006F1042 /* BlockRepository.swift in Sources */,
+				A310549E2F149DF7006F1042 /* BlockAPI.swift in Sources */,
 				A3903BEA2EC2DE360004A4C3 /* CommentSortOption.swift in Sources */,
 				D4B1C7512E76C081001C4743 /* SignupView.swift in Sources */,
 				A392EC662EB9D570000FA26C /* GetPostListUseCase.swift in Sources */,

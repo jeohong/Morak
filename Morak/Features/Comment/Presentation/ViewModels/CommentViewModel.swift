@@ -39,6 +39,11 @@ final class CommentViewModel: ObservableObject {
     @Published var showReportSuccessAlert: Bool = false
     @Published var reportSuccessMessage: String = ""
 
+    // 차단
+    @Published var showBlockConfirmation: Bool = false
+    @Published var commentToBlock: Comment?
+    @Published var showBlockSuccessAlert: Bool = false
+
     // MARK: - Private Properties
     private var currentPage: Int = 1
     private var hasMorePages: Bool = true
@@ -49,6 +54,7 @@ final class CommentViewModel: ObservableObject {
     private let deleteCommentUseCase: DeleteCommentUseCaseProtocol
     private let likeCommentUseCase: LikeCommentUseCaseProtocol
     private let reportCommentUseCase: ReportCommentUseCaseProtocol
+    private let blockUserUseCase: BlockUserUseCaseProtocol
     private let pageSize: Int = 10
     private let replyPageSize: Int = 5
     private let postId: Int
@@ -64,7 +70,8 @@ final class CommentViewModel: ObservableObject {
         updateCommentUseCase: UpdateCommentUseCaseProtocol,
         deleteCommentUseCase: DeleteCommentUseCaseProtocol,
         likeCommentUseCase: LikeCommentUseCaseProtocol,
-        reportCommentUseCase: ReportCommentUseCaseProtocol
+        reportCommentUseCase: ReportCommentUseCaseProtocol,
+        blockUserUseCase: BlockUserUseCaseProtocol
     ) {
         self.postId = postId
         self.getCommentsUseCase = getCommentsUseCase
@@ -74,6 +81,7 @@ final class CommentViewModel: ObservableObject {
         self.deleteCommentUseCase = deleteCommentUseCase
         self.likeCommentUseCase = likeCommentUseCase
         self.reportCommentUseCase = reportCommentUseCase
+        self.blockUserUseCase = blockUserUseCase
     }
 
     // MARK: - Public Methods
@@ -350,6 +358,25 @@ final class CommentViewModel: ObservableObject {
             errorMessage = "신고 처리 중 오류가 발생했습니다."
         }
     }
+
+    func blockUser() async {
+        guard let comment = commentToBlock else { return }
+
+        do {
+            _ = try await blockUserUseCase.execute(userId: comment.userId)
+            showBlockSuccessAlert = true
+            commentToBlock = nil
+
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "차단 처리 중 오류가 발생했습니다."
+        }
+    }
 }
 
 // MARK: - Factory
@@ -362,6 +389,7 @@ extension CommentViewModel {
         let deleteCommentUseCase = DeleteCommentUseCase.makeDefault()
         let likeCommentUseCase = LikeCommentUseCase.makeDefault()
         let reportCommentUseCase = ReportCommentUseCase.makeDefault()
+        let blockUserUseCase = BlockUserUseCase.makeDefault()
         return CommentViewModel(
             postId: postId,
             getCommentsUseCase: getCommentsUseCase,
@@ -370,7 +398,8 @@ extension CommentViewModel {
             updateCommentUseCase: updateCommentUseCase,
             deleteCommentUseCase: deleteCommentUseCase,
             likeCommentUseCase: likeCommentUseCase,
-            reportCommentUseCase: reportCommentUseCase
+            reportCommentUseCase: reportCommentUseCase,
+            blockUserUseCase: blockUserUseCase
         )
     }
 }

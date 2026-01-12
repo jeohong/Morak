@@ -16,8 +16,33 @@ final class AuthManager: ObservableObject {
     @Published private(set) var isLoggedIn: Bool = false
     @Published private(set) var currentUser: User? = nil
 
+    private let userDefaultsKey = "currentUser"
+
     private init() {
+        restoreUser()
         checkLoginStatus()
+    }
+
+    // MARK: - Private Methods
+
+    /// UserDefaults에서 사용자 정보 복원
+    private func restoreUser() {
+        if let data = UserDefaults.standard.data(forKey: userDefaultsKey),
+           let user = try? JSONDecoder().decode(User.self, from: data) {
+            currentUser = user
+        }
+    }
+
+    /// UserDefaults에 사용자 정보 저장
+    private func saveUser(_ user: User) {
+        if let data = try? JSONEncoder().encode(user) {
+            UserDefaults.standard.set(data, forKey: userDefaultsKey)
+        }
+    }
+
+    /// UserDefaults에서 사용자 정보 삭제
+    private func clearSavedUser() {
+        UserDefaults.standard.removeObject(forKey: userDefaultsKey)
     }
 
     // MARK: - Public Methods
@@ -35,12 +60,14 @@ final class AuthManager: ObservableObject {
         )
 
         currentUser = user
+        saveUser(user)
         isLoggedIn = true
     }
 
     /// 로그아웃 처리
     func logout() {
         SecureTokenManager.shared.clearTokens()
+        clearSavedUser()
 
         currentUser = nil
         isLoggedIn = false

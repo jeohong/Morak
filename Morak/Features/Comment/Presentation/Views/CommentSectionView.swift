@@ -80,6 +80,9 @@ struct CommentSectionView: View {
                                 onReportTap: {
                                     handleCommentReport(comment: comment)
                                 },
+                                onBlockTap: {
+                                    handleCommentBlock(comment: comment)
+                                },
                                 onEditTap: {
                                     handleEdit(comment: comment)
                                 },
@@ -107,6 +110,9 @@ struct CommentSectionView: View {
                                         },
                                         onReportTap: {
                                             handleCommentReport(comment: reply)
+                                        },
+                                        onBlockTap: {
+                                            handleCommentBlock(comment: reply)
                                         },
                                         onEditTap: {
                                             handleEdit(comment: reply)
@@ -192,6 +198,16 @@ struct CommentSectionView: View {
 
         viewModel.commentToReport = comment
         viewModel.showReportSheet = true
+    }
+
+    private func handleCommentBlock(comment: Comment) {
+        guard !authManager.requiresLogin else {
+            showLoginPrompt = true
+            return
+        }
+
+        viewModel.commentToBlock = comment
+        viewModel.showBlockConfirmation = true
     }
 
     private func handleReply(to comment: Comment) {

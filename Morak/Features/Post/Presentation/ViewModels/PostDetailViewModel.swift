@@ -19,6 +19,8 @@ final class PostDetailViewModel: ObservableObject {
     @Published var showReportSheet: Bool = false
     @Published var showReportSuccessAlert: Bool = false
     @Published var reportSuccessMessage: String = ""
+    @Published var showBlockConfirmation: Bool = false
+    @Published var showBlockSuccessAlert: Bool = false
 
     // MARK: - Private Properties
     private let getPostDetailUseCase: GetPostDetailUseCaseProtocol
@@ -144,6 +146,12 @@ final class PostDetailViewModel: ObservableObject {
         }
 
         isLoading = false
+    }
+
+    func blockUser() async {
+        // TODO: API 연동 필요 - 차단 API가 준비되면 구현
+        // 현재는 UI만 동작하도록 성공 Alert 표시
+        showBlockSuccessAlert = true
     }
 }
 

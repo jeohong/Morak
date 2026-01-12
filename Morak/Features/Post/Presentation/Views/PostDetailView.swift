@@ -230,6 +230,12 @@ struct PostDetailView: View {
                         }) {
                             Label("신고", systemImage: "exclamationmark.triangle")
                         }
+
+                        Button(role: .destructive, action: {
+                            handleBlockUser()
+                        }) {
+                            Label("사용자 차단", systemImage: "person.slash")
+                        }
                     } label: {
                         Image(systemName: "ellipsis")
                             .foregroundColor(.black)
@@ -395,6 +401,48 @@ struct PostDetailView: View {
                 primaryButton: AlertButton(title: "확인", style: .primary)
             )
         )
+        .customAlert(
+            isPresented: $viewModel.showBlockConfirmation,
+            config: CustomAlertConfig(
+                title: "사용자 차단",
+                message: "이 사용자를 차단하시겠습니까?\n차단된 사용자의 게시글과 댓글이 더 이상 표시되지 않습니다.",
+                primaryButton: AlertButton(title: "차단", style: .destructive) {
+                    Task {
+                        await viewModel.blockUser()
+                    }
+                },
+                secondaryButton: AlertButton(title: "취소", style: .cancel)
+            )
+        )
+        .customAlert(
+            isPresented: $viewModel.showBlockSuccessAlert,
+            config: CustomAlertConfig(
+                title: "차단 완료",
+                message: "사용자가 차단되었습니다.",
+                primaryButton: AlertButton(title: "확인", style: .primary)
+            )
+        )
+        .customAlert(
+            isPresented: $commentViewModel.showBlockConfirmation,
+            config: CustomAlertConfig(
+                title: "사용자 차단",
+                message: "이 사용자를 차단하시겠습니까?\n차단된 사용자의 게시글과 댓글이 더 이상 표시되지 않습니다.",
+                primaryButton: AlertButton(title: "차단", style: .destructive) {
+                    Task {
+                        await commentViewModel.blockUser()
+                    }
+                },
+                secondaryButton: AlertButton(title: "취소", style: .cancel)
+            )
+        )
+        .customAlert(
+            isPresented: $commentViewModel.showBlockSuccessAlert,
+            config: CustomAlertConfig(
+                title: "차단 완료",
+                message: "사용자가 차단되었습니다.",
+                primaryButton: AlertButton(title: "확인", style: .primary)
+            )
+        )
     }
     
     private func dismissKeyboard() {
@@ -486,6 +534,15 @@ struct PostDetailView: View {
         }
 
         viewModel.showReportSheet = true
+    }
+
+    private func handleBlockUser() {
+        guard !authManager.requiresLogin else {
+            showLoginPrompt = true
+            return
+        }
+
+        viewModel.showBlockConfirmation = true
     }
 
     private func handleCommentDelete() {

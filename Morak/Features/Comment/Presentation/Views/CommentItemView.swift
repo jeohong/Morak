@@ -12,6 +12,7 @@ struct CommentItemView: View {
     let isReply: Bool
     let onLikeTap: () -> Void
     let onReportTap: () -> Void
+    let onBlockTap: () -> Void
     let onEditTap: (() -> Void)?
     let onDeleteTap: (() -> Void)?
     let onReplyTap: (() -> Void)?
@@ -76,6 +77,10 @@ struct CommentItemView: View {
                             } else {
                                 Button(role: .destructive, action: onReportTap) {
                                     Label("신고", systemImage: "exclamationmark.triangle")
+                                }
+
+                                Button(role: .destructive, action: onBlockTap) {
+                                    Label("사용자 차단", systemImage: "person.slash")
                                 }
                             }
                         } label: {
