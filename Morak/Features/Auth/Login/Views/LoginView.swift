@@ -134,13 +134,14 @@ struct LoginView: View {
             .disabled(!viewModel.isFormValid || viewModel.isLoading)
             .padding(.horizontal, 24)
             
-            Button(action: handleForgotPassword) {
-                Text("비밀번호를 잊으셨나요?")
-                    .font(.pretendard.mediumTextRegular)
-                    .foregroundColor(.accentColor)
-            }
-            .padding(.top, 16)
-            
+            // TODO: 비밀번호 찾기 기능 추가 시 활성화
+            // Button(action: handleForgotPassword) {
+            //     Text("비밀번호를 잊으셨나요?")
+            //         .font(.pretendard.mediumTextRegular)
+            //         .foregroundColor(.accentColor)
+            // }
+            // .padding(.top, 16)
+
             Spacer()
             
             HStack(spacing: 4) {
@@ -173,10 +174,11 @@ struct LoginView: View {
         }
     }
     
-    private func handleForgotPassword() {
-        // TODO: 비밀번호 찾기 화면으로 이동
-        print("비밀번호 찾기")
-    }
+    // TODO: 비밀번호 찾기 기능 추가 시 활성화
+    // private func handleForgotPassword() {
+    //     // TODO: 비밀번호 찾기 화면으로 이동
+    //     print("비밀번호 찾기")
+    // }
 }
 
 #Preview {
