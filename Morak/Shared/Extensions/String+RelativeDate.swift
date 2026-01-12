@@ -52,10 +52,24 @@ extension String {
     private func parseISO8601Date() -> Date? {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(identifier: "UTC")
+
+        // 서버에서 한국 시간으로 보내는 경우 (타임존 정보 없음)
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
 
         // 마이크로초 포함 형식
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        if let date = formatter.date(from: self) {
+            return date
+        }
+
+        // 밀리초 포함 형식
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+        if let date = formatter.date(from: self) {
+            return date
+        }
+
+        // 초 단위 형식
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         if let date = formatter.date(from: self) {
             return date
         }
@@ -66,7 +80,7 @@ extension String {
             return date
         }
 
-        // 표준 ISO8601 형식
+        // 표준 ISO8601 형식 (타임존 정보 포함된 경우)
         let isoFormatter = ISO8601DateFormatter()
         return isoFormatter.date(from: self)
     }
