@@ -42,7 +42,7 @@ struct CommentItemView: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     // 닉네임 및 액션 버튼
-                    HStack {
+                    HStack(spacing: 16) {
                         Text(comment.nickname)
                             .font(.pretendard.mediumTextSemiBold)
                             .foregroundColor(.textPrimary)
@@ -59,6 +59,8 @@ struct CommentItemView: View {
                                     .font(.pretendard.smallTextRegular)
                                     .foregroundColor(.textSecondary)
                             }
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 4)
                         }
 
                         // 더보기 메뉴
@@ -85,8 +87,10 @@ struct CommentItemView: View {
                             }
                         } label: {
                             Image(systemName: "ellipsis")
-                                .font(.system(size: 12))
+                                .font(.system(size: 14))
                                 .foregroundColor(.textSecondary)
+                                .frame(width: 32, height: 32)
+                                .contentShape(Rectangle())
                         }
                     }
 
