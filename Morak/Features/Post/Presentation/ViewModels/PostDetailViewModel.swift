@@ -27,6 +27,7 @@ final class PostDetailViewModel: ObservableObject {
     private let likePostUseCase: LikePostUseCaseProtocol
     private let deletePostUseCase: DeletePostUseCaseProtocol
     private let reportPostUseCase: ReportPostUseCaseProtocol
+    private let blockUserUseCase: BlockUserUseCaseProtocol
     private let postId: Int
 
     // MARK: - Computed Properties
@@ -39,13 +40,15 @@ final class PostDetailViewModel: ObservableObject {
         getPostDetailUseCase: GetPostDetailUseCaseProtocol,
         likePostUseCase: LikePostUseCaseProtocol,
         deletePostUseCase: DeletePostUseCaseProtocol,
-        reportPostUseCase: ReportPostUseCaseProtocol
+        reportPostUseCase: ReportPostUseCaseProtocol,
+        blockUserUseCase: BlockUserUseCaseProtocol
     ) {
         self.postId = postId
         self.getPostDetailUseCase = getPostDetailUseCase
         self.likePostUseCase = likePostUseCase
         self.deletePostUseCase = deletePostUseCase
         self.reportPostUseCase = reportPostUseCase
+        self.blockUserUseCase = blockUserUseCase
     }
 
     // MARK: - Public Methods
@@ -149,9 +152,21 @@ final class PostDetailViewModel: ObservableObject {
     }
 
     func blockUser() async {
-        // TODO: API 연동 필요 - 차단 API가 준비되면 구현
-        // 현재는 UI만 동작하도록 성공 Alert 표시
-        showBlockSuccessAlert = true
+        guard let post = post else { return }
+
+        do {
+            _ = try await blockUserUseCase.execute(userId: post.writerId)
+            showBlockSuccessAlert = true
+
+        } catch let error as NetworkError {
+            if case .tokenRefreshFailed = error {
+                showTokenExpiredAlert = true
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        } catch {
+            errorMessage = "차단 처리 중 오류가 발생했습니다."
+        }
     }
 }
 
@@ -162,12 +177,14 @@ extension PostDetailViewModel {
         let likePostUseCase = LikePostUseCase.makeDefault()
         let deletePostUseCase = DeletePostUseCase.makeDefault()
         let reportPostUseCase = ReportPostUseCase.makeDefault()
+        let blockUserUseCase = BlockUserUseCase.makeDefault()
         return PostDetailViewModel(
             postId: postId,
             getPostDetailUseCase: getPostDetailUseCase,
             likePostUseCase: likePostUseCase,
             deletePostUseCase: deletePostUseCase,
-            reportPostUseCase: reportPostUseCase
+            reportPostUseCase: reportPostUseCase,
+            blockUserUseCase: blockUserUseCase
         )
     }
 }

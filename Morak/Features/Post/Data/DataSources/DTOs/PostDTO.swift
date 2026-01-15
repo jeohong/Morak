@@ -23,6 +23,7 @@ struct PostListRequest: Codable {
 // MARK: - Post DTO (API 응답 구조)
 struct PostDTO: Codable {
     let id: Int
+    let writerId: Int
     let nickname: String
     let content: String
     let likeCount: Int
@@ -35,6 +36,7 @@ struct PostDTO: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
+        case writerId
         case nickname
         case content
         case likeCount

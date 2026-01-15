@@ -10,6 +10,7 @@ import Foundation
 // MARK: - Post Entity (순수한 도메인 모델)
 struct Post: Identifiable {
     let id: Int
+    let writerId: Int
     let nickname: String
     let content: String
     var likeCount: Int

@@ -13,6 +13,7 @@ struct PostMapper {
     static func toDomain(_ dto: PostDTO) -> Post {
         return Post(
             id: dto.id,
+            writerId: dto.writerId,
             nickname: dto.nickname,
             content: dto.content,
             likeCount: dto.likeCount,
