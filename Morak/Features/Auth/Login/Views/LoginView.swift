@@ -10,16 +10,21 @@ import SwiftUI
 struct LoginView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = LoginViewModel()
-    @State private var showSignup: Bool = false
+    @State private var navigationPath = NavigationPath()
     @FocusState private var focusedField: Field?
-    
+
     enum Field {
         case email
         case password
     }
+
+    enum Destination: Hashable {
+        case terms
+        case signup
+    }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             VStack(spacing: 0) {
                 HStack() {
                     Spacer()
@@ -150,7 +155,7 @@ struct LoginView: View {
                     .foregroundColor(.secondary)
                 
                 Button {
-                    showSignup = true
+                    navigationPath.append(Destination.terms)
                 } label: {
                     Text("회원가입")
                         .font(.pretendard.mediumTextSemiBold)
@@ -163,8 +168,17 @@ struct LoginView: View {
             .onTapGesture {
                 focusedField = nil
             }
-            .navigationDestination(isPresented: $showSignup) {
-                SignupView()
+            .navigationDestination(for: Destination.self) { destination in
+                switch destination {
+                case .terms:
+                    TermsOfServiceView(onAgree: {
+                        // 약관 제거하고 회원가입으로 교체
+                        navigationPath.removeLast()
+                        navigationPath.append(Destination.signup)
+                    })
+                case .signup:
+                    SignupView()
+                }
             }
             .onChange(of: viewModel.isLoginSuccessful) { success in
                 if success {

@@ -92,6 +92,7 @@
 		A392EC6B2EB9F17E000FA26C /* PostHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */; };
 		A392EC6D2EB9F225000FA26C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6C2EB9F225000FA26C /* AuthManager.swift */; };
 		A392EC6F2EB9F6F1000FA26C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392EC6E2EB9F6F1000FA26C /* User.swift */; };
+		A39B59082F18E1870011885A /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39B59052F18E1870011885A /* TermsOfServiceView.swift */; };
 		A3AA92BD2ED587F100226E79 /* UpdateCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AA92BC2ED587F100226E79 /* UpdateCommentUseCase.swift */; };
 		A3AA92BF2ED58AC100226E79 /* DeleteCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AA92BE2ED58AC100226E79 /* DeleteCommentUseCase.swift */; };
 		A3B48A452EBD776D005EFD9D /* CreatePostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */; };
@@ -246,6 +247,7 @@
 		A392EC6A2EB9F17E000FA26C /* PostHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderView.swift; sourceTree = "<group>"; };
 		A392EC6C2EB9F225000FA26C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A392EC6E2EB9F6F1000FA26C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A39B59052F18E1870011885A /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		A3AA92BC2ED587F100226E79 /* UpdateCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCommentUseCase.swift; sourceTree = "<group>"; };
 		A3AA92BE2ED58AC100226E79 /* DeleteCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCommentUseCase.swift; sourceTree = "<group>"; };
 		A3B48A442EBD776D005EFD9D /* CreatePostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostUseCase.swift; sourceTree = "<group>"; };
@@ -935,6 +937,22 @@
 			path = Mappers;
 			sourceTree = "<group>";
 		};
+		A39B59062F18E1870011885A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A39B59052F18E1870011885A /* TermsOfServiceView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A39B59072F18E1870011885A /* Terms */ = {
+			isa = PBXGroup;
+			children = (
+				A39B59062F18E1870011885A /* Views */,
+			);
+			path = Terms;
+			sourceTree = "<group>";
+		};
 		A3E5056F2EFA3A10009EECBA /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1148,6 +1166,7 @@
 				D4B1C72B2E76C081001C4743 /* Repository */,
 				D4B1C72E2E76C081001C4743 /* SignUp */,
 				A3815F762EBB3EAB002363D3 /* Refresh */,
+				A39B59072F18E1870011885A /* Terms */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1480,6 +1499,7 @@
 				A33B44552ED843C600820814 /* FriendsTab.swift in Sources */,
 				A33B44562ED843C600820814 /* FriendsView.swift in Sources */,
 				A33B44572ED843C600820814 /* FriendRequest.swift in Sources */,
+				A39B59082F18E1870011885A /* TermsOfServiceView.swift in Sources */,
 				A32CC9472EFE2FE7004C589F /* ReportDTO.swift in Sources */,
 				A33B44582ED843C600820814 /* Friend.swift in Sources */,
 				A33B44592ED843C600820814 /* FriendRequestTabView.swift in Sources */,
