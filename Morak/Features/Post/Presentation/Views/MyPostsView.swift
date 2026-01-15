@@ -46,7 +46,8 @@ struct MyPostsView: View {
                                 },
                                 onPostDeleted: { deletedPostId in
                                     viewModel.removePost(deletedPostId)
-                                }
+                                },
+                                onUserBlocked: nil
                             )
                             .onAppear {
                                 let threshold = max(0, viewModel.posts.count - 3)

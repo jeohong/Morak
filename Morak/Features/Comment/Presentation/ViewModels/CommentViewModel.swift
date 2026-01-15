@@ -367,6 +367,9 @@ final class CommentViewModel: ObservableObject {
             showBlockSuccessAlert = true
             commentToBlock = nil
 
+            // 차단 성공 후 댓글 목록 새로고침 (차단된 사용자 댓글 제외)
+            await fetchComments(sortBy: selectedSort, refresh: true)
+
         } catch let error as NetworkError {
             if case .tokenRefreshFailed = error {
                 showTokenExpiredAlert = true

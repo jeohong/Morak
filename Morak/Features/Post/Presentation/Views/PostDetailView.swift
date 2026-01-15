@@ -12,6 +12,7 @@ struct PostDetailView: View {
     let postId: Int
     let onPostUpdated: ((Post) -> Void)?
     let onPostDeleted: ((Int) -> Void)?
+    let onUserBlocked: (() -> Void)?
     let shouldFocusComment: Bool
     @StateObject private var viewModel: PostDetailViewModel
     @StateObject private var commentViewModel: CommentViewModel
@@ -27,10 +28,11 @@ struct PostDetailView: View {
     @State private var navigateToEdit: Bool = false
     @FocusState private var isCommentInputFocused: Bool
 
-    init(postId: Int, onPostUpdated: ((Post) -> Void)? = nil, onPostDeleted: ((Int) -> Void)? = nil, shouldFocusComment: Bool = false) {
+    init(postId: Int, onPostUpdated: ((Post) -> Void)? = nil, onPostDeleted: ((Int) -> Void)? = nil, onUserBlocked: (() -> Void)? = nil, shouldFocusComment: Bool = false) {
         self.postId = postId
         self.onPostUpdated = onPostUpdated
         self.onPostDeleted = onPostDeleted
+        self.onUserBlocked = onUserBlocked
         self.shouldFocusComment = shouldFocusComment
         _viewModel = StateObject(wrappedValue: PostDetailViewModel.makeDefault(postId: postId))
         _commentViewModel = StateObject(wrappedValue: CommentViewModel.makeDefault(postId: postId))
@@ -276,6 +278,11 @@ struct PostDetailView: View {
         .onChange(of: showErrorAlert) { isShowing in
             if !isShowing {
                 viewModel.errorMessage = nil
+                // 게시글 조회 실패인 경우 (post가 nil이면) 목록 새로고침 후 뒤로가기
+                if viewModel.post == nil {
+                    onUserBlocked?()
+                    dismiss()
+                }
             }
         }
         .onChange(of: viewModel.showTokenExpiredAlert) { isShowing in
@@ -419,7 +426,10 @@ struct PostDetailView: View {
             config: CustomAlertConfig(
                 title: "차단 완료",
                 message: "사용자가 차단되었습니다.",
-                primaryButton: AlertButton(title: "확인", style: .primary)
+                primaryButton: AlertButton(title: "확인", style: .primary) {
+                    onUserBlocked?()
+                    dismiss()
+                }
             )
         )
         .customAlert(

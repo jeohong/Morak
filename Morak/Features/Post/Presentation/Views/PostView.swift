@@ -52,6 +52,11 @@ struct PostView: View {
                                 },
                                 onPostDeleted: { deletedPostId in
                                     viewModel.removePost(deletedPostId)
+                                },
+                                onUserBlocked: {
+                                    Task {
+                                        await viewModel.fetchPosts(sortBy: viewModel.selectedFilter, refresh: true)
+                                    }
                                 }
                             )
                                 .onAppear {
